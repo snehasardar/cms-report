@@ -1,14 +1,14 @@
 import { Formik, Form as FormikForm } from 'formik';
-import { Button, Form } from 'react-bootstrap';
+import { Row, Col, Button, Form, Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
 import * as Yup from 'yup';
 import Select from 'react-select';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../registration/registration.styles.css';
+import './customerModal.styles.css';
 import '../styles.css';
 
 import { GENDERS_FORM, REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
@@ -28,11 +28,14 @@ const initialValues = {
 console.log('initialValues', initialValues);
 
 const CustomerAdd = (props) => {
-	const { customerData } = useSelector((state) => state.customerCart);
+	const { addModal, setAddModal } = props;
+	console.log('addModal add', addModal);
+	console.log('setAddModal add',setAddModal);
+	// const { customerData } = useSelector((state) => state.customerCart);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const validateRequestCallBack = Yup.object().shape({
+	const validateCustomerInformation = Yup.object().shape({
 		initial: Yup.object().required('Please select any one initial'),
 		first_name: Yup.string()
 			.trim()
@@ -40,11 +43,6 @@ const CustomerAdd = (props) => {
 			.max(40, 'Name cannot be more than 40 characters long')
 			.required('Please enter your First Name')
 			.test('name', "Name supports only alphabets and some other characters. ('.)", (value) => value && value.match(REGEX_FULL_NAME)),
-		// middle_name: Yup.string()
-		// 	.trim()
-		// 	.min(1, 'Name cannot be less than 1 character long')
-		// 	.max(40, 'Name cannot be more than 40 characters long')
-		// 	.test('name', "Name supports only alphabets and some other characters. ('.)", (value) => value && value.match(REGEX_FULL_NAME)),
 		last_name: Yup.string()
 			.trim()
 			.min(1, 'Name cannot be less than 1 character long')
@@ -73,7 +71,9 @@ const CustomerAdd = (props) => {
 			date: new Date().toLocaleString(),
 			status: values.status.value,
 		};
+
 		dispatch(addList(post_data));
+		console.log('post_data', post_data);
 		history.push('/customerDetails');
 	};
 
@@ -82,19 +82,27 @@ const CustomerAdd = (props) => {
 		let { value, name } = event.target;
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
-		console.log('value', value);
-		console.log('setFieldValue', setFieldValue);
 	};
+	const handleClose = () => {
+		history.push('/customerDetails');
+	}
 
 	return (
+		<Modal
+			className="requestCallModal"
+			show={addModal}
+			onHide={() => setAddModal(false)}
+			backdrop="static"
+			centered>
+		<Modal.Header closeButton onClick={ handleClose }></Modal.Header>
+		<Modal.Body>
 		<div className="requestCallWrapper">
 			<Row>
 				<Col xs={12} md={5} className="callBackBg"></Col>
 				<Col xs={12} md={7} className="">
 					<h3>Add Customer here</h3>
-					<Formik initialValues={initialValues} validationSchema={validateRequestCallBack} onSubmit={handleSubmitEvent}>
+					<Formik initialValues={initialValues} validationSchema={validateCustomerInformation} onSubmit={handleSubmitEvent}>
 						{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
-							//callbacks
 							return (
 								<FormikForm>
 									{console.log('errors', errors)}
@@ -109,7 +117,6 @@ const CustomerAdd = (props) => {
 												onChange={(evt) => setFieldValue('initial', evt)} //set variable gender in formik state
 												defaultValue={values.initial}
 												placeholder="Select Initial *"
-												onBlur={values.onBlur}
 											/>
 											{errors.initial && touched.initial ? <p className="error no-pos"> {errors.initial}</p> : null}
 										</Form.Group>
@@ -128,14 +135,7 @@ const CustomerAdd = (props) => {
 										{errors.first_name && touched.first_name ? <p className="error no-pos"> {errors.first_name}</p> : null}
 									</Form.Group>
 									<Form.Group controlId="middle_name">
-										<Form.Control
-											type="text"
-											placeholder="Middle-Name *"
-											onChange={handleChange}
-											value={values.middle_name}
-											// isInvalid={errors.middle_name && touched.middle_name}
-										/>
-										{/* {errors.name && touched.name ? <p className="error no-pos"> {errors.name}</p> : null} */}
+										<Form.Control type="text" placeholder="Middle-Name *" onChange={handleChange} value={values.middle_name} />
 									</Form.Group>
 									<Form.Group controlId="last_name">
 										<Form.Control
@@ -200,6 +200,8 @@ const CustomerAdd = (props) => {
 				</Col>
 			</Row>
 		</div>
+		</Modal.Body>
+	</Modal>
 	);
 };
 

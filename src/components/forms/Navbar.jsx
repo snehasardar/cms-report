@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // import Sidebar from './customer-home/Sidebar';
 
 const Navbar = (props) => {
+	const { logged, setLogged } = props;
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,12 +27,27 @@ const Navbar = (props) => {
 									Registration
 								</Link>
 							</li>
+							{/* <li className="nav-item">
+								<Link to="/customerAdd" className="nav-link active">
+									Customer Add
+								</Link>
+							</li> 
+							<li className="nav-item">
+								<Link to="/customerDetails" className="nav-link active">
+									Customer Details
+								</Link>
+							</li>
+							 <li className="nav-item">
+								<Link to="/customerEdit" className="nav-link active">
+									Customer Edit
+								</Link>
+							</li> */}
 						</ul>
-						<span className="navbar-text">
+						{ (logged === true) ? <span className="navbar-text">
 							<Link to="/logIn" className="nav-link active">
 								Login
 							</Link>
-						</span>
+						</span> : ' ' }
 					</div>
 				</div>
 			</nav>

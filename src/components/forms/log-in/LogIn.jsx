@@ -33,31 +33,25 @@ const LogIn = (props) => {
 			email: values.email,
 			password: values.password,
 		};
-		console.log('post_data', postdata);
 		if (postdata.email == newInitialValues.uemail && postdata.password == newInitialValues.upassword) {
 			alert('successfully login');
 			history.push('/home');
 		} else {
 			alert('Incorrect Details');
 		}
-		console.log('post_data name', postdata.password);
-		console.log('newInitialValues uname', newInitialValues.upassword);
 	};
 
 	const newInitialValues = {
 		uemail: userData && Object.keys(userData).length > 0 ? userData.email : '',
 		upassword: userData && Object.keys(userData).length > 0 ? userData.password : '',
 	};
-	console.log('newInitialValues', newInitialValues);
-	console.log('newInitialValues uname', newInitialValues.uname);
 
 	const handleMobileNumberChange = (event, setFieldValue) => {
 		event.preventDefault();
 		let { value, name } = event.target;
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
-		console.log('value', value);
-		console.log('setFieldValue', setFieldValue);
+		setLogged(true);
 	};
 
 	return (
@@ -71,18 +65,6 @@ const LogIn = (props) => {
 							return (
 								<FormikForm>
 									{console.log('errors', errors)}
-									<Form.Group controlId="mobile_no">
-										<Form.Control
-											type="text"
-											name="mobile_no"
-											placeholder="Mobile Number *"
-											onChange={handleChange}
-											value={values.mobile_no}
-											onChange={(e) => handleMobileNumberChange(e, setFieldValue)}
-											isInvalid={errors.mobile_no && touched.mobile_no}
-										/>
-										{errors.mobile_no && touched.mobile_no ? <p className="error no-pos"> {errors.mobile_no}</p> : null}
-									</Form.Group>
 									<Form.Group controlId="email">
 										<Form.Control
 											type="text"
@@ -110,8 +92,8 @@ const LogIn = (props) => {
 											</Col>
 										</Row>
 									) : null}
-									<Button variant="primary" className="btn btnRed" type="submit">
-										submit
+									<Button variant="primary" className="btn btnRed" type="submit" >
+										LogIn
 									</Button>
 								</FormikForm>
 							);

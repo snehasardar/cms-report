@@ -64,8 +64,6 @@ const Registration = (props) => {
 		let { value, name } = event.target;
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
-		console.log('value', value);
-		console.log('setFieldValue', setFieldValue);
 	};
 
 	return (
@@ -95,7 +93,6 @@ const Registration = (props) => {
 											type="text"
 											name="mobile_no"
 											placeholder="Mobile Number *"
-											// onChange={handleChange}
 											value={values.mobile_no}
 											onChange={(e) => handleMobileNumberChange(e, setFieldValue)}
 											isInvalid={errors.mobile_no && touched.mobile_no}

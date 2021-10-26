@@ -2,7 +2,7 @@ import { lazy, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ErrorBoundary } from 'react-error-boundary';
-
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './assets/css/styles.css';
@@ -18,6 +18,9 @@ import LogIn from './components/forms/log-in/LogIn';
 import CustomerDetails from './components/forms/customer-home/CustomerDetails';
 import Home from './components/forms/customer-home/Home';
 import CustomerAdd from './components/forms/customer-home/CustomerAdd';
+import CustomerEdit from './components/forms/customer-home/CustomerEdit';
+import BooksDetails from './components/forms/books-home/BooksDetails';
+import BooksAdd from './components/forms/books-home/BooksAdd';
 
 const Routes = withSuspense(
 	lazy(() => import(/* webpackChunkName: "routes" */ './routes/Routes')),
@@ -25,6 +28,10 @@ const Routes = withSuspense(
 );
 
 function App() {
+	const [editModal, setEditModal] = useState(false);
+	const [addModal, setAddModal] = useState(false);
+	const [bookModal, setBookModal] = useState(false);
+	const [logged, setLogged] = useState(false);
 	useEffect(() => {
 		// Disable logs in production
 		if (process.env.NODE_ENV !== 'development') {
@@ -50,13 +57,20 @@ function App() {
 		<>
 			<BrowserRouter>
 				<div className="App">
-					<Navbar />
+					<Navbar logged={logged} setLogged={setLogged} />
 					<Switch>
 						<Route exact path="/signUp" component={Registration} />
-						<Route path="/logIn" component={LogIn} />
-						<Route path="/customerDetails" component={CustomerDetails} />
-						<Route path="/home" component={Home} />
-						<Route path="/customerAdd" component={CustomerAdd} />
+						<Route path="/logIn" component={() => < LogIn logged={logged} setLogged={setLogged} />} />
+						<Route path="/customerDetails" component={() => <CustomerDetails editModal={editModal} setEditModal={setEditModal} addModal={addModal} setAddModal={setAddModal} />} />
+						<Route exact path="/home" component={Home} /> 
+						<Route path="/customerAdd" component={() => <CustomerAdd  addModal={addModal} setAddModal={setAddModal} />} />
+						<Route path="/customerEdit/:id" component={(props) => <CustomerEdit id={props.match.params.id} editModal={editModal} setEditModal={setEditModal}/>} />
+						<Route
+							path="/customerEdit"
+							component={(props) => <CustomerEdit id={props.match.params.id} editModal={editModal} setEditModal={setEditModal} />}
+						/>
+						<Route path="/booksDetails" component={() => <BooksDetails bookModal={bookModal} setBookModal={setBookModal}/>} />
+						<Route path="/booksAdd" component={() => <BooksAdd  bookModal={bookModal} setBookModal={setBookModal}/>} />
 					</Switch>
 				</div>
 			</BrowserRouter>

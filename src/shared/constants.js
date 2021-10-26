@@ -9,8 +9,8 @@ export const GENDERS_FORM = [
 
 export const INITIAL_FORM = [
 	{label: 'Mr', value: 'Mr'},
-	{label: 'Mrs', value: 'Mrs'},
 	{label: 'Miss', value: 'Miss'},
+	{label: 'Mrs', value: 'Mrs'},
 ];
 
 export const STATUS_FORM =[
