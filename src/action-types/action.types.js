@@ -6,6 +6,7 @@ export const ADD_LIST = 'ADD_LIST';
 export const EDIT_LIST = 'EDIT_LIST';
 export const CLEAR_LIST = 'CLEAR_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
+export const LOG_OFF = 'LOG_OFF';
 
 export const ADD_BOOKS = 'ADD_BOOKS';
 export const EDIT_BOOKS = 'EDIT_BOOKS';

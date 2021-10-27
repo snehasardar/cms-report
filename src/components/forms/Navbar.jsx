@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { logOff } from '../../actions/signup.action';
 const Navbar = (props) => {
 	const { logged, setLogged } = props;
 	return (
@@ -34,7 +34,11 @@ const Navbar = (props) => {
 								</Link>
 							</span>
 						) : (
-							' '
+							<span className="navbar-text">
+								<button className="nav-link active" onClick={() => dispatch(logOff())}>
+									Logout
+								</button>
+							</span>
 						)}
 					</div>
 				</div>

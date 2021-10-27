@@ -30,6 +30,7 @@ export const editList = (data) => {
 	};
 };
 
+
 export const clearList = (payload) => {
 	return (dispatch) => {
 		dispatch({

@@ -12,7 +12,12 @@ const signCart = (state = initialStates, action) => {
 			return {
 				...state.userData,
 				userData: action.payload
-				};
+				}
+		case LOG_OFF:
+			return {
+			...state,
+			userData: [],
+			}
 
 		default:
 			return state;
