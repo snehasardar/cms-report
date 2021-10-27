@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Sidebar from './customer-home/Sidebar';
 
 const Navbar = (props) => {
 	const { logged, setLogged } = props;
@@ -27,27 +26,16 @@ const Navbar = (props) => {
 									Registration
 								</Link>
 							</li>
-							{/* <li className="nav-item">
-								<Link to="/customerAdd" className="nav-link active">
-									Customer Add
-								</Link>
-							</li> 
-							<li className="nav-item">
-								<Link to="/customerDetails" className="nav-link active">
-									Customer Details
-								</Link>
-							</li>
-							 <li className="nav-item">
-								<Link to="/customerEdit" className="nav-link active">
-									Customer Edit
-								</Link>
-							</li> */}
 						</ul>
-						{ (logged === true) ? <span className="navbar-text">
-							<Link to="/logIn" className="nav-link active">
-								Login
-							</Link>
-						</span> : ' ' }
+						{logged === false ? (
+							<span className="navbar-text">
+								<Link to="/logIn" className="nav-link active">
+									Login
+								</Link>
+							</span>
+						) : (
+							' '
+						)}
 					</div>
 				</div>
 			</nav>
@@ -55,3 +43,25 @@ const Navbar = (props) => {
 	);
 };
 export default Navbar;
+
+/*<li className="nav-item">
+								<Link to="/customerDetails" className="nav-link active">
+									Customer Details
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to="/booksDetails" className="nav-link active">
+									Books Details
+								</Link>
+							</li>
+							 <li className="nav-item">
+								<Link to="/customerAdd" className="nav-link active">
+									Customer Add
+								</Link>
+							</li> 
+							
+							 <li className="nav-item">
+								<Link to="/customerEdit" className="nav-link active">
+									Customer Edit
+								</Link>
+							</li> */

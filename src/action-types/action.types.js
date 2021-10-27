@@ -8,5 +8,7 @@ export const CLEAR_LIST = 'CLEAR_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 
 export const ADD_BOOKS = 'ADD_BOOKS';
+export const EDIT_BOOKS = 'EDIT_BOOKS';
 export const DELETE_BOOKS = 'DELETE_BOOKS';
 export const CLEAR_BOOKS = 'CLEAR_BOOKS';
+// export const SEARCH_BOOKS = 'SEARCH_BOOKS';

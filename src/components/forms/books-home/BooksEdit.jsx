@@ -15,10 +15,9 @@ import '../styles.css';
 import { GENDERS_FORM, REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
 import { numberFieldValidation, selectInitial, selectStatus } from '../../../shared/common';
 
-import { addBook } from '../../../actions/books.action';
+import { editBook } from '../../../actions/books.action';
 
 const initialValues = {
-	image_link: '',
 	book_name: '',
 	author_name: '',
 	genre: '',
@@ -28,15 +27,23 @@ const initialValues = {
 };
 console.log('initialValues', initialValues);
 
-const BooksAdd = (props) => {
-	const { bookModal, setBookModal } = props;
+const BooksEdit = (props) => {
+	const { bookEditModal, setBookEditModal } = props;
+	console.log('bookEditModal', bookEditModal);
+	console.log('setBookEditModal', setBookEditModal);
+	const { id } = props;
+	console.log('id', id);
+	const { bookList } = useSelector((state) => state.booksCart);
+	console.log('bookList', bookList);
 	const date = new Date();
 	console.log('date', date);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	const currentBook = bookList.find((item) => item.id == id);
+	console.log('currentBook', currentBook);
+
 	const validateBooksInformation = Yup.object().shape({
-		image_link: Yup.string().required('Please enter an Image Link'),
 		book_name: Yup.string()
 			.trim()
 			.min(1, 'Book Name cannot be less than 1 character long')
@@ -66,20 +73,31 @@ const BooksAdd = (props) => {
 			.matches('^[0-9]+$', 'number of books should be numbers'),
 		status: Yup.object().required('Please select status'),
 	});
+	const newInitialValues = Object.assign(initialValues, {
+		book_name: currentBook && Object.keys(currentBook).length > 0 ? currentBook.book_name : '',
+		author_name: currentBook && Object.keys(currentBook).length > 0 ? currentBook.author_name : '',
+		genre: currentBook && Object.keys(currentBook).length > 0 ? currentBook.genre : '',
+		total_books: currentBook && Object.keys(currentBook).length > 0 ? currentBook.total_books : '',
+		price: currentBook && Object.keys(currentBook).length > 0 ? currentBook.price : '',
+		status: currentBook && Object.keys(currentBook).length > 0 ? selectStatus(currentBook.status) : '',
+	});
 
 	const handleSubmitEvent = (values, actions) => {
 		let post_data = {
-			image_link: values.image_link,
+			id: currentBook && Object.keys(currentBook).length > 0 ? currentBook.id : '',
+			image_link: currentBook && Object.keys(currentBook).length > 0 ? currentBook.image_link : '',
 			book_name: values.book_name,
 			author_name: values.author_name,
 			genre: values.genre,
+			reference_num: currentBook && Object.keys(currentBook).length > 0 ? currentBook.reference_num : '',
 			total_books: values.total_books,
 			price: values.price,
 			status: values.status.value,
-			added_date: dateFormat(date, 'dd-mm-yyyy hh:mm TT'),
+			added_date: currentBook && Object.keys(currentBook).length > 0 ? currentBook.added_date : '',
+			updated_date: dateFormat(date, 'dd-mm-yyyy hh:mm TT'),
 		};
 
-		dispatch(addBook(post_data));
+		dispatch(editBook(post_data));
 		console.log('post_data', post_data);
 		history.push('/booksDetails');
 	};
@@ -95,15 +113,15 @@ const BooksAdd = (props) => {
 	};
 
 	return (
-		<Modal className="requestCallModal" show={bookModal} onHide={() => setBookModal(false)} backdrop="static" centered>
+		<Modal className="requestCallModal" show={bookEditModal} onHide={() => setBookEditModal(false)} backdrop="static" centered>
 			<Modal.Header closeButton onClick={handleClose}></Modal.Header>
 			<Modal.Body>
 				<div className="requestCallWrapper">
 					<Row>
 						<Col xs={12} md={5} className="callBackBg"></Col>
 						<Col xs={12} md={7} className="">
-							<h3>Add Books here</h3>
-							<Formik initialValues={initialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>
+							<h3>Edit Books here</h3>
+							<Formik initialValues={newInitialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
@@ -117,16 +135,6 @@ const BooksAdd = (props) => {
 													isInvalid={errors.book_name && touched.book_name}
 												/>
 												{errors.book_name && touched.book_name ? <p className="error no-pos"> {errors.book_name}</p> : null}
-											</Form.Group>
-											<Form.Group controlId="image_link">
-												<Form.Control
-													type="link"
-													placeholder="Image-Link *"
-													onChange={handleChange}
-													value={values.image_link}
-													isInvalid={errors.image_link && touched.image_link}
-												/>
-												{errors.image_link && touched.image_link ? <p className="error no-pos"> {errors.image_link}</p> : null}
 											</Form.Group>
 											<Form.Group controlId="author_name">
 												<Form.Control type="text" placeholder="Author-Name *" onChange={handleChange} value={values.author_name} />
@@ -187,7 +195,7 @@ const BooksAdd = (props) => {
 												</Row>
 											) : null}
 											<Button variant="primary" className="btn btnRed" type="submit">
-												Add
+												Save
 											</Button>
 										</FormikForm>
 									);
@@ -201,7 +209,7 @@ const BooksAdd = (props) => {
 	);
 };
 
-export default BooksAdd;
+export default BooksEdit;
 
 /*
 

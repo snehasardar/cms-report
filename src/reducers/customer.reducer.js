@@ -60,6 +60,7 @@ const customerCart = (state = initialStates, action) => {
 				...state,
 				customerData: newData,
 			};
+			
 		case CLEAR_LIST:
 			return {
 				...state,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Modal } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
@@ -31,7 +31,7 @@ const CustomerDetails = (props) => {
 				<input placeholder="Search by First Name" onChange={(e) => setSearchItem(e.target.value)} />{' '}
 				<input placeholder="Search by Email" onChange={(e) => setSearchItem(e.target.value)} />{' '}
 				<button onClick={() => dispatch(clearList())}>Clear List</button>
-				<table className="table">
+				<Table striped bordered hover>
 					<thead>
 						<tr>
 							<th>id</th>
@@ -83,7 +83,7 @@ const CustomerDetails = (props) => {
 									);
 								})}
 					</tbody>
-				</table>
+				</Table>
 			</div>
 		</div>
 	);

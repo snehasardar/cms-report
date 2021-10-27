@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
 
+import dateFormat, { masks } from "dateformat";
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../registration/registration.styles.css';
@@ -31,7 +32,8 @@ const CustomerAdd = (props) => {
 	const { addModal, setAddModal } = props;
 	console.log('addModal add', addModal);
 	console.log('setAddModal add',setAddModal);
-	// const { customerData } = useSelector((state) => state.customerCart);
+	const time = new Date();
+	console.log('time', time);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -68,7 +70,7 @@ const CustomerAdd = (props) => {
 			fullname: `${values.initial} ${values.first_name} ${values.middle_name} ${values.last_name}`,
 			mobile_no: values.mobile_no,
 			email: values.email,
-			date: new Date().toLocaleString(),
+			date: dateFormat(time, "dd-mm-yyyy hh:mm TT"),
 			status: values.status.value,
 		};
 
