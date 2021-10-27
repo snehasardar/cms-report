@@ -1,4 +1,4 @@
-import { SIGN_UP } from "../action-types/action.types";
+import { SIGN_UP, LOG_OFF } from "../action-types/action.types";
 
 const initialStates = {
 	userData: [],

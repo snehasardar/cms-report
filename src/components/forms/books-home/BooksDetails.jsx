@@ -18,7 +18,6 @@ const BooksDetails = (props) => {
 	const [searchByName, setSearchByName] = useState('');
 
 	const [posts, setPosts] = useState([]);
-	console.log('posts', posts);
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
 	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
@@ -27,7 +26,6 @@ const BooksDetails = (props) => {
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 	let currentData = posts.slice(firstData, lastData);
-
 	console.log('index of lastData', lastData);
 	console.log('index of firstData', firstData);
 	console.log('currentData', currentData);
