@@ -5,6 +5,7 @@ import { logOff } from '../../actions/signup.action';
 const Navbar = (props) => {
 	const { logged, setLogged } = props;
 	const dispatch = useDispatch();
+	console.log('logged',logged)
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,6 +30,7 @@ const Navbar = (props) => {
 								</Link>
 							</li>
 						</ul>
+						
 						{logged === false ? (
 							<span className="navbar-text">
 								<Link to="/logIn" className="nav-link active">
@@ -37,7 +39,7 @@ const Navbar = (props) => {
 							</span>
 						) : (
 							<span className="navbar-text">
-								<button className="nav-link active" onClick={() => dispatch(logOff())}>
+								<button  onClick={() => dispatch(logOff())}>
 									Logout
 								</button>
 							</span>

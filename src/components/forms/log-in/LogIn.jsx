@@ -36,6 +36,7 @@ const LogIn = (props) => {
 		if (postdata.email == newInitialValues.uemail && postdata.password == newInitialValues.upassword) {
 			alert('successfully login');
 			history.push('/home');
+			setLogged(true);
 		} else {
 			alert('Incorrect Details');
 		}
