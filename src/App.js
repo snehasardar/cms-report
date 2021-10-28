@@ -66,10 +66,17 @@ function App() {
 						<Route
 							path="/customerDetails"
 							component={() => (
-								<CustomerDetails editModal={editModal} setEditModal={setEditModal} addModal={addModal} setAddModal={setAddModal} />
+								<CustomerDetails
+									editModal={editModal}
+									setEditModal={setEditModal}
+									addModal={addModal}
+									setAddModal={setAddModal}
+									logged={logged}
+									setLogged={setLogged}
+								/>
 							)}
 						/>
-						<Route exact path="/home" component={Home} />
+						<Route exact path="/home" component={Home} logged={logged} setLogged={setLogged}/>
 						<Route path="/customerAdd" component={() => <CustomerAdd addModal={addModal} setAddModal={setAddModal} />} />
 						<Route
 							path="/customerEdit/:id"
@@ -82,7 +89,13 @@ function App() {
 						<Route
 							path="/booksDetails"
 							component={() => (
-								<BooksDetails bookModal={bookModal} setBookModal={setBookModal} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal}
+								<BooksDetails
+									bookModal={bookModal}
+									setBookModal={setBookModal}
+									bookEditModal={bookEditModal}
+									setBookEditModal={setBookEditModal}
+									logged={logged}
+									setLogged={setLogged}
 								/>
 							)}
 						/>

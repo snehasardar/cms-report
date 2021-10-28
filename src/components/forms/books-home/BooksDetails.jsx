@@ -11,7 +11,7 @@ import { deleteBook, clearBook, searchBook } from '../../../actions/books.action
 import '../customer-home/customerModal.styles.css';
 
 const BooksDetails = (props) => {
-	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
+	const { bookModal, setBookModal, bookEditModal, setBookEditModal,  logged, setLogged } = props;
 	const { bookList } = useSelector((state) => state.booksCart);
 	const dispatch = useDispatch();
 	const history = useHistory();

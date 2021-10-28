@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOff } from '../../actions/signup.action';
@@ -6,6 +6,20 @@ const Navbar = (props) => {
 	const { logged, setLogged } = props;
 	const dispatch = useDispatch();
 	console.log('logged',logged)
+
+	useEffect(() => {
+		const token = localStorage.getItem("token")
+         console.log(token);
+          
+         if(token == null){
+            setLogged(false);
+        }
+        else{   
+            setLogged(true);
+        }
+		
+	},)
+
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">

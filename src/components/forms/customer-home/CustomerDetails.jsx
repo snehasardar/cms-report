@@ -10,7 +10,7 @@ import { deleteList, clearList } from '../../../actions/customer.action';
 import './customerModal.styles.css';
 
 const CustomerDetails = (props) => {
-	const { editModal, setEditModal, addModal, setAddModal } = props;
+	const { editModal, setEditModal, addModal, setAddModal,  logged, setLogged } = props;
 	const { customerData } = useSelector((state) => state.customerCart);
 	const dispatch = useDispatch();
 	const history = useHistory();

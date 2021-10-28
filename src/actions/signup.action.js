@@ -15,6 +15,5 @@ export const logOff = (payload) => {
 		dispatch({
             type: LOG_OFF,
         });
-		
 	};
 };

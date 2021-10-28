@@ -14,6 +14,7 @@ const signCart = (state = initialStates, action) => {
 				userData: action.payload
 				}
 		case LOG_OFF:
+			localStorage.removeItem("token")
 			return {
 			...state,
 			userData: [],

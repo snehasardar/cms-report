@@ -22,6 +22,7 @@ const LogIn = (props) => {
 	const { logged, setLogged } = props;
 	const history = useHistory();
 	const userData = useSelector((state) => state.signCart.userData);
+	
 
 	const validateRequestCallBack = Yup.object().shape({
 		email: Yup.string().trim().email('Enter valid Email Id').required('Please enter Email Id'),
@@ -35,6 +36,7 @@ const LogIn = (props) => {
 		};
 		if (postdata.email == newInitialValues.uemail && postdata.password == newInitialValues.upassword) {
 			alert('successfully login');
+			localStorage.setItem("token", 'userIsLoggedIn')
 			history.push('/home');
 			setLogged(true);
 		} else {
