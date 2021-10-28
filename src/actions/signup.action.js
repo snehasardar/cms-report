@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_OFF } from '../action-types/action.types';
+import { SIGN_UP,  LOG_OFF } from '../action-types/action.types';
 
 export const signUp = (data) => {
 	return (dispatch) => {
@@ -10,7 +10,16 @@ export const signUp = (data) => {
 	};
 };
 
-export const logOff = (payload) => {
+// export const logIn = () => {
+// 	return (dispatch) => {
+// 		dispatch({
+// 			type: LOG_IN,
+			
+// 		});
+// 	};
+// };
+
+export const logOff = () => {
 	return (dispatch) => {
 		dispatch({
             type: LOG_OFF,

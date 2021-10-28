@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import * as Yup from 'yup';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 import './registration.styles.css';
 import '../styles.css';
@@ -57,6 +58,8 @@ const Registration = (props) => {
 		};
 		dispatch(signUp(post_data));
 		history.push('/logIn');
+		alert('you are successfully Registered');
+		// toast.success('you are successfully Registered');
 	};
 
 	const handleMobileNumberChange = (event, setFieldValue) => {
@@ -163,8 +166,8 @@ const Registration = (props) => {
 											</Col>
 										</Row>
 									) : null}
-									<Button variant="primary" className="btn btnRed" type="submit" disabled={isSubmitting}>
-										{isSubmitting ? 'Sending Request' : 'Send Request'}
+									<Button variant="primary" className="btn btnRed" type="submit" >
+										Submit
 									</Button>
 								</FormikForm>
 							);

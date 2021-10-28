@@ -1,10 +1,10 @@
-import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS, SEARCH_BOOKS } from '../action-types/action.types';
+import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS } from '../action-types/action.types';
 
 const initialStates = {
 	bookList: [],
 };
 
-const booksCart = (state = initialStates, action) => {
+const booksReducer = (state = initialStates, action) => {
 	switch (action.type) {
 		case ADD_BOOKS:
 			let allBookList = [...state.bookList];
@@ -32,7 +32,7 @@ const booksCart = (state = initialStates, action) => {
 			};
 
 		case DELETE_BOOKS:
-			const newBookList = state.bookList.filter((item) => item.id != action.payload);
+			const newBookList = state.bookList.filter((item) => item.id !== action.payload);
 			console.log(' newBookList', newBookList);
 			return {
 				...state,
@@ -67,18 +67,4 @@ const booksCart = (state = initialStates, action) => {
 	}
 };
 
-export default booksCart;
-
-// case SEARCH_BOOKS:
-//     let searchedBook = action.payload;
-//     console.log('searchedBook',searchedBook);
-//     const filteredBook = state.bookList.filter((data) => {
-//         return data.author_name.toLowerCase().includes(searchedBook.toLowerCase()) &&
-//         data.book_name.toLowerCase().includes(searchedBook.toLowerCase())
-//     });
-//     console.log('filteredBook',filteredBook);
-
-//      return {
-//         ...state,
-//         bookList: filteredBook,
-//         };
+export default booksReducer;

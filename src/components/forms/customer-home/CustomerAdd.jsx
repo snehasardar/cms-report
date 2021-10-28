@@ -5,15 +5,14 @@ import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
 
-import dateFormat, { masks } from "dateformat";
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../registration/registration.styles.css';
 import './customerModal.styles.css';
 import '../styles.css';
 
-import { GENDERS_FORM, REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
-import { numberFieldValidation, selectInitial, selectStatus } from '../../../shared/common';
+import {  REGEX_FULL_NAME,  INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
+import { numberFieldValidation } from '../../../shared/common';
 
 import { addList } from '../../../actions/customer.action';
 
@@ -30,11 +29,9 @@ console.log('initialValues', initialValues);
 
 const CustomerAdd = (props) => {
 	const { addModal, setAddModal } = props;
-	console.log('addModal add', addModal);
-	console.log('setAddModal add',setAddModal);
-	const time = new Date();
-	console.log('time', time);
 	const dispatch = useDispatch();
+	const { customerData } = useSelector((state) => state.customerReducer);
+	console.log('customerData', customerData);
 	const history = useHistory();
 
 	const validateCustomerInformation = Yup.object().shape({
@@ -57,7 +54,10 @@ const CustomerAdd = (props) => {
 			.trim()
 			.required('Please enter your Mobile Number')
 			.matches('^[0-9]+$', 'Mobile number should be numbers'),
-		email: Yup.string().trim().email('Enter valid Email Id').required('Please enter Email Id'),
+		email: Yup.string().trim()
+			.email('Enter valid Email Id')
+			.required('Please enter Email Id'),
+			// .test('name', "Name supports only alphabets and some other characters. ('.)", (value) => value && value.match(REGEX_EMAIL)),
 		status: Yup.object().required('Please select status'),
 	});
 
@@ -70,7 +70,7 @@ const CustomerAdd = (props) => {
 			fullname: `${values.initial} ${values.first_name} ${values.middle_name} ${values.last_name}`,
 			mobile_no: values.mobile_no,
 			email: values.email,
-			date: dateFormat(time, "dd-mm-yyyy hh:mm TT"),
+			date: new Date().toLocaleString(),
 			status: values.status.value,
 		};
 
@@ -79,131 +79,156 @@ const CustomerAdd = (props) => {
 		history.push('/customerDetails');
 	};
 
+
+	// const handleEmailChange = (e, setFieldValue) => {
+	// 	e.preventDefault();
+	// 	let { value, name } = e.target;
+	// 	console.log('event.target', e.target)
+	// 	console.log('value', value);
+	// 	console.log('name_email',name)
+	// 	value = emailFieldValidation(value);
+	// 	setFieldValue(name, value);
+	// 	console.log('value', value);
+	// 	customerData.filter((item) => {
+	// 		if(item.email == value){
+	// 			alert('there is customer with this email')
+	// 		}
+	// 	})
+	// }
+	
 	const handleMobileNumberChange = (event, setFieldValue) => {
 		event.preventDefault();
 		let { value, name } = event.target;
+		// console.log('event.target', event.target)
+		// console.log('value', value);
+		// console.log('name',name)
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
+		// console.log('value', value);
+		// console.log('name',name)
+		customerData.filter((item) => {
+			if(item.mobile_no == value){
+				alert('there is customer with this number')
+			}
+		})
 	};
 	const handleClose = () => {
 		history.push('/customerDetails');
-	}
+	};
 
 	return (
-		<Modal
-			className="requestCallModal"
-			show={addModal}
-			onHide={() => setAddModal(false)}
-			backdrop="static"
-			centered>
-		<Modal.Header closeButton onClick={ handleClose }></Modal.Header>
-		<Modal.Body>
-		<div className="requestCallWrapper">
-			<Row>
-				<Col xs={12} md={5} className="callBackBg"></Col>
-				<Col xs={12} md={7} className="">
-					<h3>Add Customer here</h3>
-					<Formik initialValues={initialValues} validationSchema={validateCustomerInformation} onSubmit={handleSubmitEvent}>
-						{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
-							return (
-								<FormikForm>
-									{console.log('errors', errors)}
-									<Form.Row>
-										<Form.Group as={Col} sm="6" controlId="initial">
-											<Select
-												options={INITIAL_FORM}
-												className="basic-select"
-												classNamePrefix="select"
-												getOptionValue={(x) => x.value}
-												getOptionLabel={(x) => x.label}
-												onChange={(evt) => setFieldValue('initial', evt)} //set variable gender in formik state
-												defaultValue={values.initial}
-												placeholder="Select Initial *"
-											/>
-											{errors.initial && touched.initial ? <p className="error no-pos"> {errors.initial}</p> : null}
-										</Form.Group>
-									</Form.Row>
-									<br />
-									<br />
-									<br />
-									<Form.Group controlId="first_name">
-										<Form.Control
-											type="text"
-											placeholder="First-Name *"
-											onChange={handleChange}
-											value={values.first_name}
-											isInvalid={errors.first_name && touched.first_name}
-										/>
-										{errors.first_name && touched.first_name ? <p className="error no-pos"> {errors.first_name}</p> : null}
-									</Form.Group>
-									<Form.Group controlId="middle_name">
-										<Form.Control type="text" placeholder="Middle-Name *" onChange={handleChange} value={values.middle_name} />
-									</Form.Group>
-									<Form.Group controlId="last_name">
-										<Form.Control
-											type="text"
-											placeholder="Last-Name *"
-											onChange={handleChange}
-											value={values.last_name}
-											isInvalid={errors.last_name && touched.last_name}
-										/>
-										{errors.last_name && touched.last_name ? <p className="error no-pos"> {errors.last_name}</p> : null}
-									</Form.Group>
-									<Form.Group controlId="mobile_no">
-										<Form.Control
-											type="text"
-											name="mobile_no"
-											placeholder="Mobile Number *"
-											value={values.mobile_no}
-											onChange={(e) => handleMobileNumberChange(e, setFieldValue)}
-											isInvalid={errors.mobile_no && touched.mobile_no}
-										/>
-										{errors.mobile_no && touched.mobile_no ? <p className="error no-pos"> {errors.mobile_no}</p> : null}
-									</Form.Group>
-									<Form.Group controlId="email">
-										<Form.Control
-											type="text"
-											placeholder="Email Id *"
-											onChange={handleChange}
-											value={values.email}
-											isInvalid={errors.email && touched.email}
-										/>
-										{errors.email && touched.email ? <p className="error no-pos"> {errors.email}</p> : null}
-									</Form.Group>
-									<Form.Row>
-										<Form.Group as={Col} sm="6" controlId="status">
-											<Select
-												options={STATUS_FORM}
-												className="basic-select"
-												classNamePrefix="select"
-												getOptionValue={(x) => x.value}
-												getOptionLabel={(x) => x.label}
-												onChange={(evt) => setFieldValue('status', evt)} //set variable gender in formik state
-												defaultValue={values.status}
-												placeholder="Select Status *"
-											/>
-											{errors.status && touched.status ? <p className="error no-pos"> {errors.status}</p> : null}
-										</Form.Group>
-									</Form.Row>
-									{errors.message ? (
-										<Row>
-											<Col xs={12} sm={12} md={12}>
-												<span className="errorMsg">{errors.message}</span>
-											</Col>
-										</Row>
-									) : null}
-									<Button variant="primary" className="btn btnRed" type="submit">
-										Add
-									</Button>
-								</FormikForm>
-							);
-						}}
-					</Formik>
-				</Col>
-			</Row>
-		</div>
-		</Modal.Body>
-	</Modal>
+		<Modal className="requestCallModal" show={addModal} onHide={() => setAddModal(false)} backdrop="static" centered>
+			<Modal.Header closeButton onClick={handleClose}></Modal.Header>
+			<Modal.Body>
+				<div className="requestCallWrapper">
+					<Row>
+						<Col xs={12} md={5} className="callBackBg"></Col>
+						<Col xs={12} md={7} className="">
+							<h3>Add Customer here</h3>
+							<Formik initialValues={initialValues} validationSchema={validateCustomerInformation} onSubmit={handleSubmitEvent}>
+								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
+									return (
+										<FormikForm>
+											{/* {console.log('errors', errors)} */}
+											<Form.Row>
+												<Form.Group as={Col} sm="6" controlId="initial">
+													<Select
+														options={INITIAL_FORM}
+														className="basic-select"
+														classNamePrefix="select"
+														getOptionValue={(x) => x.value}
+														getOptionLabel={(x) => x.label}
+														onChange={(evt) => setFieldValue('initial', evt)} //set variable gender in formik state
+														defaultValue={values.initial}
+														placeholder="Select Initial *"
+													/>
+													{errors.initial && touched.initial ? <p className="error no-pos"> {errors.initial}</p> : null}
+												</Form.Group>
+											</Form.Row>
+											<br />
+											<br />
+											<br />
+											<br />
+											<br />
+											<Form.Group controlId="first_name">
+												<Form.Control
+													type="text"
+													placeholder="First-Name *"
+													onChange={handleChange}
+													value={values.first_name}
+													isInvalid={errors.first_name && touched.first_name}
+												/>
+												{errors.first_name && touched.first_name ? <p className="error no-pos"> {errors.first_name}</p> : null}
+											</Form.Group>
+											<Form.Group controlId="middle_name">
+												<Form.Control type="text" placeholder="Middle-Name" onChange={handleChange} value={values.middle_name} />
+											</Form.Group>
+											<Form.Group controlId="last_name">
+												<Form.Control
+													type="text"
+													placeholder="Last-Name *"
+													onChange={handleChange}
+													value={values.last_name}
+													isInvalid={errors.last_name && touched.last_name}
+												/>
+												{errors.last_name && touched.last_name ? <p className="error no-pos"> {errors.last_name}</p> : null}
+											</Form.Group>
+											<Form.Group controlId="mobile_no">
+												<Form.Control
+													type="text"
+													name="mobile_no"
+													placeholder="Mobile Number *"
+													value={values.mobile_no}
+													onChange={(e) => handleMobileNumberChange(e, setFieldValue)}
+													isInvalid={errors.mobile_no && touched.mobile_no}
+												/>
+												{errors.mobile_no && touched.mobile_no ? <p className="error no-pos"> {errors.mobile_no}</p> : null}
+											</Form.Group>
+											<Form.Group controlId="email">
+												<Form.Control
+													type="text"
+													name="email"
+													placeholder="Email Id *"
+													// onChange={(e) => handleEmailChange(e, setFieldValue)}
+													value={values.email}
+													isInvalid={errors.email && touched.email}
+												/>
+												{errors.email && touched.email ? <p className="error no-pos"> {errors.email}</p> : null}
+											</Form.Group>
+											<Form.Row>
+												<Form.Group as={Col} sm="6" controlId="status">
+													<Select
+														options={STATUS_FORM}
+														className="basic-select"
+														classNamePrefix="select"
+														getOptionValue={(x) => x.value}
+														getOptionLabel={(x) => x.label}
+														onChange={(evt) => setFieldValue('status', evt)} //set variable gender in formik state
+														defaultValue={values.status}
+														placeholder="Select Status *"
+													/>
+													{errors.status && touched.status ? <p className="error no-pos"> {errors.status}</p> : null}
+												</Form.Group>
+											</Form.Row>
+											{errors.message ? (
+												<Row>
+													<Col xs={12} sm={12} md={12}>
+														<span className="errorMsg">{errors.message}</span>
+													</Col>
+												</Row>
+											) : null}
+											<Button variant="primary" className="btn btnRed" type="submit">
+												Add
+											</Button>
+										</FormikForm>
+									);
+								}}
+							</Formik>
+						</Col>
+					</Row>
+				</div>
+			</Modal.Body>
+		</Modal>
 	);
 };
 

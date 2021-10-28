@@ -28,13 +28,9 @@ const initialValues = {
 console.log('initialValues', initialValues);
 
 const CustomerEdit = (props) => {
-    // const id =props.match.params.id;
 	const {editModal, setEditModal} = props;
-	console.log('editModal edit', editModal);
-	console.log('setEditModal edit',setEditModal);
     const { id } = props;
-    console.log('id',id)
-	const { customerData } = useSelector((state) => state.customerCart);
+	const { customerData } = useSelector((state) => state.customerReducer);
     console.log('customerData', customerData)
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -75,7 +71,6 @@ const CustomerEdit = (props) => {
 		last_name: currentData && Object.keys(currentData).length > 0 ? currentData.last_name : '',
 		mobile_no: currentData && Object.keys(currentData).length > 0 ? currentData.mobile_no : '',
 		email: currentData && Object.keys(currentData).length > 0 ? currentData.email : '',
-		date: currentData && Object.keys(currentData).length > 0 ? currentData.date : '',
 		status: currentData && Object.keys(currentData).length > 0 ? selectStatus(currentData.status) : '',
 	});
 
@@ -89,7 +84,7 @@ const CustomerEdit = (props) => {
 			fullname: `${values.initial} ${values.first_name} ${values.middle_name} ${values.last_name}`,
 			mobile_no: values.mobile_no,
 			email: values.email,
-			// date: new Date().toLocaleString(),
+			date: currentData && Object.keys(currentData).length > 0 ? currentData.date : '',
 			status: values.status.value,
 		};
 

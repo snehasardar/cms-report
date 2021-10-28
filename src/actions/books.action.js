@@ -1,4 +1,4 @@
-import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS, SEARCH_BOOKS } from '../action-types/action.types';
+import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS } from '../action-types/action.types';
 
 export const addBook = (data) => {
 	return (dispatch) => {
@@ -27,20 +27,11 @@ export const editBook = (data) => {
 	};
 };
 
-// export const searchBook = (data) => {
-// 	return (dispatch) => {
-// 		dispatch({
-// 			type : SEARCH_BOOKS,
-// 			payload : data,
-// 		});
-// 	};
-// };
 
-export const clearBook = (payload) => {
+export const clearBook = () => {
 	return (dispatch) => {
 		dispatch({
 			type: CLEAR_BOOKS,
-			payload: payload,
 		});
 	};
 };

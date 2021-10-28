@@ -5,15 +5,14 @@ import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
 
-import dateFormat, { masks } from 'dateformat';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../registration/registration.styles.css';
 import '../customer-home/customerModal.styles.css';
 import '../styles.css';
 
-import { GENDERS_FORM, REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
-import { numberFieldValidation, selectInitial, selectStatus } from '../../../shared/common';
+import { STATUS_FORM } from '../../../shared/constants';
+import { numberFieldValidation,  selectStatus } from '../../../shared/common';
 
 import { editBook } from '../../../actions/books.action';
 
@@ -29,14 +28,8 @@ console.log('initialValues', initialValues);
 
 const BooksEdit = (props) => {
 	const { bookEditModal, setBookEditModal } = props;
-	console.log('bookEditModal', bookEditModal);
-	console.log('setBookEditModal', setBookEditModal);
 	const { id } = props;
-	console.log('id', id);
-	const { bookList } = useSelector((state) => state.booksCart);
-	console.log('bookList', bookList);
-	const date = new Date();
-	console.log('date', date);
+	const { bookList } = useSelector((state) => state.booksReducer);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -75,6 +68,7 @@ const BooksEdit = (props) => {
 	});
 	const newInitialValues = Object.assign(initialValues, {
 		book_name: currentBook && Object.keys(currentBook).length > 0 ? currentBook.book_name : '',
+		image_link: currentBook && Object.keys(currentBook).length > 0 ? currentBook.image_link : '',
 		author_name: currentBook && Object.keys(currentBook).length > 0 ? currentBook.author_name : '',
 		genre: currentBook && Object.keys(currentBook).length > 0 ? currentBook.genre : '',
 		total_books: currentBook && Object.keys(currentBook).length > 0 ? currentBook.total_books : '',
@@ -85,7 +79,7 @@ const BooksEdit = (props) => {
 	const handleSubmitEvent = (values, actions) => {
 		let post_data = {
 			id: currentBook && Object.keys(currentBook).length > 0 ? currentBook.id : '',
-			image_link: currentBook && Object.keys(currentBook).length > 0 ? currentBook.image_link : '',
+			image_link: values.image_link,
 			book_name: values.book_name,
 			author_name: values.author_name,
 			genre: values.genre,
@@ -94,7 +88,7 @@ const BooksEdit = (props) => {
 			price: values.price,
 			status: values.status.value,
 			added_date: currentBook && Object.keys(currentBook).length > 0 ? currentBook.added_date : '',
-			updated_date: dateFormat(date, 'dd-mm-yyyy hh:mm TT'),
+			updated_date: new Date().toLocaleString(),
 		};
 
 		dispatch(editBook(post_data));
@@ -135,6 +129,16 @@ const BooksEdit = (props) => {
 													isInvalid={errors.book_name && touched.book_name}
 												/>
 												{errors.book_name && touched.book_name ? <p className="error no-pos"> {errors.book_name}</p> : null}
+											</Form.Group>
+											<Form.Group controlId="image_link">
+												<Form.Control
+													type="link"
+													placeholder="Image-Link *"
+													onChange={handleChange}
+													value={values.image_link}
+													isInvalid={errors.image_link && touched.image_link}
+												/>
+												{errors.image_link && touched.image_link ? <p className="error no-pos"> {errors.image_link}</p> : null}
 											</Form.Group>
 											<Form.Group controlId="author_name">
 												<Form.Control type="text" placeholder="Author-Name *" onChange={handleChange} value={values.author_name} />

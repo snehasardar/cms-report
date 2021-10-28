@@ -6,16 +6,18 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../customer-home/Sidebar';
 import Pagination from 'react-js-pagination';
 
-import { deleteBook, clearBook, searchBook } from '../../../actions/books.action';
+import dateFormat from 'dateformat';
+import { deleteBook, clearBook } from '../../../actions/books.action';
 
 import '../customer-home/customerModal.styles.css';
 
 const BooksDetails = (props) => {
-	const { bookModal, setBookModal, bookEditModal, setBookEditModal,  logged, setLogged } = props;
-	const { bookList } = useSelector((state) => state.booksCart);
+	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
+	const { bookList } = useSelector((state) => state.booksReducer);
 	const dispatch = useDispatch();
-	const history = useHistory();
+	// const history = useHistory();
 	const [searchByName, setSearchByName] = useState('');
+	const [filterdBookList, setFilterdBookList] =useState('');
 
 	const [posts, setPosts] = useState([]);
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
@@ -25,7 +27,7 @@ const BooksDetails = (props) => {
 	const totalData = bookList.length;
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
-	let currentData = posts.slice(firstData, lastData);
+	let currentData = filterdBookList.slice(firstData, lastData);
 	console.log('index of lastData', lastData);
 	console.log('index of firstData', firstData);
 	console.log('currentData', currentData);
@@ -33,13 +35,30 @@ const BooksDetails = (props) => {
 	const handleSearchByName = (e) => {
 		setSearchByName(e.target.value);
 		console.log('handleSearchByName ', searchByName);
-		// dispatch(searchBook(searchByName));
+		
+		// if( e.target.value ){
+		// 	posts.filter((data) => {
+		// 		if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
+		// 			setFilterdBookList(data);
+		// 		} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
+		// 			setFilterdBookList(data);
+		// 		} else if (
+		// 			data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
+		// 			data.book_name.toLowerCase().includes(searchByName.toLowerCase())
+		// 		) {
+		// 			setFilterdBookList(data);
+		// 		}
+		// 	})
+		// }else{
+		// 	setFilterdBookList(bookList)
+		// }
 	};
 
-	const showBookList = () => {
+	const showBookList = (start, end) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
+			setFilterdBookList(bookList);
 			setPosts(bookList);
 		}, 1000);
 	};
@@ -72,36 +91,33 @@ const BooksDetails = (props) => {
 								<th>Author Name</th>
 								<th>Genre</th>
 								<th>Reference Number</th>
-								<th>Total Books</th>
+								<th>Stock </th>
 								<th>Price</th>
 								<th>Added date</th>
 								<th>Updated Date</th>
 								<th>Status</th>
-								<th>Action</th>
+								<th colSpan="2">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							{currentData &&
-								currentData
-									.filter((data) => {
-										if (searchByName === '') {
-											return data;
-										} else if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
-											return data;
-										} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
-											return data;
-										} else if (
-											data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-											data.book_name.toLowerCase().includes(searchByName.toLowerCase())
-										) {
-											return data;
-										}
-									})
-									.map((data, index) => {
+								currentData.filter((data) => {
+									if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
+										return data;
+									} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
+										return data;
+									} else if (
+										data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
+										data.book_name.toLowerCase().includes(searchByName.toLowerCase())
+									) {
+										return data;
+									}
+								})
+								.map((data, index) => {
 										return (
 											<tr key={index}>
 												<td>
-													<img src={data.image_link} width="50" height="50" />{' '}
+													<img src={data.image_link} alt="books image" width="50" height="50" />{' '}
 												</td>
 												<td>{data.id}</td>
 												<td>{data.book_name}</td>
@@ -110,8 +126,8 @@ const BooksDetails = (props) => {
 												<td>{data.reference_num}</td>
 												<td>{data.total_books}</td>
 												<td>₹{data.price}</td>
-												<td>{data.added_date}</td>
-												<td>{data.updated_date}</td>
+												<td>{dateFormat((data.added_date), 'dd-mm-yyyy hh:MM TT')}</td>
+												<td>{dateFormat((data.updated_date), 'dd-mm-yyyy hh:MM TT')}</td>
 												<td>{data.status}</td>
 												<td>
 													<button onClick={() => dispatch(deleteBook(data.id))}>Delete</button>
@@ -129,13 +145,17 @@ const BooksDetails = (props) => {
 				) : (
 					<div>Loading...</div>
 				)}
-				<Pagination
-					activePage={activePage}
-					itemsCountPerPage={itemsCountPerPage}
-					totalItemsCount={totalData}
-					pageRangeDisplayed={pageRangeDisplayed}
-					onChange={(currentPage) => setActivePage(currentPage)}
-				/>
+				{
+					(bookList >= 5) ? (
+						<Pagination
+						activePage={activePage}
+						itemsCountPerPage={itemsCountPerPage}
+						totalItemsCount={totalData}
+						pageRangeDisplayed={pageRangeDisplayed}
+						onChange={(currentPage) => setActivePage(currentPage)}/>
+					) : ( ' ' )
+				}
+				
 			</div>
 		</div>
 	);

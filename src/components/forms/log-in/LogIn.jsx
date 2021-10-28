@@ -1,16 +1,16 @@
 import { Formik, Form as FormikForm } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import * as Yup from 'yup';
-import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 import '../registration/registration.styles.css';
 import '../styles.css';
 
-import { GENDERS_FORM, REGEX_FULL_NAME } from '../../../shared/constants';
-import { numberFieldValidation, selectGender } from '../../../shared/common';
+import { numberFieldValidation } from '../../../shared/common';
+import { logIn } from '../../../actions/signup.action';
 
 const initialValues = {
 	email: '',
@@ -20,9 +20,10 @@ console.log('initialValues', initialValues);
 
 const LogIn = (props) => {
 	const { logged, setLogged } = props;
+	const dispatch = useDispatch();
 	const history = useHistory();
-	const userData = useSelector((state) => state.signCart.userData);
-	
+	const { userData } = useSelector((state) => state.registration);
+	console.log(' userData',  userData);
 
 	const validateRequestCallBack = Yup.object().shape({
 		email: Yup.string().trim().email('Enter valid Email Id').required('Please enter Email Id'),
@@ -34,13 +35,17 @@ const LogIn = (props) => {
 			email: values.email,
 			password: values.password,
 		};
+		console.log(' login password', values.password);
+		console.log(' login email', values.email);
 		if (postdata.email == newInitialValues.uemail && postdata.password == newInitialValues.upassword) {
-			alert('successfully login');
-			localStorage.setItem("token", 'userIsLoggedIn')
-			history.push('/home');
+			// toast.success('successfully login');
 			setLogged(true);
+			alert('successfully login');
+			// dispatch(logIn());
+			// history.push('/home');
 		} else {
-			alert('Incorrect Details');
+			// toast.warning('Incorrect Details');
+			alert('Incorrect Detail');
 		}
 	};
 
@@ -48,13 +53,14 @@ const LogIn = (props) => {
 		uemail: userData && Object.keys(userData).length > 0 ? userData.email : '',
 		upassword: userData && Object.keys(userData).length > 0 ? userData.password : '',
 	};
+	console.log('  newInitialValues uemail', newInitialValues.uemail);
+	console.log('  newInitialValues uemail', newInitialValues.upassword);
 
 	const handleMobileNumberChange = (event, setFieldValue) => {
 		event.preventDefault();
 		let { value, name } = event.target;
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
-		setLogged(true);
 	};
 
 	return (
@@ -95,7 +101,7 @@ const LogIn = (props) => {
 											</Col>
 										</Row>
 									) : null}
-									<Button variant="primary" className="btn btnRed" type="submit" >
+									<Button variant="primary" className="btn btnRed" type="submit">
 										LogIn
 									</Button>
 								</FormikForm>

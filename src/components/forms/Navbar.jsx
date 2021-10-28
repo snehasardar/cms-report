@@ -1,24 +1,27 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOff } from '../../actions/signup.action';
+// import { toast } from 'react-toastify';
+
 const Navbar = (props) => {
 	const { logged, setLogged } = props;
 	const dispatch = useDispatch();
-	console.log('logged',logged)
+	const { userToken } = useSelector((state) => state.registration);
+	console.log('logged', logged);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token")
-         console.log(token);
-          
-         if(token == null){
-            setLogged(false);
-        }
-        else{   
-            setLogged(true);
-        }
-		
-	},)
+		let utoken = userToken;
+		if (utoken) {
+			setLogged(true);
+			// alert('your are successfully Login');
+			// toast.success('your are successfully Login');
+			// toast.error
+			// toast.warning
+		} else {
+			setLogged(false);
+		}
+	});
 
 	return (
 		<div>
@@ -43,8 +46,17 @@ const Navbar = (props) => {
 									Registration
 								</Link>
 							</li>
+							{logged === true ? (
+								<li className="nav-item">
+									<Link to="/home" className="nav-link active">
+										Home
+									</Link>
+								</li>
+							) : (
+								' '
+							)}
 						</ul>
-						
+
 						{logged === false ? (
 							<span className="navbar-text">
 								<Link to="/logIn" className="nav-link active">
@@ -53,9 +65,7 @@ const Navbar = (props) => {
 							</span>
 						) : (
 							<span className="navbar-text">
-								<button  onClick={() => dispatch(logOff())}>
-									Logout
-								</button>
+								<button onClick={() => dispatch(logOff())}>Logout</button>
 							</span>
 						)}
 					</div>

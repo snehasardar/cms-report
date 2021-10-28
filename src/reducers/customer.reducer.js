@@ -30,13 +30,13 @@ const addCart = (state, action) => {
 	};
 };
 
-const customerCart = (state = initialStates, action) => {
+const customerReducer = (state = initialStates, action) => {
 	switch (action.type) {
 		case ADD_LIST:
 			return addCart(state, action);
 
 		case DELETE_LIST:
-			const newList = state.customerData.filter((item) => item.first_name != action.payload);
+			const newList = state.customerData.filter((item) => item.id !== action.payload);
 			console.log(' newList', newList);
 			return {
 				...state,
@@ -73,7 +73,7 @@ const customerCart = (state = initialStates, action) => {
 	}
 };
 
-export default customerCart;
+export default customerReducer;
 
 /**
 newCustomerData.push(action.payload);

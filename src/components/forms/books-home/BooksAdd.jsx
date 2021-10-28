@@ -1,19 +1,19 @@
 import { Formik, Form as FormikForm } from 'formik';
 import { Row, Col, Button, Form, Modal } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
 
-import dateFormat, { masks } from 'dateformat';
+
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../registration/registration.styles.css';
 import '../customer-home/customerModal.styles.css';
 import '../styles.css';
 
-import { GENDERS_FORM, REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
-import { numberFieldValidation, selectInitial, selectStatus } from '../../../shared/common';
+import { STATUS_FORM } from '../../../shared/constants';
+import { numberFieldValidation } from '../../../shared/common';
 
 import { addBook } from '../../../actions/books.action';
 
@@ -30,8 +30,6 @@ console.log('initialValues', initialValues);
 
 const BooksAdd = (props) => {
 	const { bookModal, setBookModal } = props;
-	const date = new Date();
-	console.log('date', date);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -76,7 +74,7 @@ const BooksAdd = (props) => {
 			total_books: values.total_books,
 			price: values.price,
 			status: values.status.value,
-			added_date: dateFormat(date, 'dd-mm-yyyy hh:mm TT'),
+			added_date: new Date().toLocaleString(),
 		};
 
 		dispatch(addBook(post_data));
@@ -101,6 +99,7 @@ const BooksAdd = (props) => {
 				<div className="requestCallWrapper">
 					<Row>
 						<Col xs={12} md={5} className="callBackBg"></Col>
+						
 						<Col xs={12} md={7} className="">
 							<h3>Add Books here</h3>
 							<Formik initialValues={initialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>
@@ -146,7 +145,7 @@ const BooksAdd = (props) => {
 												<Form.Control
 													type="number"
 													name="total_books"
-													placeholder="Number of Books*"
+													placeholder="Stock*"
 													value={values.total_books}
 													onChange={(e) => handleMobileNumberChange(e, setFieldValue)}
 													isInvalid={errors.total_books && touched.total_books}
@@ -157,7 +156,7 @@ const BooksAdd = (props) => {
 												<Form.Control
 													type="text"
 													name="price"
-													placeholder="price of the Book*"
+													placeholder="price *"
 													value={values.price}
 													onChange={(e) => handleMobileNumberChange(e, setFieldValue)}
 													isInvalid={errors.price && touched.price}
