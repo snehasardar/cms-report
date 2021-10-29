@@ -41,6 +41,11 @@ const Navbar = (props) => {
 									Registration
 								</Link>
 							</li>
+							<li className="nav-item">
+								<Link to="/customerDetails" className="nav-link active">
+									Customer Details
+								</Link>
+							</li>
 							{logged === true ? (
 								<li className="nav-item">
 									<Link to="/home" className="nav-link active">
@@ -71,7 +76,7 @@ const Navbar = (props) => {
 };
 export default Navbar;
 
-/*<li className="nav-item">
+/*							<li className="nav-item">
 								<Link to="/customerDetails" className="nav-link active">
 									Customer Details
 								</Link>

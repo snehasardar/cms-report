@@ -6,10 +6,12 @@ import Sidebar from '../customer-home/Sidebar';
 import Pagination from 'react-js-pagination';
 
 import dateFormat from 'dateformat';
-import { deleteBook, clearBook } from '../../../actions/books.action';
+import { deleteBook, clearBook, addAllData } from '../../../actions/books.action';
 
 import '../customer-home/customerModal.styles.css';
 import { toast } from 'react-toastify';
+
+import BookDataList from './BooksData';
 
 const BooksDetails = (props) => {
 	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
@@ -65,6 +67,11 @@ const BooksDetails = (props) => {
 		}
 	};
 
+	const handleAddAutoData = () => {
+		console.log('CustomerDataList.allCustomerDtails', BookDataList.allBooksDtails);
+		dispatch(addAllData( BookDataList.allBooksDtails));
+	}
+
 	const handleDelete = (id) => {
 		dispatch(deleteBook(id));
 		toast.success('Book has been successfully deleted')
@@ -99,13 +106,14 @@ const BooksDetails = (props) => {
 				</button>{' '}
 				<input placeholder="Search by Book Name" value={searchByName} onChange={handleSearchByName} />{' '}
 				<input placeholder="Search by Author Name" value={searchByAuthor} onChange={handleSearchByName} />{' '}
-				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button>
+				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button>{' '}
+				<button onClick={ handleAddAutoData }>Autofill</button>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
 							<tr>
 								<th>Image</th>
-								{/* <th>ID</th> */}
+								<th>ID</th>
 								<th>Book Name</th>
 								<th>Author Name</th>
 								<th>Genre</th>
@@ -127,7 +135,7 @@ const BooksDetails = (props) => {
 											<td>
 												<img src={data.image_link} alt="book image" width="50" height="50" />{' '}
 											</td>
-											{/* <td>{data.id}</td> */}
+											<td>{data.id}</td>
 											<td>{data.book_name}</td>
 											<td>{data.author_name}</td>
 											<td>{data.genre}</td>
@@ -139,7 +147,6 @@ const BooksDetails = (props) => {
 											<td>{data.status}</td>
 											<td>
 											<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-												{/* <button onClick={() => dispatch(deleteBook(data.id))}>Delete</button> */}
 											</td>
 											<td>
 												<button onClick={() => setBookEditModal(true)}>

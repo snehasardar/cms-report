@@ -1,4 +1,4 @@
-import { ADD_LIST, DELETE_LIST, EDIT_LIST, CLEAR_LIST } from '../action-types/action.types';
+import { ADD_LIST, DELETE_LIST, EDIT_LIST, CLEAR_LIST, ADDALL_DATA } from '../action-types/action.types';
 
 
 export const addList = (data) => {
@@ -9,6 +9,17 @@ export const addList = (data) => {
 			payload: data,
 		});
 		
+	};
+};
+
+export const addAllData = (data) => {
+	
+	return (dispatch) => {
+		dispatch({
+			type: ADDALL_DATA,
+			payload: data,
+		});
+		console.log(' data', data)
 	};
 };
 

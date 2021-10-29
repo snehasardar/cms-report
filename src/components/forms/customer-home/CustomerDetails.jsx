@@ -6,9 +6,11 @@ import Sidebar from './Sidebar';
 import Pagination from 'react-js-pagination';
 import dateFormat from 'dateformat';
 
-import { deleteList, clearList } from '../../../actions/customer.action';
+import { deleteList, clearList, addAllData } from '../../../actions/customer.action';
 import './customerModal.styles.css';
 import { toast } from 'react-toastify';
+
+import CustomerDataList from './CustomerDataList';
 
 const CustomerDetails = (props) => {
 	const { editModal, setEditModal, addModal, setAddModal } = props;
@@ -26,6 +28,8 @@ const CustomerDetails = (props) => {
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 	// let currentData = filteredCustomer.slice(firstData, lastData);
+
+	console.log('customerData',customerData);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -62,6 +66,12 @@ const CustomerDetails = (props) => {
 		}
 	};
 
+	const handleAddAutoData = () => {
+		console.log('CustomerDataList.allCustomerDtails', CustomerDataList.allCustomerDtails);
+		dispatch(addAllData( CustomerDataList.allCustomerDtails));
+		// console.log('storedData',storedData);
+	}
+
 	const showBookList = (start, end) => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -96,7 +106,8 @@ const CustomerDetails = (props) => {
 				</button>{' '}
 				<input placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />
 				<input placeholder="Search by Email" name="email_search" value={searchByEmail} onChange={handleSearch} />{' '}
-				<button onClick={() => dispatch(clearList())}>Clear List</button>
+				<button onClick={() => dispatch(clearList())}>Clear List</button>{' '}
+				<button onClick={ handleAddAutoData }>Autofill</button>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>

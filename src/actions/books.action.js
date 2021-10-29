@@ -1,4 +1,4 @@
-import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS } from '../action-types/action.types';
+import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS, ADDALL_DATA } from '../action-types/action.types';
 
 export const addBook = (data) => {
 	return (dispatch) => {
@@ -6,6 +6,17 @@ export const addBook = (data) => {
 			type: ADD_BOOKS,
 			payload: data,
 		});
+	};
+};
+
+export const addAllData = (data) => {
+	
+	return (dispatch) => {
+		dispatch({
+			type: ADDALL_DATA,
+			payload: data,
+		});
+		console.log(' data', data)
 	};
 };
 

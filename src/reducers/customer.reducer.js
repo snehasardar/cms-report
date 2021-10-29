@@ -1,4 +1,4 @@
-import { ADD_LIST, DELETE_LIST, EDIT_LIST, CLEAR_LIST } from '../action-types/action.types';
+import { ADD_LIST, DELETE_LIST, EDIT_LIST, CLEAR_LIST, ADDALL_DATA } from '../action-types/action.types';
 
 const initialStates = {
 	customerData: [],
@@ -41,6 +41,33 @@ const customerReducer = (state = initialStates, action) => {
 		case ADD_LIST:
 			return addCart(state, action);
 
+		case ADDALL_DATA:
+			let oldData = [...state.customerData];
+			let localValue = action.payload; 
+				console.log('localValue',localValue);
+			const totalData = oldData.length;
+			for(let i=0; i < localValue.length; i++){
+				if (totalData > 0) {
+					let id = oldData[totalData - 1].id + 1; 
+					let newValue = {
+						...localValue[i],id,};
+					oldData.push(newValue);
+					console.log('newValue',newValue)
+					console.log('localValue[i].first_name',localValue[i].first_name)
+				} else {
+					let id = 0;
+					id = id + 1;
+					let newValue = {
+						...localValue[i],id,};
+					oldData.push(newValue);
+					console.log('newValue',newValue)
+				}
+			} 
+			console.log('oldData',oldData);
+			return {
+				customerData: oldData,
+			};
+			
 		case DELETE_LIST:
 			let newList = [...state.customerData];
 			let freshData = newList.filter((item) => item.id !== action.payload);
@@ -81,3 +108,19 @@ const customerReducer = (state = initialStates, action) => {
 };
 
 export default customerReducer;
+
+/**
+ * let newValue = localValue.map((item) => {
+					return{
+						initial: item.initial,
+						first_name: item.first_name,
+						middle_name: item.middle_name,
+						last_name: item.last_name,
+						fullname: item.fullname,
+						mobile_no: item.mobile_no,
+						email: item.email,
+						status: item.status,
+						registration_num: item.registration_num,
+					}
+				})
+ */

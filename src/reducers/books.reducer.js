@@ -1,4 +1,4 @@
-import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS } from '../action-types/action.types';
+import { ADD_BOOKS, DELETE_BOOKS, CLEAR_BOOKS, EDIT_BOOKS, ADDALL_DATA } from '../action-types/action.types';
 
 const initialStates = {
 	bookList: [],
@@ -29,6 +29,32 @@ const booksReducer = (state = initialStates, action) => {
 			return {
 				...state,
 				bookList: allBookList,
+			};
+
+		case ADDALL_DATA:
+			let oldData = [...state.bookList];
+			let localValue = action.payload; 
+				console.log('localValue',localValue);
+			const totalData = oldData.length;
+			for(let i=0; i < localValue.length; i++){
+				if (totalData > 0) {
+					let id = oldData[totalData - 1].id + 1; 
+					let newValue = {
+						...localValue[i],id,};
+					oldData.push(newValue);
+					console.log('newValue',newValue)
+				} else {
+					let id = 0;
+					id = id + 1;
+					let newValue = {
+						...localValue[i],id,};
+					oldData.push(newValue);
+						console.log('newValue',newValue)
+				}
+			} 
+				console.log('oldData',oldData);
+			return {
+				bookList: oldData,
 			};
 
 		case DELETE_BOOKS:
