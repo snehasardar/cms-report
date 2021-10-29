@@ -9,12 +9,14 @@ import dateFormat from 'dateformat';
 import { deleteBook, clearBook } from '../../../actions/books.action';
 
 import '../customer-home/customerModal.styles.css';
+import { toast } from 'react-toastify';
 
 const BooksDetails = (props) => {
 	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
 	const { bookList } = useSelector((state) => state.booksReducer);
 	const dispatch = useDispatch();
 	const [searchByName, setSearchByName] = useState('');
+	const [searchByAuthor, setSearchByAuthor] = useState('');
 	const [filterdBookList, setFilterdBookList] = useState('');
 
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(2);
@@ -25,23 +27,31 @@ const BooksDetails = (props) => {
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
+
 	const handleSearchByName = (e) => {
 		e.preventDefault();
-		setSearchByName(e.target.value);
-		console.log('handleSearchByName ', searchByName);
-		console.log('filterdBookList', filterdBookList);
-		if (e.target.value) {
+		const { name, value } = e.target;
+		console.log('name ', name);
+		console.log('value', value);
+		if (value && name === 'name_search') {
 			let newData = [];
 			bookList.filter((data) => {
-				if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
+				if (data.book_name.toLowerCase().includes(value.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
-				} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
+				}
+			});
+			setSearchByName(value);
+			setFilterdBookList(newData);
+		} else if (value && name === 'email_search') {
+			let newData = [];
+			bookList.filter((data) => {
+				if (data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
 				} else if (
-					data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-					data.book_name.toLowerCase().includes(searchByName.toLowerCase())
+					data.book_name.toLowerCase().includes(searchByName.toLowerCase()) &&
+					data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())
 				) {
 					newData.push(data);
 					console.log('data', data);
@@ -50,8 +60,15 @@ const BooksDetails = (props) => {
 			setFilterdBookList(newData);
 		} else {
 			setFilterdBookList(bookList);
+			setSearchByName('');
+			setSearchByAuthor('');
 		}
 	};
+
+	const handleDelete = (id) => {
+		dispatch(deleteBook(id));
+		toast.success('Book has been successfully deleted')
+	}
 
 	const showBookList = (start, end) => {
 		setIsLoading(true);
@@ -60,6 +77,11 @@ const BooksDetails = (props) => {
 			setFilterdBookList(bookList);
 		}, 1000);
 	};
+
+	useEffect(() => {
+		setFilterdBookList(bookList);
+	}, [bookList]);
+
 
 	useEffect(() => {
 		showBookList(firstData, lastData);
@@ -75,8 +97,8 @@ const BooksDetails = (props) => {
 				<button onClick={() => setBookModal(true)}>
 					<Link to={'/booksAdd'}>Add Books</Link>
 				</button>{' '}
-				<input placeholder="Search by Book Name" onChange={handleSearchByName} />{' '}
-				<input placeholder="Search by Author Name" onChange={handleSearchByName} />{' '}
+				<input placeholder="Search by Book Name" value={searchByName} onChange={handleSearchByName} />{' '}
+				<input placeholder="Search by Author Name" value={searchByAuthor} onChange={handleSearchByName} />{' '}
 				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button>
 				{!isLoading ? (
 					<Table striped bordered hover>
@@ -116,7 +138,8 @@ const BooksDetails = (props) => {
 											<td>{dateFormat(data.updated_date, 'dd-mm-yyyy hh:MM TT')}</td>
 											<td>{data.status}</td>
 											<td>
-												<button onClick={() => dispatch(deleteBook(data.id))}>Delete</button>
+											<button onClick={(e) => handleDelete(data.id)}>Delete</button>
+												{/* <button onClick={() => dispatch(deleteBook(data.id))}>Delete</button> */}
 											</td>
 											<td>
 												<button onClick={() => setBookEditModal(true)}>
@@ -147,3 +170,34 @@ const BooksDetails = (props) => {
 	);
 };
 export default BooksDetails;
+
+/*
+const handleSearchByName = (e) => {
+		e.preventDefault();
+		setSearchByName(e.target.value);
+		console.log('handleSearchByName ', searchByName);
+		console.log('filterdBookList', filterdBookList);
+		if (e.target.value) {
+			let newData = [];
+			bookList.filter((data) => {
+				if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
+					newData.push(data);
+					console.log('data', data);
+				} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
+					newData.push(data);
+					console.log('data', data);
+				} else if (
+					data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
+					data.book_name.toLowerCase().includes(searchByName.toLowerCase())
+				) {
+					newData.push(data);
+					console.log('data', data);
+				}
+			});
+			setFilterdBookList(newData);
+		} else {
+			setFilterdBookList(bookList);
+		}
+	};
+
+ */

@@ -11,19 +11,25 @@ const addCart = (state, action) => {
 		let id = newCustomerData[totalCustomer - 1].id + 1; //take the id of last customer
 		let subtringName = action.payload.first_name.substring(0, 4);
 		let regNum = subtringName + 1000 + id;
+		// let fullName = action.payload.initial +' '+ action.payload.first_name +' '+ action.payload.middle_name +' '+ action.payload.last_name;
+		// console.log('fullName', fullName)
 		let customer = {
 			...action.payload,
 			id,
 			registration_num: regNum,
+			// full_name : fullName ,
 		};
 		newCustomerData.push(customer);
 	} else {
 		let id = 1;
 		let subtringName = action.payload.first_name.substr(0, 4);
 		let regNum = subtringName + 1000 + id;
+		// let fullName = action.payload.initial +' '+ action.payload.first_name +' '+ action.payload.middle_name +' '+ action.payload.last_name;
+		// console.log('fullName', fullName)
 		let renewedData = { ...action.payload, id, registration_num: regNum };
 		newCustomerData.push(renewedData);
 	}
+	
 	return {
 		...state,
 		customerData: newCustomerData,

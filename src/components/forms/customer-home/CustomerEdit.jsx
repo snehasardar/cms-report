@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -81,7 +82,7 @@ const CustomerEdit = (props) => {
 			first_name: values.first_name,
 			middle_name: values.middle_name,
 			last_name: values.last_name,
-			fullname: `${values.initial} ${values.first_name} ${values.middle_name} ${values.last_name}`,
+			fullname: `${values.initial.label} ${values.first_name} ${values.middle_name} ${values.last_name}`,
 			mobile_no: values.mobile_no,
 			email: values.email,
 			date: currentData && Object.keys(currentData).length > 0 ? currentData.date : '',
@@ -89,6 +90,7 @@ const CustomerEdit = (props) => {
 		};
 
 		dispatch(editList(post_data));
+		toast.success('Customer Data has been successfully edited');
 		history.push('/customerDetails');
 	};
 

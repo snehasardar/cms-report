@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -92,6 +93,7 @@ const BooksEdit = (props) => {
 		};
 
 		dispatch(editBook(post_data));
+		toast('Book information has been successfully edited');
 		console.log('post_data', post_data);
 		history.push('/booksDetails');
 	};

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
-
+import { toast } from 'react-toastify';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -78,6 +78,7 @@ const BooksAdd = (props) => {
 		};
 
 		dispatch(addBook(post_data));
+		toast.success('The Book has been added successfully');
 		console.log('post_data', post_data);
 		history.push('/booksDetails');
 	};

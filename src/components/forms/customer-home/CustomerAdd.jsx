@@ -68,7 +68,7 @@ const CustomerAdd = (props) => {
 			first_name: values.first_name,
 			middle_name: values.middle_name,
 			last_name: values.last_name,
-			fullname: `${values.initial} ${values.first_name} ${values.middle_name} ${values.last_name}`,
+			fullname: `${values.initial.label} ${values.first_name} ${values.middle_name} ${values.last_name}`,
 			mobile_no: values.mobile_no,
 			email: values.email,
 			date: new Date().toLocaleString(),
@@ -76,6 +76,7 @@ const CustomerAdd = (props) => {
 		};
 
 		dispatch(addList(post_data));
+		toast.success('Customer Data added successfully');
 		console.log('post_data', post_data);
 		history.push('/customerDetails');
 	};

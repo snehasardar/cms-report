@@ -47,6 +47,14 @@ const LogIn = (props) => {
 	console.log('  newInitialValues uemail', newInitialValues.uemail);
 	console.log('  newInitialValues uemail', newInitialValues.upassword);
 
+	const handleEmailChange = (e, setFieldValue) => {
+		e.preventDefault();
+		let { value, name } = e.target;
+		console.log('event.target', e.target)
+		console.log('value', value);
+		setFieldValue(name, value);
+	}
+
 	return (
 		<div className="requestCallWrapper">
 			<Row>
@@ -61,9 +69,10 @@ const LogIn = (props) => {
 									<Form.Group controlId="email">
 										<Form.Control
 											type="text"
-											placeholder="Email Id *"
 											name="email"
+											placeholder="Email Id *"
 											value={values.email}
+											onChange={(e) => handleEmailChange(e, setFieldValue)}
 											isInvalid={errors.email && touched.email}
 										/>
 										{errors.email && touched.email ? <p className="error no-pos"> {errors.email}</p> : null}

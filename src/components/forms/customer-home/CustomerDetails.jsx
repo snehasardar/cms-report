@@ -8,12 +8,14 @@ import dateFormat from 'dateformat';
 
 import { deleteList, clearList } from '../../../actions/customer.action';
 import './customerModal.styles.css';
+import { toast } from 'react-toastify';
 
 const CustomerDetails = (props) => {
 	const { editModal, setEditModal, addModal, setAddModal } = props;
 	const { customerData } = useSelector((state) => state.customerReducer);
 	const dispatch = useDispatch();
 	const [searchByName, setSearchByName] = useState('');
+	const [searchByEmail, setSearchByEmail] = useState('');
 	const [filteredCustomer, setFilteredCustomer] = useState('');
 
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(2);
@@ -25,23 +27,28 @@ const CustomerDetails = (props) => {
 	const firstData = lastData - itemsCountPerPage;
 	// let currentData = filteredCustomer.slice(firstData, lastData);
 
-	const handleSearchByName = (e) => {
+	const handleSearch = (e) => {
 		e.preventDefault();
-		setSearchByName(e.target.value);
-		console.log('handleSearchByName ', searchByName);
-		console.log('filteredCustomer', filteredCustomer);
-		if (e.target.value) {
+		const { name, value } = e.target;
+		if (value && name === 'name_search') {
 			let newData = [];
 			customerData.filter((data) => {
-				if (data.first_name.toLowerCase().includes(searchByName.toLowerCase())) {
+				if (data.first_name.toLowerCase().includes(value.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
-				} else if (data.email.toLowerCase().includes(searchByName.toLowerCase())) {
+				}
+			});
+			setSearchByName(value);
+			setFilteredCustomer(newData);
+		} else if (value && name === 'email_search') {
+			let newData = [];
+			customerData.filter((data) => {
+				if (data.email.toLowerCase().includes(searchByEmail.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
 				} else if (
 					data.first_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-					data.email.toLowerCase().includes(searchByName.toLowerCase())
+					data.email.toLowerCase().includes(searchByEmail.toLowerCase())
 				) {
 					newData.push(data);
 					console.log('data', data);
@@ -50,6 +57,8 @@ const CustomerDetails = (props) => {
 			setFilteredCustomer(newData);
 		} else {
 			setFilteredCustomer(customerData);
+			setSearchByName('');
+			setSearchByEmail('');
 		}
 	};
 
@@ -60,6 +69,15 @@ const CustomerDetails = (props) => {
 			setFilteredCustomer(customerData);
 		}, 1000);
 	};
+
+	const handleDelete = (id) => {
+		dispatch(deleteList(id));
+		toast.success('Customer Data has been successfully deleted');
+	}
+
+	useEffect(() => {
+		setFilteredCustomer(customerData);
+	}, [customerData]);
 
 	useEffect(() => {
 		showBookList();
@@ -76,7 +94,8 @@ const CustomerDetails = (props) => {
 				<button onClick={() => setAddModal(true)}>
 					<Link to={'/customerAdd'}>Add Customer</Link>
 				</button>{' '}
-				<input placeholder="Search by First Name" onChange={handleSearchByName} /> <input placeholder="Search by Email" onChange={handleSearchByName} />{' '}
+				<input placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />
+				<input placeholder="Search by Email" name="email_search" value={searchByEmail} onChange={handleSearch} />{' '}
 				<button onClick={() => dispatch(clearList())}>Clear List</button>
 				{!isLoading ? (
 					<Table striped bordered hover>
@@ -107,16 +126,14 @@ const CustomerDetails = (props) => {
 											<td>{data.first_name}</td>
 											<td>{data.middle_name}</td>
 											<td>{data.last_name}</td>
-											<td>
-												{data.initial} {data.first_name} {data.middle_name} {data.last_name}
-											</td>
+											<td>{data.fullname}</td>
 											<td>{data.mobile_no}</td>
 											<td>{data.email}</td>
 											<td>{data.registration_num}</td>
 											<td>{data.status}</td>
 											<td> {dateFormat(data.date, 'dd-mm-yyyy hh:MM TT')} </td>
 											<td>
-												<button onClick={() => dispatch(deleteList(data.id))}>Delete</button>
+												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
 											</td>
 											<td>
 												<button onClick={() => setEditModal(true)}>
