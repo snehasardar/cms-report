@@ -1,6 +1,6 @@
 export const REGEX_DIGITS = /^[0-9]+$/;
 export const REGEX_FULL_NAME = /^[a-zA-Z'.]+( [a-zA-Z'.]+)*$/;
-// export const REGEX_EMAIL = /^[a-zA-Z0-9@!#$%&a-zA-Z'.]+( [a-zA-Z0-9@!#$%&a-zA-Z'.]+)*$/;
+// export const REGEX_EMAIL = /^[a-zA-Z0-9!#$%&@'.]+( [a-zA-Z'.]+)*$/;
 
 export const GENDERS_FORM = [
 	{ label: 'Male', value: 'M' },

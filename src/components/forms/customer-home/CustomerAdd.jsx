@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -57,7 +58,7 @@ const CustomerAdd = (props) => {
 		email: Yup.string().trim()
 			.email('Enter valid Email Id')
 			.required('Please enter Email Id'),
-			// .test('name', "Name supports only alphabets and some other characters. ('.)", (value) => value && value.match(REGEX_EMAIL)),
+			// .test('name',"Email supports only alphabets and some other characters. ('.)", (value) => value && value.match(REGEX_EMAIL)),
 		status: Yup.object().required('Please select status'),
 	});
 
@@ -80,35 +81,29 @@ const CustomerAdd = (props) => {
 	};
 
 
-	// const handleEmailChange = (e, setFieldValue) => {
-	// 	e.preventDefault();
-	// 	let { value, name } = e.target;
-	// 	console.log('event.target', e.target)
-	// 	console.log('value', value);
-	// 	console.log('name_email',name)
-	// 	value = emailFieldValidation(value);
-	// 	setFieldValue(name, value);
-	// 	console.log('value', value);
-	// 	customerData.filter((item) => {
-	// 		if(item.email == value){
-	// 			alert('there is customer with this email')
-	// 		}
-	// 	})
-	// }
+	const handleEmailChange = (e, setFieldValue) => {
+		e.preventDefault();
+		let { value, name } = e.target;
+		console.log('event.target', e.target)
+		console.log('value', value);
+		console.log('name_email',name)
+		setFieldValue(name, value);
+		console.log('value', value);
+		customerData.filter((item) => {
+			if(item.email == value){
+				toast.warning('there is customer with this email')
+			}
+		})
+	}
 	
 	const handleMobileNumberChange = (event, setFieldValue) => {
 		event.preventDefault();
 		let { value, name } = event.target;
-		// console.log('event.target', event.target)
-		// console.log('value', value);
-		// console.log('name',name)
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
-		// console.log('value', value);
-		// console.log('name',name)
 		customerData.filter((item) => {
 			if(item.mobile_no == value){
-				alert('there is customer with this number')
+				toast.warning('there is customer with this number')
 			}
 		})
 	};
@@ -129,7 +124,6 @@ const CustomerAdd = (props) => {
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
-											{/* {console.log('errors', errors)} */}
 											<Form.Row>
 												<Form.Group as={Col} sm="6" controlId="initial">
 													<Select
@@ -189,7 +183,7 @@ const CustomerAdd = (props) => {
 													type="text"
 													name="email"
 													placeholder="Email Id *"
-													// onChange={(e) => handleEmailChange(e, setFieldValue)}
+													onChange={(e) => handleEmailChange(e, setFieldValue)}
 													value={values.email}
 													isInvalid={errors.email && touched.email}
 												/>

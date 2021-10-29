@@ -5,23 +5,14 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './assets/css/styles.css';
+// import './assets/css/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import FullPageLoader from './components/loaders/FullPageLoader';
 import ErrorFallback from './Error/ErrorBoundary/ErrorFallback';
 import errorHandler from './Error/ErrorBoundary/errorHandler';
 import { withSuspense } from './hoc/withSuspense';
 
-import Navbar from './components/forms/Navbar';
-import Registration from './components/forms/registration/Registration';
-import LogIn from './components/forms/log-in/LogIn';
-import CustomerDetails from './components/forms/customer-home/CustomerDetails';
-import Home from './components/forms/customer-home/Home';
-import CustomerAdd from './components/forms/customer-home/CustomerAdd';
-import CustomerEdit from './components/forms/customer-home/CustomerEdit';
-import BooksDetails from './components/forms/books-home/BooksDetails';
-import BooksAdd from './components/forms/books-home/BooksAdd';
-import BooksEdit from './components/forms/books-home/BooksEdit';
 
 const Routes = withSuspense(
 	lazy(() => import(/* webpackChunkName: "routes" */ './routes/Routes')),
@@ -29,11 +20,7 @@ const Routes = withSuspense(
 );
 
 function App() {
-	const [editModal, setEditModal] = useState(false);
-	const [addModal, setAddModal] = useState(false);
-	const [bookModal, setBookModal] = useState(false);
-	const [bookEditModal, setBookEditModal] = useState(false);
-	const [logged, setLogged] = useState(false);
+	
 	useEffect(() => {
 		// Disable logs in production
 		if (process.env.NODE_ENV !== 'development') {
@@ -57,60 +44,12 @@ function App() {
 
 	return (
 		<>
-			<BrowserRouter>
-				<div className="App">
-					<Navbar logged={logged} setLogged={setLogged} />
-					<Switch>
-						<Route exact path="/signUp" component={Registration} />
-						<Route path="/logIn" component={() => <LogIn logged={logged} setLogged={setLogged} />} />
-						<Route
-							path="/customerDetails"
-							component={() => (
-								<CustomerDetails
-									editModal={editModal}
-									setEditModal={setEditModal}
-									addModal={addModal}
-									setAddModal={setAddModal}
-									logged={logged}
-									setLogged={setLogged}
-								/>
-							)}
-						/>
-						<Route exact path="/home" component={Home} logged={logged} setLogged={setLogged}/>
-						<Route path="/customerAdd" component={() => <CustomerAdd addModal={addModal} setAddModal={setAddModal} />} />
-						<Route
-							path="/customerEdit/:id"
-							component={(props) => <CustomerEdit id={props.match.params.id} editModal={editModal} setEditModal={setEditModal} />}
-						/>
-						<Route
-							path="/customerEdit"
-							component={(props) => <CustomerEdit id={props.match.params.id} editModal={editModal} setEditModal={setEditModal} />}
-						/>
-						<Route
-							path="/booksDetails"
-							component={() => (
-								<BooksDetails
-									bookModal={bookModal}
-									setBookModal={setBookModal}
-									bookEditModal={bookEditModal}
-									setBookEditModal={setBookEditModal}
-									logged={logged}
-									setLogged={setLogged}
-								/>
-							)}
-						/>
-						<Route path="/booksAdd" component={() => <BooksAdd bookModal={bookModal} setBookModal={setBookModal} />} />
-						<Route
-							path="/booksEdit/:id"
-							component={(props) => <BooksEdit id={props.match.params.id} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal} />}
-						/>
-						<Route
-							path="/booksEdit"
-							component={(props) => <BooksEdit id={props.match.params.id} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal} />}
-						/>
-					</Switch>
-				</div>
-			</BrowserRouter>
+			<ErrorBoundary FallbackComponent={ErrorFallback} onError={errorHandler}>
+				<Switch>
+					<Route path="/" component={Routes} />
+				</Switch>
+			</ErrorBoundary>
+			<ToastContainer />
 		</>
 	);
 }

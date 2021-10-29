@@ -13,41 +13,44 @@ const CustomerDetails = (props) => {
 	const { editModal, setEditModal, addModal, setAddModal } = props;
 	const { customerData } = useSelector((state) => state.customerReducer);
 	const dispatch = useDispatch();
-	// const history = useHistory();
 	const [searchByName, setSearchByName] = useState('');
 	const [filteredCustomer, setFilteredCustomer] = useState('');
 
-	const [posts, setPosts] = useState([]);
-	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
+	const [itemsCountPerPage, setItemsCountPerPage] = useState(2);
 	const [activePage, setActivePage] = useState(1);
-	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
+	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(2);
 	const [isLoading, setIsLoading] = useState(false);
 	const totalData = customerData.length;
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
-	let currentData = filteredCustomer.slice(firstData, lastData);
+	// let currentData = filteredCustomer.slice(firstData, lastData);
 
 	const handleSearchByName = (e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		setSearchByName(e.target.value);
 		console.log('handleSearchByName ', searchByName);
-		// console.log('filteredCustomer', filteredCustomer);
-		// if(e.target.value){
-		// 	posts.filter((data) => {
-		// 		if (data.first_name.toLowerCase().includes(searchByName.toLowerCase())) {
-		// 			setFilteredCustomer(data);
-		// 		} else if (data.email.toLowerCase().includes(searchByName.toLowerCase())) {
-		// 			setFilteredCustomer(data);
-		// 		} else if (
-		// 			data.first_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-		// 			data.email.toLowerCase().includes(searchByName.toLowerCase())
-		// 		) {
-		// 			setFilteredCustomer(data);
-		// 		}
-		// 	})
-		// }else {
-		// 	setFilteredCustomer(customerData)
-		// }
+		console.log('filteredCustomer', filteredCustomer);
+		if (e.target.value) {
+			let newData = [];
+			customerData.filter((data) => {
+				if (data.first_name.toLowerCase().includes(searchByName.toLowerCase())) {
+					newData.push(data);
+					console.log('data', data);
+				} else if (data.email.toLowerCase().includes(searchByName.toLowerCase())) {
+					newData.push(data);
+					console.log('data', data);
+				} else if (
+					data.first_name.toLowerCase().includes(searchByName.toLowerCase()) &&
+					data.email.toLowerCase().includes(searchByName.toLowerCase())
+				) {
+					newData.push(data);
+					console.log('data', data);
+				}
+			});
+			setFilteredCustomer(newData);
+		} else {
+			setFilteredCustomer(customerData);
+		}
 	};
 
 	const showBookList = (start, end) => {
@@ -55,7 +58,6 @@ const CustomerDetails = (props) => {
 		setTimeout(() => {
 			setIsLoading(false);
 			setFilteredCustomer(customerData);
-			setPosts(customerData);
 		}, 1000);
 	};
 
@@ -90,14 +92,65 @@ const CustomerDetails = (props) => {
 								<th>Email Id</th>
 								<th>Regno</th>
 								<th>Status</th>
-								<th>Added Date</th>
+								<th>Date</th>
 								<th colSpan="2">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							{currentData &&
-								currentData
-								.filter((data) => {
+							{filteredCustomer &&
+								filteredCustomer.length > 0 &&
+								filteredCustomer.slice(firstData, lastData).map((data, index) => {
+									return (
+										<tr key={index}>
+											<td>{data.id}</td>
+											<td>{data.initial}</td>
+											<td>{data.first_name}</td>
+											<td>{data.middle_name}</td>
+											<td>{data.last_name}</td>
+											<td>
+												{data.initial} {data.first_name} {data.middle_name} {data.last_name}
+											</td>
+											<td>{data.mobile_no}</td>
+											<td>{data.email}</td>
+											<td>{data.registration_num}</td>
+											<td>{data.status}</td>
+											<td> {dateFormat(data.date, 'dd-mm-yyyy hh:MM TT')} </td>
+											<td>
+												<button onClick={() => dispatch(deleteList(data.id))}>Delete</button>
+											</td>
+											<td>
+												<button onClick={() => setEditModal(true)}>
+													<Link to={`/customerEdit/${data.id}`}>Edit</Link>
+												</button>
+											</td>
+										</tr>
+									);
+								})}
+						</tbody>
+					</Table>
+				) : (
+					<div>Loading...</div>
+				)}
+				{customerData.length >= itemsCountPerPage ? (
+					<Pagination
+						activePage={activePage}
+						itemsCountPerPage={itemsCountPerPage}
+						totalItemsCount={totalData}
+						pageRangeDisplayed={pageRangeDisplayed}
+						onChange={(currentPage) => setActivePage(currentPage)}
+					/>
+				) : (
+					' '
+				)}
+			</div>
+		</div>
+	);
+};
+export default CustomerDetails;
+
+/* <Link to={'/detail/'+'d.id'}>edit</Link> */
+/* <td>{index + 1}</td> 
+.filter((data) => {
 									if (data.first_name.toLowerCase().includes(searchByName.toLowerCase())) {
 										return data;
 									} else if (data.email.toLowerCase().includes(searchByName.toLowerCase())) {
@@ -108,58 +161,4 @@ const CustomerDetails = (props) => {
 									) {
 										return data;
 									}
-								})
-								.map((data, index) => {
-										return (
-											<tr key={index}>
-												<td>{data.id}</td>
-												<td>{data.initial}</td>
-												<td>{data.first_name}</td>
-												<td>{data.middle_name}</td>
-												<td>{data.last_name}</td>
-												<td>
-													{data.initial} {data.first_name} {data.middle_name} {data.last_name}
-												</td>
-												<td>{data.mobile_no}</td>
-												<td>{data.email}</td>
-												<td>{data.registration_num}</td>
-												<td>{data.status}</td>
-												<td> {dateFormat(data.date, 'dd-mm-yyyy hh:MM TT')} </td>
-												<td>
-													<button onClick={() => dispatch(deleteList(data.id))}>Delete</button>
-												</td>
-												<td>
-													<button onClick={() => setEditModal(true)}>
-														<Link to={`/customerEdit/${data.id}`}>Edit</Link>
-													</button>
-												</td>
-											</tr>
-										);
-									})}
-						</tbody>
-					</Table>
-				) : (
-					<div>Loading...</div>
-				)}
-				{ console.log('currentData.length',currentData.length)}
-				
-				{
-					(customerData.length >= 5) ? (
-						<Pagination
-						activePage={activePage}
-						itemsCountPerPage={itemsCountPerPage}
-						totalItemsCount={totalData}
-						pageRangeDisplayed={pageRangeDisplayed}
-						onChange={(currentPage) => setActivePage(currentPage)}/>
-					): ( ' ')
-				}
-				
-				
-			</div>
-		</div>
-	);
-};
-export default CustomerDetails;
-
-/* <Link to={'/detail/'+'d.id'}>edit</Link> */
-/* <td>{index + 1}</td> */
+								})*/

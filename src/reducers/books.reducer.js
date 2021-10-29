@@ -32,7 +32,8 @@ const booksReducer = (state = initialStates, action) => {
 			};
 
 		case DELETE_BOOKS:
-			const newBookList = state.bookList.filter((item) => item.id !== action.payload);
+			let freshBookList = [...state.bookList];
+			let newBookList = freshBookList.filter((item) => item.id !== action.payload);
 			console.log(' newBookList', newBookList);
 			return {
 				...state,

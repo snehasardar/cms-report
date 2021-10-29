@@ -1,44 +1,45 @@
-import { SIGN_UP,  LOG_OFF } from "../action-types/action.types";
+import { toast } from 'react-toastify';
+import { SIGN_UP, LOG_IN, LOG_OFF } from '../action-types/action.types';
 
 const initialStates = {
 	userData: [],
-	userToken : '',
-    
+	userToken: '',
 };
 
 const registration = (state = initialStates, action) => {
 	switch (action.type) {
 		case SIGN_UP:
-			// let allUserData= [...state.userData];
-			// 	console.log('allUserData',allUserData)
-			// let newUser = action.payload;
-			// allUserData.push(newUser);
-			// console.log('newUser',newUser);
-			let token = 'userLoggedIn';
-				console.log('token',token);
-			return {
-				...state.userData,
-				userData: action.payload,
-				userToken : token,
-				}
+			let allUserData = [...state.userData];
+			let newUser = action.payload;
+			allUserData.push(newUser);
+			console.log('newUser', newUser);
 
-		// case LOG_IN:
-			
-		// 	return {
-		// 	...state,
-		// 	userToken : token,
-		// 	}
+			return {
+				...state,
+				userData: allUserData,
+			};
+
+		case LOG_IN:
+			let totalUser = [...state.userData];
+			let loggedUser = [];
+			if ((loggedUser = totalUser.find((item) => item == action.payload))) {
+				console.log('loggedUser', loggedUser);
+				toast.success('successfully login');
+			} else {
+				toast.warning('Invalid credential');
+			}
+			const token = 'userLoggedIn';
+			console.log('token', token);
+			return {
+				...state,
+				userToken: token,
+			};
 
 		case LOG_OFF:
-			// let renewedUser = [...state.userData];
-			// let loggedOutUser = renewedUser.filter((item) => item.id != action.payload);
-			// renewedUser = loggedOutUser;
-			// console.log(' renewedUser',renewedUser);
 			return {
-			...state,
-			userData: [],
-			userToken : '',
-			}
+				...state,
+				userToken: '',
+			};
 
 		default:
 			return state;

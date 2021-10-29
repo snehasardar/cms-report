@@ -4,12 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import * as Yup from 'yup';
-import { toast } from 'react-toastify';
 
 import '../registration/registration.styles.css';
 import '../styles.css';
 
-import { numberFieldValidation } from '../../../shared/common';
 import { logIn } from '../../../actions/signup.action';
 
 const initialValues = {
@@ -23,7 +21,7 @@ const LogIn = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userData } = useSelector((state) => state.registration);
-	console.log(' userData',  userData);
+	console.log(' userData', userData);
 
 	const validateRequestCallBack = Yup.object().shape({
 		email: Yup.string().trim().email('Enter valid Email Id').required('Please enter Email Id'),
@@ -37,16 +35,9 @@ const LogIn = (props) => {
 		};
 		console.log(' login password', values.password);
 		console.log(' login email', values.email);
-		if (postdata.email == newInitialValues.uemail && postdata.password == newInitialValues.upassword) {
-			// toast.success('successfully login');
-			setLogged(true);
-			alert('successfully login');
-			// dispatch(logIn());
-			// history.push('/home');
-		} else {
-			// toast.warning('Incorrect Details');
-			alert('Incorrect Detail');
-		}
+		dispatch(logIn(postdata));
+		setLogged(true);
+		history.push('/home');
 	};
 
 	const newInitialValues = {
@@ -55,13 +46,6 @@ const LogIn = (props) => {
 	};
 	console.log('  newInitialValues uemail', newInitialValues.uemail);
 	console.log('  newInitialValues uemail', newInitialValues.upassword);
-
-	const handleMobileNumberChange = (event, setFieldValue) => {
-		event.preventDefault();
-		let { value, name } = event.target;
-		value = numberFieldValidation(value);
-		setFieldValue(name, value);
-	};
 
 	return (
 		<div className="requestCallWrapper">
@@ -78,7 +62,7 @@ const LogIn = (props) => {
 										<Form.Control
 											type="text"
 											placeholder="Email Id *"
-											onChange={handleChange}
+											name="email"
 											value={values.email}
 											isInvalid={errors.email && touched.email}
 										/>

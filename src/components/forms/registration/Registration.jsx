@@ -28,6 +28,8 @@ console.log('initialValues', initialValues);
 const Registration = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { userData } = useSelector((state) => state.registration);
+	// console.log(' userData',  userData);
 
 	const validateRequestCallBack = Yup.object().shape({
 		name: Yup.string()
@@ -58,15 +60,52 @@ const Registration = (props) => {
 		};
 		dispatch(signUp(post_data));
 		history.push('/logIn');
-		alert('you are successfully Registered');
-		// toast.success('you are successfully Registered');
+		// alert('you are successfully Registered');
+		toast.success('you are successfully Registered');
 	};
+
+	const newInitialValues = {
+		umobile_no: userData && Object.keys(userData).length > 0 ? userData.umobile_no : '',
+	};
+	console.log('  newInitialValues uemail', newInitialValues.umobile_no);
+
+	const handleEmailChange = (e, setFieldValue) => {
+		e.preventDefault();
+		let { value, name } = e.target;
+		console.log('event.target', e.target)
+		console.log('value', value);
+		console.log('name_email',name)
+		// value = emailFieldValidation(value);
+		setFieldValue(name, value);
+		console.log('value', value);
+		if(userData.length > 0){
+			userData.filter((item) => {
+				if(item.email == value){
+					// alert('there is customer with this email')
+					toast.warning('there is customer with this email')
+				}
+			})
+		}
+		
+	}
 
 	const handleMobileNumberChange = (event, setFieldValue) => {
 		event.preventDefault();
 		let { value, name } = event.target;
 		value = numberFieldValidation(value);
 		setFieldValue(name, value);
+		console.log(' userData',  userData);
+		if(userData.length > 0){
+			userData.some((item) => {
+				console.log('item', item);
+				if(item.mobile_no == value){
+					toast.warning('there is customer with this number')
+					console.log('hello');
+				}
+			})
+		}
+		
+		
 	};
 
 	return (
@@ -105,9 +144,10 @@ const Registration = (props) => {
 									<Form.Group controlId="email">
 										<Form.Control
 											type="text"
+											name="email"
 											placeholder="Email Id *"
-											onChange={handleChange}
 											value={values.email}
+											onChange={(e) => handleEmailChange(e, setFieldValue)}
 											isInvalid={errors.email && touched.email}
 										/>
 										{errors.email && touched.email ? <p className="error no-pos"> {errors.email}</p> : null}

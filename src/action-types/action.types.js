@@ -2,7 +2,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 export const SIGN_UP = 'SIGN_UP';
-// export const LOG_IN = 'LOG_IN';
+export const LOG_IN = 'LOG_IN';
 export const ADD_LIST = 'ADD_LIST';
 export const EDIT_LIST = 'EDIT_LIST';
 export const CLEAR_LIST = 'CLEAR_LIST';

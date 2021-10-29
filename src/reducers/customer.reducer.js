@@ -36,7 +36,10 @@ const customerReducer = (state = initialStates, action) => {
 			return addCart(state, action);
 
 		case DELETE_LIST:
-			const newList = state.customerData.filter((item) => item.id !== action.payload);
+			let newList = [...state.customerData];
+			let freshData = newList.filter((item) => item.id !== action.payload);
+			newList = freshData;
+			console.log('freshData', freshData);
 			console.log(' newList', newList);
 			return {
 				...state,
@@ -44,29 +47,27 @@ const customerReducer = (state = initialStates, action) => {
 			};
 
 		case EDIT_LIST:
-			let existingData = [...state.customerData]
-			
-			let newData = existingData.map((item )=> {
-					if(item.id === action.payload.id){
-						return { 
-							...item, 
-							...action.payload,
-						}
-					}
-					return item
-				})
-				console.log(' existingData', existingData);
+			let existingData = [...state.customerData];
+			let newData = existingData.map((item) => {
+				if (item.id === action.payload.id) {
+					return {
+						...item,
+						...action.payload,
+					};
+				}
+				return item;
+			});
+			console.log(' existingData', existingData);
 			return {
 				...state,
 				customerData: newData,
 			};
 
-	
 		case CLEAR_LIST:
 			return {
 				...state,
 				customerData: [],
-			}
+			};
 
 		default:
 			return state;
@@ -74,58 +75,3 @@ const customerReducer = (state = initialStates, action) => {
 };
 
 export default customerReducer;
-
-/**
-newCustomerData.push(action.payload);
-				for (let i = 0; i <= newCustomerData.length; i++) {
-					 id = i + 1;
-					 regNum = 1000 + id;
-					let recentObject = { ...newCustomerData[i], id, regno: regNum };
-					console.log('recentData',recentObject);
-					renewedData.push(recentObject)
-				}console.log('renewedData', renewedData);
-
-// console.log('state.customerData',state.customerData)
-
-				let id = 0;
-				let regNum = 0;
-				let customerData = [];
-				newcustomerData.map((item, index)=> {
-					return(
-						 id = index + 1,
-						 regNum = 1000 + id,
-						 customerData = {...item, id, registration_num : regNum}
-					)	
-				})
-
-
-let newName = data.first_name ;
-		console.log('newName',newName) 	
-		  	
-		let number = 1000;
-		for(let i=1; i <= olddata.length; i++){
-			
-			let updatename = newName.substr(0, 3);
-				console.log('updatename',updatename);
-			number += 1;
-			let regno = '';
-			regno = newName.concat(number)
-			Object.assign(data, {regno});
-		}
-
-
-
-// let arr = [...state.customerData];
-			// const newList = arr.filter((item) => item.first_name != action.payload);
-			// arr = newList;
-
-
-// for( let i = 0; i <= newcustomerData.length; i++){
-			// 	const id = previousId + 1;
-			// 		console.log('id', id);
-			// 	Object.assign(action.payload, {id});
-			// 		console.log('action.payload.id',action.payload)
-			// }
-
-
- */

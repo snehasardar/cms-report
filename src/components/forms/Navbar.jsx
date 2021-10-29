@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOff } from '../../actions/signup.action';
-// import { toast } from 'react-toastify';
 
 const Navbar = (props) => {
 	const { logged, setLogged } = props;
@@ -14,10 +13,6 @@ const Navbar = (props) => {
 		let utoken = userToken;
 		if (utoken) {
 			setLogged(true);
-			// alert('your are successfully Login');
-			// toast.success('your are successfully Login');
-			// toast.error
-			// toast.warning
 		} else {
 			setLogged(false);
 		}

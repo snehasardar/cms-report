@@ -36,6 +36,7 @@ export const selectStatus = (status) => {
 
 export const numberFieldValidation = (value) => {
 	if (value.slice(-1)) {
+		console.log(' common value', value);
 		if(value.charAt(0) !== "0"){
 			if (!REGEX_DIGITS.test(value.slice(-1)) || value.length > 10 || parseInt(value.slice(-1) === 0)) {
 				let newValue = value.slice(0, value.length - 1);
@@ -53,9 +54,9 @@ export const numberFieldValidation = (value) => {
 };
 
 // export const emailFieldValidation = (value) => {
-// 	if (value.slice(-1)) {
+// 	if (value.slice(1)) {
 // 		if(value.charAt(0) !== "0"){
-// 			if (!REGEX_DIGITS.test(value.slice(-1)) || value.length > 20 || parseInt(value.slice(-1) === 0)) {
+// 			if (!REGEX_EMAIL.test(value.slice(1)) || value.length > 20 ) {
 // 				let newValue = value.slice(0, value.length - 1);
 // 				return newValue;
 // 			} else {
