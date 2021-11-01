@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+
 
 import '../registration/registration.styles.css';
 import '../styles.css';
@@ -35,17 +37,27 @@ const LogIn = (props) => {
 		};
 		console.log(' login password', values.password);
 		console.log(' login email', values.email);
-		dispatch(logIn(postdata));
-		setLogged(true);
-		history.push('/home');
+		console.log('postdata',postdata);
+		
+		if((userData.filter((item) => item.email === values.email))){
+			let existedUser = userData.filter((item) => item.email === values.email)
+			console.log('existedUser',existedUser);
+			console.log('existedUser[0].email',existedUser[0].email);
+			if (existedUser[0].email === values.email && existedUser[0].password === values.password) {
+				console.log('loggedUser.email',postdata.email);
+				toast.success('successfully login');
+				dispatch(logIn());
+				setLogged(true);	
+				history.push('/home');
+			} else {
+				toast.warning('Invalid credential');
+				
+			}
+		}else {
+			toast.warning('Invalid credential');
+		}
+		
 	};
-
-	const newInitialValues = {
-		uemail: userData && Object.keys(userData).length > 0 ? userData.email : '',
-		upassword: userData && Object.keys(userData).length > 0 ? userData.password : '',
-	};
-	console.log('  newInitialValues uemail', newInitialValues.uemail);
-	console.log('  newInitialValues uemail', newInitialValues.upassword);
 
 	const handleEmailChange = (e, setFieldValue) => {
 		e.preventDefault();

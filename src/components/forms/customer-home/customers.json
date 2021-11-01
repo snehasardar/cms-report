@@ -1,0 +1,59 @@
+{
+    "allCustomerDetails": [
+      { 
+        "initial": "Mrs",
+        "first_name": "parul",
+        "middle_name": "chawdhury",
+        "last_name": "sardar",
+        "fullname": "Mrs parul chawdhry sardar",
+        "mobile_no": "7895620482",
+        "email": "parul@gmail.com",
+        "status": "1",
+        "registration_num": "paru10001"
+      },
+      {
+        "initial": "Miss",
+        "first_name": "susmita",
+        "middle_name": "",
+        "last_name": "biswas",
+        "fullname": "Miss susmita biswas",
+        "mobile_no": "7895620444",
+        "email": "susmita@gmail.com",
+        "status": "1",
+        "registration_num": "susm10002"
+      },
+      {
+        "initial": "Mr",
+        "first_name": "Tamsur",
+        "middle_name": "",
+        "last_name": "sardar",
+        "fullname": "Mr Tamsur sardar",
+        "mobile_no": "7866620482",
+        "email": "tamsur@gmail.com",
+        "status": "1",
+        "registration_num": "tams10003"
+      },
+      {
+        "initial": "Mr",
+        "first_name": "Apijay",
+        "middle_name": "",
+        "last_name": "sharma",
+        "fullname": "Mr Apijay sharma",
+        "mobile_no": "7895600482",
+        "email": "apijay@gmail.com",
+        "status": "1",
+        "registration_num": "apij10004"
+      },
+      {
+        "initial": "Mr",
+        "first_name": "Rohan",
+        "middle_name": "",
+        "last_name": "Gupta",
+        "fullname": "Mr Rohan Gupta",
+        "mobile_no": "7895590482",
+        "email": "rohan@gmail.com",
+        "status": "1",
+        "registration_num": "Roha10001"
+      }
+    ]
+  }

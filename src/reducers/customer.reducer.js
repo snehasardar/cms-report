@@ -11,21 +11,16 @@ const addCart = (state, action) => {
 		let id = newCustomerData[totalCustomer - 1].id + 1; //take the id of last customer
 		let subtringName = action.payload.first_name.substring(0, 4);
 		let regNum = subtringName + 1000 + id;
-		// let fullName = action.payload.initial +' '+ action.payload.first_name +' '+ action.payload.middle_name +' '+ action.payload.last_name;
-		// console.log('fullName', fullName)
 		let customer = {
 			...action.payload,
 			id,
 			registration_num: regNum,
-			// full_name : fullName ,
 		};
 		newCustomerData.push(customer);
 	} else {
 		let id = 1;
 		let subtringName = action.payload.first_name.substr(0, 4);
 		let regNum = subtringName + 1000 + id;
-		// let fullName = action.payload.initial +' '+ action.payload.first_name +' '+ action.payload.middle_name +' '+ action.payload.last_name;
-		// console.log('fullName', fullName)
 		let renewedData = { ...action.payload, id, registration_num: regNum };
 		newCustomerData.push(renewedData);
 	}
@@ -45,18 +40,15 @@ const customerReducer = (state = initialStates, action) => {
 			let oldData = [...state.customerData];
 			let localValue = action.payload; 
 				console.log('localValue',localValue);
-			const totalData = oldData.length;
 			let id = 0;
 			for(let i=0; i < localValue.length; i++){
-				if (totalData > 0) {
-					let id = oldData[totalData - 1].id + 1; 
+				if (oldData.length > 0) {
+					let id = oldData[oldData.length- 1].id + 1; 
 					let newValue = {
 						...localValue[i],id,};
 					oldData.push(newValue);
 					console.log('newValue',newValue)
-					console.log('localValue[i].first_name',localValue[i].first_name)
 				} else {
-					
 					id = id + 1;
 					let newValue = {
 						...localValue[i],id,};
@@ -124,4 +116,6 @@ export default customerReducer;
 						registration_num: item.registration_num,
 					}
 				})
+// let fullName = action.payload.initial +' '+ action.payload.first_name +' '+ action.payload.middle_name +' '+ action.payload.last_name;
+		// console.log('fullName', fullName)
  */

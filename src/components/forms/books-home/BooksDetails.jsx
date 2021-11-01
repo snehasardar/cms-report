@@ -11,7 +11,8 @@ import { deleteBook, clearBook, addAllData } from '../../../actions/books.action
 import '../customer-home/customerModal.styles.css';
 import { toast } from 'react-toastify';
 
-import BookDataList from './BooksData';
+import books from './books.json'
+import allBooksDtails from './books.json';
 
 const BooksDetails = (props) => {
 	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
@@ -21,9 +22,9 @@ const BooksDetails = (props) => {
 	const [searchByAuthor, setSearchByAuthor] = useState('');
 	const [filterdBookList, setFilterdBookList] = useState('');
 
-	const [itemsCountPerPage, setItemsCountPerPage] = useState(2);
+	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
-	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(2);
+	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
 	const totalData = bookList.length;
 	const lastData = activePage * itemsCountPerPage;
@@ -68,8 +69,15 @@ const BooksDetails = (props) => {
 	};
 
 	const handleAddAutoData = () => {
-		console.log('CustomerDataList.allCustomerDtails', BookDataList.allBooksDtails);
-		dispatch(addAllData( BookDataList.allBooksDtails));
+		console.log('data', books);
+		console.log('allBooksDtails', allBooksDtails);
+		books.allBooksDtails.map(item => {
+			return(
+				console.log(item)
+			)
+			
+		});
+		dispatch(addAllData( books.allBooksDtails));
 	}
 
 	const handleDelete = (id) => {
@@ -104,8 +112,8 @@ const BooksDetails = (props) => {
 				<button onClick={() => setBookModal(true)}>
 					<Link to={'/booksAdd'}>Add Books</Link>
 				</button>{' '}
-				<input placeholder="Search by Book Name" value={searchByName} onChange={handleSearchByName} />{' '}
-				<input placeholder="Search by Author Name" value={searchByAuthor} onChange={handleSearchByName} />{' '}
+				<input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
+				<input placeholder="Search by Author Name" name="email_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
 				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button>{' '}
 				<button onClick={ handleAddAutoData }>Autofill</button>
 				{!isLoading ? (
@@ -162,7 +170,7 @@ const BooksDetails = (props) => {
 					<div>Loading...</div>
 				)}
 				{bookList.length >= itemsCountPerPage ? (
-					<Pagination
+					<Pagination linkClass="page-link" linkClass="page-link"
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalData}

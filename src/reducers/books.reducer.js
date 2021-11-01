@@ -35,16 +35,18 @@ const booksReducer = (state = initialStates, action) => {
 			let oldData = [...state.bookList];
 			let localValue = action.payload; 
 				console.log('localValue',localValue);
-			const totalData = oldData.length;
+			// const totalData = oldData.length;
+			let id = 0;
 			for(let i=0; i < localValue.length; i++){
-				if (totalData > 0) {
-					let id = oldData[totalData - 1].id + 1; 
+				if (oldData.length > 0) {
+					 id = oldData[oldData.length - 1].id + 1; 
+					console.log('id',id);
 					let newValue = {
 						...localValue[i],id,};
 					oldData.push(newValue);
 					console.log('newValue',newValue)
 				} else {
-					let id = 0;
+					
 					id = id + 1;
 					let newValue = {
 						...localValue[i],id,};

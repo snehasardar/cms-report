@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { SIGN_UP, LOG_IN, LOG_OFF } from '../action-types/action.types';
 
 const initialStates = {
@@ -20,22 +19,20 @@ const registration = (state = initialStates, action) => {
 			};
 
 		case LOG_IN:
-			let totalUser = [...state.userData];
-			let loggedUser = [];
-			if ((loggedUser = totalUser.find((item) => item == action.payload))) {
-				console.log('loggedUser', loggedUser);
-				toast.success('successfully login');
-			} else {
-				toast.warning('Invalid credential');
-			}
-			const token = 'userLoggedIn';
+			// let totalUser = [...state.userData];
+			// let loggedUser =  action.payload;
+			// console.log('loggedUser', loggedUser);
+			
+			let token = 'userLoggedIn';
 			console.log('token', token);
+			
 			return {
 				...state,
 				userToken: token,
 			};
 
 		case LOG_OFF:
+
 			return {
 				...state,
 				userToken: '',

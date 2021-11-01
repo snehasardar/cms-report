@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import {  useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOff } from '../../actions/signup.action';
 
 const Navbar = (props) => {
 	const { logged, setLogged } = props;
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { userToken } = useSelector((state) => state.registration);
 	console.log('logged', logged);
 
@@ -17,6 +18,11 @@ const Navbar = (props) => {
 			setLogged(false);
 		}
 	});
+	
+	const handleLogout = () => {
+		dispatch(logOff());
+		history.push('/signUp');
+	}
 
 	return (
 		<div>
@@ -41,6 +47,11 @@ const Navbar = (props) => {
 									Registration
 								</Link>
 							</li>
+							<li className="nav-item">
+								<Link to="/booksDetails" className="nav-link active">
+									Books Details
+								</Link>
+							</li>
 							
 							{logged === true ? (
 								<li className="nav-item">
@@ -61,7 +72,7 @@ const Navbar = (props) => {
 							</span>
 						) : (
 							<span className="navbar-text">
-								<button onClick={() => dispatch(logOff())}>Logout</button>
+								<button onClick={ handleLogout }>Logout</button>
 							</span>
 						)}
 					</div>

@@ -10,7 +10,8 @@ import { deleteList, clearList, addAllData } from '../../../actions/customer.act
 import './customerModal.styles.css';
 import { toast } from 'react-toastify';
 
-import CustomerDataList from './CustomerDataList';
+import customers from './customers.json';
+import allCustomerDetails from './customers.json';
 
 const CustomerDetails = (props) => {
 	const { editModal, setEditModal, addModal, setAddModal } = props;
@@ -20,9 +21,9 @@ const CustomerDetails = (props) => {
 	const [searchByEmail, setSearchByEmail] = useState('');
 	const [filteredCustomer, setFilteredCustomer] = useState('');
 
-	const [itemsCountPerPage, setItemsCountPerPage] = useState(2);
+	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
-	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(2);
+	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
 	const totalData = customerData.length;
 	const lastData = activePage * itemsCountPerPage;
@@ -67,9 +68,16 @@ const CustomerDetails = (props) => {
 	};
 
 	const handleAddAutoData = () => {
-		console.log('CustomerDataList.allCustomerDtails', CustomerDataList.allCustomerDtails);
-		dispatch(addAllData( CustomerDataList.allCustomerDtails));
-		// console.log('storedData',storedData);
+		console.log('data', customers);
+		console.log('allCustomerDetails', allCustomerDetails);
+		customers.allCustomerDetails.map(item => {
+			return(
+				console.log(item)
+			)
+			
+		});
+		dispatch(addAllData( customers.allCustomerDetails));
+		console.log('customers.allCustomerDetails', customers.allCustomerDetails);
 	}
 
 	const showBookList = (start, end) => {
@@ -160,7 +168,7 @@ const CustomerDetails = (props) => {
 					<div>Loading...</div>
 				)}
 				{customerData.length >= itemsCountPerPage ? (
-					<Pagination
+					<Pagination   linkClass="page-link" linkClass="page-link"
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalData}

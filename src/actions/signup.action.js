@@ -10,12 +10,10 @@ export const signUp = (data) => {
 	};
 };
 
-export const logIn = (payload) => {
+export const logIn = () => {
 	return (dispatch) => {
 		dispatch({
 			type: LOG_IN,
-			payload : payload,
-			
 		});
 	};
 };

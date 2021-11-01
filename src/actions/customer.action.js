@@ -12,14 +12,12 @@ export const addList = (data) => {
 	};
 };
 
-export const addAllData = (data) => {
+export const addAllData = () => {
 	
 	return (dispatch) => {
 		dispatch({
 			type: ADDALL_DATA,
-			payload: data,
 		});
-		console.log(' data', data)
 	};
 };
 
