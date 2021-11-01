@@ -81,7 +81,6 @@ const Registration = (props) => {
 		if(userData.length > 0){
 			userData.filter((item) => {
 				if(item.email == value){
-					// alert('there is customer with this email')
 					toast.warning('there is customer with this email')
 				}
 			})

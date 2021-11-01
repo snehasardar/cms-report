@@ -46,6 +46,7 @@ const customerReducer = (state = initialStates, action) => {
 			let localValue = action.payload; 
 				console.log('localValue',localValue);
 			const totalData = oldData.length;
+			let id = 0;
 			for(let i=0; i < localValue.length; i++){
 				if (totalData > 0) {
 					let id = oldData[totalData - 1].id + 1; 
@@ -55,7 +56,7 @@ const customerReducer = (state = initialStates, action) => {
 					console.log('newValue',newValue)
 					console.log('localValue[i].first_name',localValue[i].first_name)
 				} else {
-					let id = 0;
+					
 					id = id + 1;
 					let newValue = {
 						...localValue[i],id,};
