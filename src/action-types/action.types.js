@@ -14,3 +14,9 @@ export const ADD_BOOKS = 'ADD_BOOKS';
 export const EDIT_BOOKS = 'EDIT_BOOKS';
 export const DELETE_BOOKS = 'DELETE_BOOKS';
 export const CLEAR_BOOKS = 'CLEAR_BOOKS';
+
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const SUB_QUANTITY = 'SUB_QUANTITY';
+export const ADD_QUANTITY = 'ADD_QUANTITY';
+export const CLEAR_CART = 'CLEAR_CART'

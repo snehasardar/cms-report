@@ -23,6 +23,8 @@ import Home from '../components/forms/customer-home/Home';
 import BooksDetails from '../components/forms/books-home/BooksDetails';
 import BooksAdd from '../components/forms/books-home/BooksAdd';
 import BooksEdit from '../components/forms/books-home/BooksEdit';
+import ProductsList from '../components/forms/products-cart/ProductsList';
+import ProductsListCart from '../components/forms/products-cart/ProductsListCart';
 
 const Routes = () => {
 	const [editModal, setEditModal] = useState(false);
@@ -92,6 +94,8 @@ const Routes = () => {
 					path="/booksEdit"
 					component={(props) => <BooksEdit id={props.match.params.id} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal} />}
 				/>
+				<PublicRoute path="/productsList" component={ProductsList}  logged={logged} setLogged={setLogged} />
+				<PublicRoute path="/productsListCart" component={ProductsListCart} />
 				{/* <PublicRoute exact path="/404" component={PageNotFound} /> */}
 				{/* <PublicRoutefrom="*" render={() => <Redirect to="/404" />} /> */}
 			</Switch>

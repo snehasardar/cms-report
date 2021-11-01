@@ -6,7 +6,7 @@
         "author_name": "Meyer",
         "genre": "vampire",
         "total_books": "45",
-        "price": "987",
+        "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "twil10001"
@@ -17,7 +17,7 @@
         "author_name": "Sarat",
         "genre": "Novel",
         "total_books": "43",
-        "price": "970",
+        "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "pari10002"
@@ -28,7 +28,7 @@
         "author_name": "rabindranath Tagore",
         "genre": "Novel",
         "total_books": "25",
-        "price": "988",
+        "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Gita10003"
@@ -39,7 +39,7 @@
         "author_name": "Robin Sharma",
         "genre": "Self-help",
         "total_books": "466",
-        "price": "597",
+        "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "monk10004"
@@ -50,7 +50,7 @@
         "author_name": "satyajit",
         "genre": "detective",
         "total_books": "24",
-        "price": "982",
+        "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Felu10005"
@@ -61,7 +61,7 @@
         "author_name": "Robin Sharma",
         "genre": "Self-help",
         "total_books": "466",
-        "price": "597",
+        "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "monk10006"
@@ -72,7 +72,7 @@
         "author_name": "satyajit",
         "genre": "detective",
         "total_books": "24",
-        "price": "982",
+        "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Felu10007"
@@ -83,7 +83,7 @@
         "author_name": "Robin Sharma",
         "genre": "Self-help",
         "total_books": "466",
-        "price": "597",
+        "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "monk10008"

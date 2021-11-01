@@ -58,6 +58,14 @@ const Navbar = (props) => {
 							)}
 						</ul>
 
+						{logged === true ? (
+						<span className="navbar-text">
+							<Link to="/productsList" className="nav-link active">
+								Buy Products
+							</Link>
+						</span>
+							
+						) : ( ' ')}
 						{logged === false ? (
 							<span className="navbar-text">
 								<Link to="/logIn" className="nav-link active">
@@ -65,6 +73,7 @@ const Navbar = (props) => {
 								</Link>
 							</span>
 						) : (
+							
 							<span className="navbar-text">
 								<button onClick={ handleLogout }>Logout</button>
 							</span>

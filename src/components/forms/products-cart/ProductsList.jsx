@@ -5,20 +5,15 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../customer-home/Sidebar';
 import Pagination from 'react-js-pagination';
 
-import dateFormat from 'dateformat';
-import { deleteBook, clearBook, addAllData } from '../../../actions/books.action';
+import { addToCart } from '../../../actions/product.action';
 
-import '../customer-home/customerModal.styles.css';
-import { toast } from 'react-toastify';
 
-import books from './books.json'
-import allBooksDtails from './books.json';
-
-const BooksDetails = (props) => {
-	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
-	const { bookList } = useSelector((state) => state.booksReducer);
-	const dispatch = useDispatch();
-	const [searchByName, setSearchByName] = useState('');
+const ProductsList = (props) => {
+    const { logged, setLogged } = props;
+    const { bookList } = useSelector((state) => state.booksReducer);
+    console.log('booklist',bookList);
+    const dispatch = useDispatch();
+    const [searchByName, setSearchByName] = useState('');
 	const [searchByAuthor, setSearchByAuthor] = useState('');
 	const [filterdBookList, setFilterdBookList] = useState('');
 
@@ -30,15 +25,30 @@ const BooksDetails = (props) => {
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
+    let updatedBookList = [];
+            let i = 0;
+            while(i < bookList.length){
+                console.log("hello guys 1")
+                if(bookList[i].status == 1){
+                    console.log("hello guys 2")
+                    let newBookList= bookList[i]
+                    console.log('bookList[i].status',bookList[i])
+                    console.log('newBookList', newBookList)
+                    updatedBookList.push(newBookList);
+                }
+                i= i + 1; 
+            }
+        // console.log('bookList[i]',bookList[0].status)
+        console.log('updatedBookList', updatedBookList)
 
-	const handleSearchByName = (e) => {
+    const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
 		console.log('name ', name);
 		console.log('value', value);
 		if (value && name === 'name_search') {
 			let newData = [];
-			bookList.filter((data) => {
+			updatedBookList.filter((data) => {
 				if (data.book_name.toLowerCase().includes(value.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
@@ -48,7 +58,7 @@ const BooksDetails = (props) => {
 			setFilterdBookList(newData);
 		} else if (value && name === 'email_search') {
 			let newData = [];
-			bookList.filter((data) => {
+			updatedBookList.filter((data) => {
 				if (data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
@@ -62,39 +72,22 @@ const BooksDetails = (props) => {
 			});
 			setFilterdBookList(newData);
 		} else {
-			setFilterdBookList(bookList);
+			setFilterdBookList(updatedBookList);
 			setSearchByName('');
 			setSearchByAuthor('');
 		}
 	};
 
-	const handleAddAutoData = () => {
-		console.log('data', books);
-		console.log('allBooksDtails', allBooksDtails);
-		books.allBooksDtails.map(item => {
-			return(
-				console.log(item)
-			)
-			
-		});
-		dispatch(addAllData( books.allBooksDtails));
-	}
-
-	const handleDelete = (id) => {
-		dispatch(deleteBook(id));
-		toast.success('Book has been successfully deleted')
-	}
-
-	const showBookList = (start, end) => {
+    const showBookList = (start, end) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			setFilterdBookList(bookList);
+			setFilterdBookList(updatedBookList);
 		}, 1000);
 	};
 
 	useEffect(() => {
-		setFilterdBookList(bookList);
+		setFilterdBookList(updatedBookList);
 	}, [bookList]);
 
 
@@ -104,35 +97,27 @@ const BooksDetails = (props) => {
 	}, [activePage]);
 
 	console.log('isLoading', isLoading);
-	return (
-		<div className="container">
-			<Sidebar />
-			<div>
-				<h5>Books list </h5>
-				<button onClick={() => setBookModal(true)}>
-					<Link to={'/booksAdd'}>Add Books</Link>
-				</button>{' '}
-				<input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
+    return(
+        <div className='container'>
+            <Sidebar />
+                 <div >
+                 <h5>Shop now </h5>
+                 <input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
 				<input placeholder="Search by Author Name" name="email_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
-				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button>{' '}
-				<button onClick={ handleAddAutoData }>Autofill</button>
-				<h6>Total Books : {bookList.length}</h6>
-				{!isLoading ? (
+                <button >
+					<Link to={`/productsListCart`}>See your Cart</Link>
+				</button>
+                {!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
 							<tr>
 								<th>Image</th>
-								<th>ID</th>
 								<th>Book Name</th>
 								<th>Author Name</th>
 								<th>Genre</th>
-								<th>Reference Number</th>
 								<th>Stock </th>
 								<th>Price</th>
-								<th>Added date</th>
-								<th>Updated Date</th>
-								<th>Status</th>
-								<th colSpan="2">Action</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -144,24 +129,15 @@ const BooksDetails = (props) => {
 											<td>
 												<img src={data.image_link} alt="book image" width="50" height="50" />{' '}
 											</td>
-											<td>{data.id}</td>
 											<td>{data.book_name}</td>
 											<td>{data.author_name}</td>
 											<td>{data.genre}</td>
-											<td>{data.reference_num}</td>
 											<td>{data.total_books}</td>
 											<td>₹{data.price}</td>
-											<td>{dateFormat(data.added_date, 'dd-mm-yyyy hh:MM TT')}</td>
-											<td>{dateFormat(data.updated_date, 'dd-mm-yyyy hh:MM TT')}</td>
-											<td>{data.status}</td>
 											<td>
-											<button onClick={(e) => handleDelete(data.id)}>Delete</button>
+											<button className="btn btn-primary" onClick={() => dispatch(addToCart(data))}>Add to cart</button>
 											</td>
-											<td>
-												<button onClick={() => setBookEditModal(true)}>
-													<Link to={`/booksEdit/${data.id}`}>Edit</Link>
-												</button>
-											</td>
+											
 										</tr>
 									);
 								})}
@@ -181,39 +157,32 @@ const BooksDetails = (props) => {
 				) : (
 					' '
 				)}
-			</div>
-		</div>
-	);
-};
-export default BooksDetails;
+                </div> 
+            </div>
+    )
 
-/*
-const handleSearchByName = (e) => {
-		e.preventDefault();
-		setSearchByName(e.target.value);
-		console.log('handleSearchByName ', searchByName);
-		console.log('filterdBookList', filterdBookList);
-		if (e.target.value) {
-			let newData = [];
-			bookList.filter((data) => {
-				if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
-					newData.push(data);
-					console.log('data', data);
-				} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
-					newData.push(data);
-					console.log('data', data);
-				} else if (
-					data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-					data.book_name.toLowerCase().includes(searchByName.toLowerCase())
-				) {
-					newData.push(data);
-					console.log('data', data);
-				}
-			});
-			setFilterdBookList(newData);
-		} else {
-			setFilterdBookList(bookList);
-		}
-	};
+}
+export default ProductsList;
 
- */
+
+
+/* <p>Stock: {item.total_books} </p> 
+{
+                            (logged== true) ? <button className="btn btn-primary" >
+                               Add to cart</button> : ' '
+                           } */
+/* <ul className="list-group list-group-flush">
+                    {
+                        bookList.map( (item, index) => {
+                            return(   
+                            <li className="list-group-item" key={index}>
+                            <h5>Book Name: {item.book_name}</h5>
+                            <p>Author Name: {item.author_name}</p>
+                            <p>Price: ₹{item.price}</p>
+                            <button className="btn btn-primary" >
+                               Add to cart</button>
+                            </li>
+                            )
+                        })
+                    }
+                    </ul> */
