@@ -54,6 +54,39 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Felu10005"
+      },
+      {
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "book_name": "Monk",
+        "author_name": "Robin Sharma",
+        "genre": "Self-help",
+        "total_books": "466",
+        "price": "597",
+        "status": "0",
+        "added_date": "10/29/2021, 3:14:15 PM",
+        "reference_num": "monk10006"
+      },
+      {
+        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "book_name": "Feluda",
+        "author_name": "satyajit",
+        "genre": "detective",
+        "total_books": "24",
+        "price": "982",
+        "status": "1",
+        "added_date": "10/29/2021, 3:14:15 PM",
+        "reference_num": "Felu10007"
+      },
+      {
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "book_name": "Monk",
+        "author_name": "Robin Sharma",
+        "genre": "Self-help",
+        "total_books": "466",
+        "price": "597",
+        "status": "0",
+        "added_date": "10/29/2021, 3:14:15 PM",
+        "reference_num": "monk10008"
       }
     ]
   }

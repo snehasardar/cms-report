@@ -8,16 +8,17 @@ export const addList = (data) => {
 			type: ADD_LIST,
 			payload: data,
 		});
-		
 	};
 };
 
-export const addAllData = () => {
+export const addAllData = (data) => {
 	
 	return (dispatch) => {
 		dispatch({
 			type: ADDALL_DATA,
+			payload: data,
 		});
+		console.log(' data', data)
 	};
 };
 

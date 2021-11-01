@@ -47,12 +47,6 @@ const Navbar = (props) => {
 									Registration
 								</Link>
 							</li>
-							<li className="nav-item">
-								<Link to="/booksDetails" className="nav-link active">
-									Books Details
-								</Link>
-							</li>
-							
 							{logged === true ? (
 								<li className="nav-item">
 									<Link to="/home" className="nav-link active">

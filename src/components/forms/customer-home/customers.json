@@ -53,7 +53,62 @@
         "mobile_no": "7895590482",
         "email": "rohan@gmail.com",
         "status": "1",
-        "registration_num": "Roha10001"
+        "registration_num": "Roha10005"
+      },
+      {
+        "initial": "Mrs",
+        "first_name": "Simran",
+        "middle_name": "Mondal",
+        "last_name": "Laskar",
+        "fullname": "Mrs Simran Mondal Laskar",
+        "mobile_no": "7855590482",
+        "email": "simran@gmail.com",
+        "status": "1",
+        "registration_num": "Simr10006"
+      },
+      {
+        "initial": "Mr",
+        "first_name": "Deboprasad",
+        "middle_name": "Thakur",
+        "last_name": "Gupta",
+        "fullname": "Mr Deboprasad Thakur Gupta",
+        "mobile_no": "7895590222",
+        "email": "debo@gmail.com",
+        "status": "1",
+        "registration_num": "Debo10007"
+      },
+      {
+        "initial": "Mr",
+        "first_name": "Aman",
+        "middle_name": "Kumar",
+        "last_name": "Gupta",
+        "fullname": "Mr Aman Kumar Gupta",
+        "mobile_no": "7895590002",
+        "email": "aman@gmail.com",
+        "status": "1",
+        "registration_num": "Aman10008"
+      },
+      {
+        "initial": "Mrs",
+        "first_name": "Barnisha",
+        "middle_name": "",
+        "last_name": "Saha",
+        "fullname": "Mrs Barnisha Saha",
+        "mobile_no": "7895555482",
+        "email": "barnisha@gmail.com",
+        "status": "1",
+        "registration_num": "Barn10009"
+      },
+      {
+        "initial": "Mr",
+        "first_name": "Sourav",
+        "middle_name": "",
+        "last_name": "Sardar",
+        "fullname": "Mr Sourav Sardar",
+        "mobile_no": "7895599999",
+        "email": "sourav@gmail.com",
+        "status": "1",
+        "registration_num": "Sour10010"
       }
     ]
   }
