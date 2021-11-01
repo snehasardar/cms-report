@@ -105,7 +105,7 @@ const ProductsList = (props) => {
                  <input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
 				<input placeholder="Search by Author Name" name="email_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
                 <button >
-					<Link to={`/productsListCart`}>See your Cart</Link>
+					<Link to={`/productsListCart`}>Check Your Cart</Link>
 				</button>
                 {!isLoading ? (
 					<Table striped bordered hover>
