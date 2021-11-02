@@ -10,24 +10,22 @@ const productReducer = (state = initialStates, action) => {
 	switch (action.type) {
 		case ADD_TO_CART:
             let allAddedItems = [...state.items];
-                console.log('allAddedItems',allAddedItems);
             let addValue = action.payload; 
-				console.log('addValue',addValue);
             if (allAddedItems.length > 0) {
                 let needToadd = allAddedItems.find((data) => data.id == addValue.id);
-                console.log('needToadd', needToadd);
                 if(needToadd ){
                     needToadd.quantity = needToadd.quantity + 1;
                     console.log('needToadd.quantity',needToadd.quantity);
-                    // allAddedItems.push(needToadd);
                 }else{
                     let qnt = 1;
-                    let newValue = { ...action.payload, quantity: qnt };
+                    addValue.product_btn = "Remove from Cart";
+                    let newValue = { ...addValue, quantity: qnt };
                     allAddedItems.push(newValue);
                 }
             } else {
                 let qnt = 1;
-                let newValue = { ...action.payload, quantity: qnt };
+                addValue.product_btn = "Remove from Cart";
+                let newValue = { ...addValue, quantity: qnt };
                 allAddedItems.push(newValue);
             }
                 console.log('allAddedItems ',allAddedItems);   
@@ -58,6 +56,7 @@ const productReducer = (state = initialStates, action) => {
                 needtoAdd.quantity = needtoAdd.quantity - 1;
             }
             if (needtoAdd.quantity == 0) {
+                needtoAdd.product_btn = "Add to Cart";
                 let clearPrd = allAddeditems.filter((data) => data.id != action.payload);
                 allAddeditems = clearPrd;
                 console.log('clearprd', clearPrd);
@@ -76,6 +75,7 @@ const productReducer = (state = initialStates, action) => {
             console.log('allAddItems',allAddItems);
             let clearPrd = allAddItems.find((data) => data.id == action.payload);
             clearPrd.quantity = 0;
+            clearPrd.product_btn = "Add to Cart";
             let needToAdd = allAddItems.filter((data) => data.id != action.payload);
             allAddItems = needToAdd;
             console.log(' remove clearPrd ', clearPrd);

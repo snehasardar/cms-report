@@ -2,9 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import './sideBar.styles.css';
 
-const Home = (props) => {
-	const { logged, setLogged } = props;
-	console.log(' home logged',logged);
+const Home = () => {
 	return (
 		<div className="App" id="outer-container">
 			<Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />

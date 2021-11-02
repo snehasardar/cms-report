@@ -6,7 +6,6 @@ import { Row, Col } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
-
 import '../registration/registration.styles.css';
 import '../styles.css';
 
@@ -35,37 +34,29 @@ const LogIn = (props) => {
 			email: values.email,
 			password: values.password,
 		};
-		console.log(' login password', values.password);
-		console.log(' login email', values.email);
-		console.log('postdata',postdata);
-		
-		if((userData.filter((item) => item.email === values.email))){
-			let existedUser = userData.filter((item) => item.email === values.email)
-			console.log('existedUser',existedUser);
-			console.log('existedUser[0].email',existedUser[0].email);
-			if (existedUser[0].email === values.email && existedUser[0].password === values.password) {
-				console.log('loggedUser.email',postdata.email);
+		console.log('postdata', postdata);
+		const user = userData.find((item) => item.email === values.email);
+		if (user && Object.keys(user).length > 0) {
+			if (user.password === values.password) {
+				console.log('loggedUser.email', postdata.email);
 				toast.success('successfully login');
 				dispatch(logIn());
-				setLogged(true);	
-				history.push('/home');
+				history.push('/');
 			} else {
 				toast.warning('Invalid credential');
-				
 			}
-		}else {
+		} else {
 			toast.warning('Invalid credential');
 		}
-		
 	};
 
 	const handleEmailChange = (e, setFieldValue) => {
 		e.preventDefault();
 		let { value, name } = e.target;
-		console.log('event.target', e.target)
+		console.log('event.target', e.target);
 		console.log('value', value);
 		setFieldValue(name, value);
-	}
+	};
 
 	return (
 		<div className="requestCallWrapper">

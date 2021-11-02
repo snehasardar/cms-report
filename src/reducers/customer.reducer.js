@@ -47,16 +47,14 @@ const customerReducer = (state = initialStates, action) => {
 					let newValue = {
 						...localValue[i],id,};
 					oldData.push(newValue);
-					console.log('newValue',newValue)
 				} else {
 					id = id + 1;
 					let newValue = {
 						...localValue[i],id,};
 					oldData.push(newValue);
-					console.log('newValue',newValue)
 				}
-			} 
-			console.log('oldData',oldData);
+			}
+
 			return {
 				customerData: oldData,
 			};
@@ -65,8 +63,6 @@ const customerReducer = (state = initialStates, action) => {
 			let newList = [...state.customerData];
 			let freshData = newList.filter((item) => item.id !== action.payload);
 			newList = freshData;
-			console.log('freshData', freshData);
-			console.log(' newList', newList);
 			return {
 				...state,
 				customerData: newList,

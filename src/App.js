@@ -13,14 +13,16 @@ import ErrorFallback from './Error/ErrorBoundary/ErrorFallback';
 import errorHandler from './Error/ErrorBoundary/errorHandler';
 import { withSuspense } from './hoc/withSuspense';
 
-
-const Routes = withSuspense(
-	lazy(() => import(/* webpackChunkName: "routes" */ './routes/Routes')),
+const CmsRoutes = withSuspense(
+	lazy(() => import(/* webpackChunkName: "cms-routes" */ './routes/CmsRoutes')),
+	<FullPageLoader />
+);
+const ShopRoutes = withSuspense(
+	lazy(() => import(/* webpackChunkName: "shop-routes" */ './routes/ShopRoutes')),
 	<FullPageLoader />
 );
 
 function App() {
-	
 	useEffect(() => {
 		// Disable logs in production
 		if (process.env.NODE_ENV !== 'development') {
@@ -41,13 +43,20 @@ function App() {
 			}
 		}
 	}, []);
+	const isShop = window.location.href.search('shop') > 0;
 
 	return (
 		<>
 			<ErrorBoundary FallbackComponent={ErrorFallback} onError={errorHandler}>
-				<Switch>
-					<Route path="/" component={Routes} />
-				</Switch>
+				{isShop ? (
+					<Switch>
+						<Route path="/" component={ShopRoutes} />
+					</Switch>
+				) : (
+					<Switch>
+						<Route path="/" component={CmsRoutes} />
+					</Switch>
+				)}
 			</ErrorBoundary>
 			<ToastContainer />
 		</>

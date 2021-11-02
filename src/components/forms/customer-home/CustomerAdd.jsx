@@ -85,11 +85,7 @@ const CustomerAdd = (props) => {
 	const handleEmailChange = (e, setFieldValue) => {
 		e.preventDefault();
 		let { value, name } = e.target;
-		console.log('event.target', e.target)
-		console.log('value', value);
-		console.log('name_email',name)
 		setFieldValue(name, value);
-		console.log('value', value);
 		customerData.filter((item) => {
 			if(item.email == value){
 				toast.warning('there is customer with this email')

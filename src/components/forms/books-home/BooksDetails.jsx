@@ -6,12 +6,12 @@ import Sidebar from '../customer-home/Sidebar';
 import Pagination from 'react-js-pagination';
 
 import dateFormat from 'dateformat';
-import { deleteBook, clearBook, addAllData } from '../../../actions/books.action';
+import { deleteBook, clearBook, addAutoAllData } from '../../../actions/books.action';
 
 import '../customer-home/customerModal.styles.css';
 import { toast } from 'react-toastify';
 
-import books from './books.json'
+import books from './books.json';
 import allBooksDtails from './books.json';
 
 const BooksDetails = (props) => {
@@ -26,77 +26,79 @@ const BooksDetails = (props) => {
 	const [activePage, setActivePage] = useState(1);
 	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
-	const totalData = bookList.length;
+	const [totalBookData, setTotalBookData] = useState(0);
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
-
+	let newDataList = [];
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
 		console.log('name ', name);
 		console.log('value', value);
 		if (value && name === 'name_search') {
-			let newData = [];
 			bookList.filter((data) => {
 				if (data.book_name.toLowerCase().includes(value.toLowerCase())) {
-					newData.push(data);
+					newDataList.push(data);
 					console.log('data', data);
 				}
 			});
 			setSearchByName(value);
-			setFilterdBookList(newData);
-		} else if (value && name === 'email_search') {
-			let newData = [];
+			setFilterdBookList(newDataList);
+			setTotalBookData(newDataList.length);
+			setActivePage(1);
+		} else if (value && name === 'author_search') {
+			// let newDataList = [];
 			bookList.filter((data) => {
 				if (data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())) {
-					newData.push(data);
+					newDataList.push(data);
 					console.log('data', data);
 				} else if (
 					data.book_name.toLowerCase().includes(searchByName.toLowerCase()) &&
 					data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())
 				) {
-					newData.push(data);
+					newDataList.push(data);
 					console.log('data', data);
 				}
 			});
-			setFilterdBookList(newData);
+			setSearchByAuthor(value);
+			setFilterdBookList(newDataList);
+			setTotalBookData(newDataList.length);
+			setActivePage(1);
 		} else {
 			setFilterdBookList(bookList);
+			setTotalBookData(bookList.length);
 			setSearchByName('');
 			setSearchByAuthor('');
 		}
 	};
 
 	const handleAddAutoData = () => {
-		console.log('data', books);
-		console.log('allBooksDtails', allBooksDtails);
-		books.allBooksDtails.map(item => {
-			return(
-				console.log(item)
-			)
-			
+		books.allBooksDtails.map((item) => {
+			return console.log(item);
 		});
-		dispatch(addAllData( books.allBooksDtails));
-	}
+		dispatch(addAutoAllData(books.allBooksDtails));
+	};
 
 	const handleDelete = (id) => {
 		dispatch(deleteBook(id));
-		toast.success('Book has been successfully deleted')
-	}
+		toast.success('Book has been successfully deleted');
+	};
 
 	const showBookList = (start, end) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
 			setFilterdBookList(bookList);
+			setTotalBookData(bookList.length);
 		}, 1000);
 	};
 
+
 	useEffect(() => {
 		setFilterdBookList(bookList);
+		setTotalBookData(bookList.length);
 	}, [bookList]);
-
 
 	useEffect(() => {
 		showBookList(firstData, lastData);
@@ -113,10 +115,9 @@ const BooksDetails = (props) => {
 					<Link to={'/booksAdd'}>Add Books</Link>
 				</button>{' '}
 				<input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
-				<input placeholder="Search by Author Name" name="email_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
-				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button>{' '}
-				<button onClick={ handleAddAutoData }>Autofill</button>
-				<h6>Total Books : {bookList.length}</h6>
+				<input placeholder="Search by Author Name" name="author_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
+				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button> <button onClick={handleAddAutoData}>Autofill</button>
+				<h6>Total Books : {filterdBookList.length}</h6>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
@@ -155,7 +156,7 @@ const BooksDetails = (props) => {
 											<td>{dateFormat(data.updated_date, 'dd-mm-yyyy hh:MM TT')}</td>
 											<td>{data.status}</td>
 											<td>
-											<button onClick={(e) => handleDelete(data.id)}>Delete</button>
+												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
 											</td>
 											<td>
 												<button onClick={() => setBookEditModal(true)}>
@@ -170,11 +171,13 @@ const BooksDetails = (props) => {
 				) : (
 					<div>Loading...</div>
 				)}
-				{bookList.length >= itemsCountPerPage ? (
-					<Pagination linkClass="page-link" linkClass="page-link"
+				{totalBookData >= itemsCountPerPage ? (
+					<Pagination
+						linkClass="page-link"
+						linkClass="page-link"
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
-						totalItemsCount={totalData}
+						totalItemsCount={totalBookData}
 						pageRangeDisplayed={pageRangeDisplayed}
 						onChange={(currentPage) => setActivePage(currentPage)}
 					/>

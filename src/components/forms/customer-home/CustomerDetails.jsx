@@ -18,25 +18,29 @@ const CustomerDetails = (props) => {
 	const { customerData } = useSelector((state) => state.customerReducer);
 	const dispatch = useDispatch();
 	const [searchByName, setSearchByName] = useState('');
-	const [searchByEmail, setSearchByEmail] = useState('');
+	const [searchByCustomerEmail, setSearchByCustomerEmail] = useState('');
 	const [filteredCustomer, setFilteredCustomer] = useState('');
 
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
 	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
-	const totalData = customerData.length;
+	const [totalData, setTotalData] = useState(0);
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 	// let currentData = filteredCustomer.slice(firstData, lastData);
 
-	console.log('customerData',customerData);
+	console.log('customerData',customerData)
+	console.log('filteredCustomer',filteredCustomer);
 
+	
+	
 	const handleSearch = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
+		console.log('value',value);
+		let newData = [];
 		if (value && name === 'name_search') {
-			let newData = [];
 			customerData.filter((data) => {
 				if (data.first_name.toLowerCase().includes(value.toLowerCase())) {
 					newData.push(data);
@@ -45,63 +49,75 @@ const CustomerDetails = (props) => {
 			});
 			setSearchByName(value);
 			setFilteredCustomer(newData);
+			setTotalData(newData.length);
+			setActivePage(1)
+			console.log('name TotalData', totalData);
 		} else if (value && name === 'email_search') {
-			let newData = [];
 			customerData.filter((data) => {
-				if (data.email.toLowerCase().includes(searchByEmail.toLowerCase())) {
+				if (data.email.toLowerCase().includes(searchByCustomerEmail.toLowerCase())) {
 					newData.push(data);
 					console.log('data', data);
 				} else if (
 					data.first_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-					data.email.toLowerCase().includes(searchByEmail.toLowerCase())
+					data.email.toLowerCase().includes(searchByCustomerEmail.toLowerCase())
 				) {
 					newData.push(data);
 					console.log('data', data);
 				}
 			});
+			setSearchByCustomerEmail(value);
 			setFilteredCustomer(newData);
+			setTotalData(newData.length);
+			setActivePage(1)
+			console.log('email TotalData', totalData);	
 		} else {
 			setFilteredCustomer(customerData);
+			setTotalData(customerData.length);
 			setSearchByName('');
-			setSearchByEmail('');
+			setSearchByCustomerEmail('');
 		}
 	};
 
 	const handleAddAutoData = () => {
-		console.log('data', customers);
-		console.log('allCustomerDetails', allCustomerDetails);
 		customers.allCustomerDetails.map(item => {
 			return(
 				console.log(item)
 			)
-			
 		});
 		dispatch(addAllData( customers.allCustomerDetails));
-		console.log('customers.allCustomerDetails', customers.allCustomerDetails);
 	}
-
-	const showBookList = (start, end) => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-			setFilteredCustomer(customerData);
-		}, 1000);
-	};
 
 	const handleDelete = (id) => {
 		dispatch(deleteList(id));
 		toast.success('Customer Data has been successfully deleted');
 	}
+	const handleClear= () => {
+		dispatch(clearList())
+		setTotalData(0);
+		
+	}
+
+	const showCustomerList = (start, end) => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+			setFilteredCustomer(customerData);
+			setTotalData(customerData.length);
+		}, 1000);
+	};
+
 
 	useEffect(() => {
 		setFilteredCustomer(customerData);
+		setTotalData(customerData.length);
 	}, [customerData]);
 
 	useEffect(() => {
-		showBookList();
+		showCustomerList();
 		console.log('activepage', activePage);
 	}, [activePage]);
 
+	console.log('TotalData', totalData);
 	console.log('isLoading', isLoading);
 
 	return (
@@ -112,10 +128,11 @@ const CustomerDetails = (props) => {
 				<button onClick={() => setAddModal(true)}>
 					<Link to={'/customerAdd'}>Add Customer</Link>
 				</button>{' '}
-				<input placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />
-				<input placeholder="Search by Email" name="email_search" value={searchByEmail} onChange={handleSearch} />{' '}
-				<button onClick={() => dispatch(clearList())}>Clear List</button>{' '}
+				<input placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />{' '}
+				<input placeholder="Search by Email" name="email_search" value={searchByCustomerEmail} onChange={handleSearch} />{' '}
+				<button onClick={() => handleClear()}>Clear List</button>{' '}
 				<button onClick={ handleAddAutoData }>Autofill</button>
+				<h6>Total Customer : {filteredCustomer.length}</h6>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
@@ -167,7 +184,7 @@ const CustomerDetails = (props) => {
 				) : (
 					<div>Loading...</div>
 				)}
-				{customerData.length >= itemsCountPerPage ? (
+				{totalData > itemsCountPerPage ? (
 					<Pagination   linkClass="page-link" linkClass="page-link"
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}

@@ -14,6 +14,8 @@ export const ADD_BOOKS = 'ADD_BOOKS';
 export const EDIT_BOOKS = 'EDIT_BOOKS';
 export const DELETE_BOOKS = 'DELETE_BOOKS';
 export const CLEAR_BOOKS = 'CLEAR_BOOKS';
+export const ADDAUTOFILL_DATA = 'ADDAUTOFILL_DATA';
+
 
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_ITEM = 'REMOVE_ITEM';

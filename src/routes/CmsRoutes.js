@@ -23,15 +23,12 @@ import Home from '../components/forms/customer-home/Home';
 import BooksDetails from '../components/forms/books-home/BooksDetails';
 import BooksAdd from '../components/forms/books-home/BooksAdd';
 import BooksEdit from '../components/forms/books-home/BooksEdit';
-import ProductsList from '../components/forms/products-cart/ProductsList';
-import ProductsListCart from '../components/forms/products-cart/ProductsListCart';
 
-const Routes = () => {
+const CmsRoutes = () => {
 	const [editModal, setEditModal] = useState(false);
 	const [addModal, setAddModal] = useState(false);
 	const [bookModal, setBookModal] = useState(false);
 	const [bookEditModal, setBookEditModal] = useState(false);
-	const [logged, setLogged] = useState(false);
 
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
@@ -39,7 +36,7 @@ const Routes = () => {
 
 	return (
 		<BrowserRouter>
-			<Navbar logged={logged} setLogged={setLogged} />
+			<Navbar />
 			<Switch>
 				{/* <PublicRoute exact path="/login" component={Login} /> */}
 
@@ -48,21 +45,12 @@ const Routes = () => {
 				{/* <PrivateRoute exact path="/" component={Dashboard} /> */}
 
 				<PublicRoute exact path="/signUp" component={Registration} />
-				<PublicRoute path="/logIn" component={() => <LogIn logged={logged} setLogged={setLogged} />} />
+				<PublicRoute path="/logIn" component={LogIn} />
 				<PublicRoute
 					path="/customerDetails"
-					component={() => (
-						<CustomerDetails
-							editModal={editModal}
-							setEditModal={setEditModal}
-							addModal={addModal}
-							setAddModal={setAddModal}
-							logged={logged}
-							setLogged={setLogged}
-						/>
-					)}
+					component={() => <CustomerDetails editModal={editModal} setEditModal={setEditModal} addModal={addModal} setAddModal={setAddModal} />}
 				/>
-				<PublicRoute exact path="/home" component={Home} logged={logged} setLogged={setLogged} />
+				<PublicRoute exact path="/" component={Home} />
 				<PublicRoute path="/customerAdd" component={() => <CustomerAdd addModal={addModal} setAddModal={setAddModal} />} />
 				<PublicRoute
 					path="/customerEdit/:id"
@@ -75,14 +63,7 @@ const Routes = () => {
 				<PublicRoute
 					path="/booksDetails"
 					component={() => (
-						<BooksDetails
-							bookModal={bookModal}
-							setBookModal={setBookModal}
-							bookEditModal={bookEditModal}
-							setBookEditModal={setBookEditModal}
-							logged={logged}
-							setLogged={setLogged}
-						/>
+						<BooksDetails bookModal={bookModal} setBookModal={setBookModal} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal} />
 					)}
 				/>
 				<PublicRoute path="/booksAdd" component={() => <BooksAdd bookModal={bookModal} setBookModal={setBookModal} />} />
@@ -94,13 +75,13 @@ const Routes = () => {
 					path="/booksEdit"
 					component={(props) => <BooksEdit id={props.match.params.id} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal} />}
 				/>
-				<PublicRoute path="/productsList" component={ProductsList}  logged={logged} setLogged={setLogged} />
-				<PublicRoute path="/productsListCart" component={ProductsListCart} />
-				{/* <PublicRoute exact path="/404" component={PageNotFound} /> */}
-				{/* <PublicRoutefrom="*" render={() => <Redirect to="/404" />} /> */}
+				{/* <PublicRoute path="/productsList" component={ProductsList}  logged={logged} setLogged={setLogged} />
+				<PublicRoute path="/productsListCart" component={ProductsListCart} /> */}
+				<PublicRoute exact path="/404" component={PageNotFound} />
+				<PublicRoute from="*" render={() => <Redirect to="/404" />} />
 			</Switch>
 		</BrowserRouter>
 	);
 };
 
-export default withRouter(Routes); //withRouter HOC will let us use props for location and history
+export default withRouter(CmsRoutes); //withRouter HOC will let us use props for location and history

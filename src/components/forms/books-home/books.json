@@ -9,7 +9,8 @@
         "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "twil10001"
+        "reference_num": "twil10001",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
@@ -20,7 +21,8 @@
         "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "pari10002"
+        "reference_num": "pari10002",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
@@ -31,7 +33,8 @@
         "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "Gita10003"
+        "reference_num": "Gita10003",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
@@ -42,7 +45,8 @@
         "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "monk10004"
+        "reference_num": "monk10004",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
@@ -53,40 +57,67 @@
         "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "Felu10005"
+        "reference_num": "Felu10005",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
-        "book_name": "Monk",
-        "author_name": "Robin Sharma",
+        "book_name": "Think like Monk",
+        "author_name": "Jay Shetty",
         "genre": "Self-help",
         "total_books": "466",
         "price": "100",
-        "status": "0",
+        "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "monk10006"
+        "reference_num": "Thin10006",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
-        "book_name": "Feluda",
-        "author_name": "satyajit",
+        "book_name": "Byomkesh",
+        "author_name": "Sharadindu Bandyopadhyay",
         "genre": "detective",
         "total_books": "24",
         "price": "100",
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "Felu10007"
+        "reference_num": "Byom10007",
+        "product_btn" : "Add to Cart"
       },
       {
         "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
-        "book_name": "Monk",
-        "author_name": "Robin Sharma",
-        "genre": "Self-help",
+        "book_name": "Devdas",
+        "author_name": "Sarat",
+        "genre": "Novel",
         "total_books": "466",
         "price": "100",
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
-        "reference_num": "monk10008"
+        "reference_num": "Devd10008",
+        "product_btn" : "Add to Cart"
+      },
+      {
+        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "book_name": "Kabuliwala",
+        "author_name": "Rabindranath Tagore",
+        "genre": "Short Story",
+        "total_books": "24",
+        "price": "100",
+        "status": "0",
+        "added_date": "10/29/2021, 3:14:15 PM",
+        "reference_num": "Kabu10009",
+        "product_btn" : "Add to Cart"
+      },{
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "book_name": "Kiriti",
+        "author_name": "Niharranjan Gupta",
+        "genre": "Detective Short Story",
+        "total_books": "466",
+        "price": "100",
+        "status": "1",
+        "added_date": "10/29/2021, 3:14:15 PM",
+        "reference_num": "Kiri100010",
+        "product_btn" : "Add to Cart"
       }
     ]
   }

@@ -1,23 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {  useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOff } from '../../actions/signup.action';
 
-const Navbar = (props) => {
-	const { logged, setLogged } = props;
+const Navbar = () => {
+	const { loggedIn } = useSelector((state) => state.registration);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { userToken } = useSelector((state) => state.registration);
-	console.log('logged', logged);
-
-	useEffect(() => {
-		let utoken = userToken;
-		if (utoken) {
-			setLogged(true);
-		} else {
-			setLogged(false);
-		}
-	});
 	
 	const handleLogout = () => {
 		dispatch(logOff());
@@ -42,12 +31,14 @@ const Navbar = (props) => {
 					</button>
 					<div className="collapse navbar-collapse" id="navbarText">
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+						{loggedIn === false ? (
 							<li className="nav-item">
 								<Link to="/signUp" className="nav-link active">
 									Registration
 								</Link>
 							</li>
-							{logged === true ? (
+						) : ( ' ')}
+							{loggedIn === true ? (
 								<li className="nav-item">
 									<Link to="/home" className="nav-link active">
 										Home
@@ -58,15 +49,7 @@ const Navbar = (props) => {
 							)}
 						</ul>
 
-						{logged === true ? (
-						<span className="navbar-text">
-							<Link to="/productsList" className="nav-link active">
-								Buy Products
-							</Link>
-						</span>
-							
-						) : ( ' ')}
-						{logged === false ? (
+						{loggedIn === false ? (
 							<span className="navbar-text">
 								<Link to="/logIn" className="nav-link active">
 									Login
@@ -106,4 +89,12 @@ export default Navbar;
 								<Link to="/customerEdit" className="nav-link active">
 									Customer Edit
 								</Link>
-							</li> */
+							</li>
+							{logged === true ? (
+						<span className="navbar-text">
+							<Link to="/productsList" className="nav-link active">
+								Buy Products
+							</Link>
+						</span>
+							
+						) : ( ' ')} */
