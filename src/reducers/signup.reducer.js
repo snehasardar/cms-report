@@ -34,6 +34,7 @@ const registration = (state = initialStates, action) => {
 			return {
 				...state,
 				userToken: '',
+				loggedIn : false,
 			};
 
 		default:
