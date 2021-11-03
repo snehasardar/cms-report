@@ -41,7 +41,7 @@ const LogIn = (props) => {
 				console.log('loggedUser.email', postdata.email);
 				toast.success('successfully login');
 				dispatch(logIn());
-				history.push('/');
+				history.push('/home');
 			} else {
 				toast.warning('Invalid credential');
 			}

@@ -44,13 +44,13 @@ const CmsRoutes = () => {
 				{/* Use below code for dashboard when login form is done */}
 				{/* <PrivateRoute exact path="/" component={Dashboard} /> */}
 
-				<PublicRoute exact path="/signUp" component={Registration} />
+				<PublicRoute exact path="/" component={Registration} />
 				<PublicRoute path="/logIn" component={LogIn} />
 				<PublicRoute
 					path="/customerDetails"
 					component={() => <CustomerDetails editModal={editModal} setEditModal={setEditModal} addModal={addModal} setAddModal={setAddModal} />}
 				/>
-				<PublicRoute exact path="/" component={Home} />
+				<PublicRoute exact path="/home" component={Home} />
 				<PublicRoute path="/customerAdd" component={() => <CustomerAdd addModal={addModal} setAddModal={setAddModal} />} />
 				<PublicRoute
 					path="/customerEdit/:id"
