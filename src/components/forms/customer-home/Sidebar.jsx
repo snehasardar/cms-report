@@ -15,6 +15,9 @@ const Sidebar = () => {
 			<Link to={'/booksDetails'} className="menu-item" >
 				Books
 			</Link>
+			<Link to={'/mobileDetails'} className="menu-item" >
+				Mobiles
+			</Link>
 		</Menu>
 	);
 };

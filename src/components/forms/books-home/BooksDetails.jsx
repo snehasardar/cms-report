@@ -12,7 +12,7 @@ import '../customer-home/customerModal.styles.css';
 import { toast } from 'react-toastify';
 
 import books from './books.json';
-import allBooksDtails from './books.json';
+// import allBooksDtails from './books.json';
 
 const BooksDetails = (props) => {
 	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
@@ -68,6 +68,7 @@ const BooksDetails = (props) => {
 		} else {
 			setFilterdBookList(bookList);
 			setTotalBookData(bookList.length);
+			console.log('TotalBookData', totalBookData)
 			setSearchByName('');
 			setSearchByAuthor('');
 		}
@@ -85,7 +86,7 @@ const BooksDetails = (props) => {
 		toast.success('Book has been successfully deleted');
 	};
 
-	const showBookList = (start, end) => {
+	const showBookList = () => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
@@ -98,6 +99,7 @@ const BooksDetails = (props) => {
 	useEffect(() => {
 		setFilterdBookList(bookList);
 		setTotalBookData(bookList.length);
+		console.log('bookList.length', bookList.length)
 	}, [bookList]);
 
 	useEffect(() => {

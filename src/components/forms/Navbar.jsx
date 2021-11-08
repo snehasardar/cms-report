@@ -5,12 +5,13 @@ import { logOff } from '../../actions/signup.action';
 
 const Navbar = () => {
 	const { loggedIn } = useSelector((state) => state.registration);
+	console.log('navbar loggedIn ', loggedIn);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	
 	const handleLogout = () => {
 		dispatch(logOff());
-		history.push('/signUp');
+		history.push('/logIn');
 	}
 
 	return (
@@ -33,7 +34,7 @@ const Navbar = () => {
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 						{loggedIn === false ? (
 							<li className="nav-item">
-								<Link to="/signUp" className="nav-link active">
+								<Link to="/" className="nav-link active">
 									Registration
 								</Link>
 							</li>

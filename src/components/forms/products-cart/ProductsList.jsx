@@ -9,7 +9,7 @@ import { addToCart } from '../../../actions/product.action';
 
 const ProductsList = (props) => {
 	const { bookList } = useSelector((state) => state.booksReducer);
-	// const { items }= useSelector((state) => state.productReducer);
+	const { items }= useSelector((state) => state.productReducer);
 	const dispatch = useDispatch();
 	const [filterdProductList, setFilterdProductList] = useState('');
 
@@ -17,19 +17,20 @@ const ProductsList = (props) => {
 	const [activePage, setActivePage] = useState(1);
 	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
-	const [totalData, setTotalData] = useState(bookList.length);
+	const [totalData, setTotalData] = useState(0);
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
+	let newProduct = []; 
+
 	let updatedProductList = [];
-	
 
 	const handleSubmit = (data) => {
 		dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
 	};
-
-	const showBookList = (start, end) => {
+	
+	const showBookList = () => {
 		setIsLoading(true);
 		let i = 0;
 		while (i < bookList.length) {
@@ -39,22 +40,26 @@ const ProductsList = (props) => {
 			}
 			i = i + 1;
 		}
-		setTotalData(updatedProductList.length);
 		setTimeout(() => {
 			setIsLoading(false);
 			setFilterdProductList(updatedProductList);
+			console.log('updatedProductList.length in settime',updatedProductList.length); 
+			setTotalData(updatedProductList.length);
+			console.log('TotalData in settime',totalData);
 		}, 1000);
 	};
+	useEffect(() => {
+		showBookList()
+		console.log('booklist',bookList)
+		console.log('activePage',activePage)
+	},[bookList, activePage])
 
 	useEffect(() => {
 		setFilterdProductList(updatedProductList);
+		setTotalData(bookList.length);
+		console.log('TotalData in useEffect',totalData);
 	}, [bookList]);
 	
-
-	useEffect(() => {
-		showBookList(firstData, lastData);
-		console.log('activepage', activePage);
-	}, [activePage]);
 
 	console.log('isLoading', isLoading);
 	return (
@@ -78,6 +83,7 @@ const ProductsList = (props) => {
 							</tr>
 						</thead>
 						<tbody>
+
 							{filterdProductList &&
 								filterdProductList.length > 0 &&
 								filterdProductList.slice(firstData, lastData).map((data, index) => {
@@ -91,11 +97,21 @@ const ProductsList = (props) => {
 											<td>{data.genre}</td>
 											<td>{data.total_books}</td>
 											<td>₹{data.price}</td>
-											<td>
+											{ newProduct = items.map((product) => product.id === data.id)  &&
+												newProduct && 
+												newProduct.length > 0 ? (
+												<td>
+													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+													{newProduct.product_btn}
+												</button>
+												</td>
+											)  : ( 
+												<td>
 												<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 													{data.product_btn}
 												</button>
 											</td>
+											) }
 										</tr>
 									);
 								})}
@@ -104,7 +120,7 @@ const ProductsList = (props) => {
 				) : (
 					<div>Loading...</div>
 				)}
-				{updatedProductList.length >= itemsCountPerPage ? (
+				{totalData > itemsCountPerPage ? (
 					<Pagination
 						linkClass="page-link"
 						linkClass="page-link"

@@ -16,6 +16,11 @@ export const DELETE_BOOKS = 'DELETE_BOOKS';
 export const CLEAR_BOOKS = 'CLEAR_BOOKS';
 export const ADDAUTOFILL_DATA = 'ADDAUTOFILL_DATA';
 
+export const ADD_MOBILE = 'ADD_MOBILE';
+export const EDIT_MOBILE = 'EDIT_MOBILE';
+export const DELETE_MOBILE = 'DELETE_MOBILE';
+export const CLEAR_MOBILES = 'CLEAR_MOBILES';
+export const AUTOFILL_MOBILES = 'AUTOFILL_MOBILES';
 
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_ITEM = 'REMOVE_ITEM';

@@ -23,12 +23,17 @@ import Home from '../components/forms/customer-home/Home';
 import BooksDetails from '../components/forms/books-home/BooksDetails';
 import BooksAdd from '../components/forms/books-home/BooksAdd';
 import BooksEdit from '../components/forms/books-home/BooksEdit';
+import MobileDetails from '../components/forms/mobiles-home/MobileDetails';
+import MobileAdd from '../components/forms/mobiles-home/MobileAdd';
+import MobileEdit from '../components/forms/mobiles-home/mobileEdit';
 
 const CmsRoutes = () => {
 	const [editModal, setEditModal] = useState(false);
 	const [addModal, setAddModal] = useState(false);
 	const [bookModal, setBookModal] = useState(false);
 	const [bookEditModal, setBookEditModal] = useState(false);
+	const [mobileAddModal, setMobileAddModal] = useState(false);
+	const [mobileEditModal, setMobileEditModal] = useState(false);
 
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
@@ -60,6 +65,7 @@ const CmsRoutes = () => {
 					path="/customerEdit"
 					component={(props) => <CustomerEdit id={props.match.params.id} editModal={editModal} setEditModal={setEditModal} />}
 				/>
+
 				<PublicRoute
 					path="/booksDetails"
 					component={() => (
@@ -75,8 +81,25 @@ const CmsRoutes = () => {
 					path="/booksEdit"
 					component={(props) => <BooksEdit id={props.match.params.id} bookEditModal={bookEditModal} setBookEditModal={setBookEditModal} />}
 				/>
-				{/* <PublicRoute path="/productsList" component={ProductsList}  logged={logged} setLogged={setLogged} />
-				<PublicRoute path="/productsListCart" component={ProductsListCart} /> */}
+
+				<PublicRoute
+					path="/mobileDetails"
+					component={() => (
+						<MobileDetails
+							mobileAddModal={mobileAddModal}
+							setMobileAddModal={setMobileAddModal}
+							mobileEditModal={mobileEditModal}
+							setMobileEditModal={setMobileEditModal}
+						/>
+					)}
+				/>
+				<PublicRoute path="/mobileAdd" component={() => <MobileAdd mobileAddModal={mobileAddModal} setMobileAddModal={setMobileAddModal} />} />
+
+				<PublicRoute
+					path="/mobileEdit/:id"
+					component={(props) => <MobileEdit id={props.match.params.id} mobileEditModal={mobileEditModal} setMobileEditModal={setMobileEditModal} />}
+				/>
+				<PublicRoute path="/mobileEdit" component={(props) => <MobileEdit id={props.match.params.id} mobileEditModal={mobileEditModal} setMobileEditModal={setMobileEditModal} />} />
 				<PublicRoute exact path="/404" component={PageNotFound} />
 				<PublicRoute from="*" render={() => <Redirect to="/404" />} />
 			</Switch>

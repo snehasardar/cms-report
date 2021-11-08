@@ -2,7 +2,6 @@ import { lazy, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import './assets/css/styles.css';
