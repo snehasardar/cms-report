@@ -67,8 +67,8 @@ const MobileDetails = (props) => {
 			setTotalMobileItem(newMobileList.length);
 			setActivePage(1);
 		}  else {
-			setFilterdMobileList(mobileList);
-			setTotalMobileItem(mobileList.length);
+			setFilterdMobileList(newMobileList);
+			setTotalMobileItem(newMobileList.length);
 			console.log('totalMobileItem', totalMobileItem)
             setSearchByMobile('');
 			setSearchByBrand('');

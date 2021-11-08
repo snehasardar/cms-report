@@ -167,6 +167,7 @@ const Registration = (props) => {
 												options={GENDERS_FORM}
 												className="basic-select"
 												classNamePrefix="select"
+												aria-label="select_gender"
 												getOptionValue={(x) => x.value}
 												getOptionLabel={(x) => x.label}
 												onChange={(evt) => setFieldValue('gender', evt)} //set variable gender in formik state
@@ -180,16 +181,17 @@ const Registration = (props) => {
 										<div className="form-check">
 											<input
 												name="terms_of_service"
+												aria-labelledby="checkbox_span"
 												className="form-check-input mr-2"
 												id="bookhc-agreement"
 												type="checkbox"
 												onChange={handleChange}
 											/>
-											<label htmlFor="bookhc-agreement">I agree to the</label>
-											<span className="pointer mr-2 ml-2 text-primary" onClick={() => null}>
+											<label htmlFor="bookhc-agreement"  id="checkbox_span1">I agree to the</label>
+											<span className="pointer mr-2 ml-2 text-primary"  onClick={() => null}>
 												Terms of Use
 											</span>
-											<label htmlFor="bookhc-agreement">and </label>
+											<label htmlFor="bookhc-agreement"  id="checkbox_span1">and </label>
 											<span className="pointer ml-2 text-primary" onClick={() => null}>
 												Privacy Policy
 											</span>
