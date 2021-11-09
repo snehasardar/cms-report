@@ -1,7 +1,7 @@
 {
     "allBooksDtails": [
       { 
-        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
         "book_name": "twilight",
         "author_name": "Meyer",
         "genre": "vampire",
@@ -25,7 +25,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
         "book_name": "Gitanjali",
         "author_name": "rabindranath Tagore",
         "genre": "Novel",
@@ -49,7 +49,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
         "book_name": "Feluda",
         "author_name": "satyajit",
         "genre": "detective",
@@ -73,7 +73,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
         "book_name": "Byomkesh",
         "author_name": "Sharadindu Bandyopadhyay",
         "genre": "detective",
@@ -97,7 +97,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/color/48/000000/story-book.png",
+        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
         "book_name": "Kabuliwala",
         "author_name": "Rabindranath Tagore",
         "genre": "Short Story",

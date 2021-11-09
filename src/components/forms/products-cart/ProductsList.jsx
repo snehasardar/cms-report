@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { toast } from 'react-toastify';
@@ -64,11 +64,11 @@ const ProductsList = (props) => {
 	console.log('isLoading', isLoading);
 	return (
 		<div className="container">
-			<div>
+			<div className="main-content">
 				<h5>Shop now </h5>
-				<button>
-					<Link to={`/shop/productsListCart`}>Check Your Cart</Link>
-				</button>
+				<Button variant="link">
+					<Link to={`/shop/productsListCart`} >Check Your Cart</Link>
+				</Button>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
@@ -90,7 +90,7 @@ const ProductsList = (props) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.image_link} alt="book image" width="50" height="50" />{' '}
+												<img src={data.image_link} alt="book image" width="48" height="48"  />{' '}
 											</td>
 											<td>{data.book_name}</td>
 											<td>{data.author_name}</td>
@@ -121,7 +121,7 @@ const ProductsList = (props) => {
 					<div>Loading...</div>
 				)}
 				{totalData > itemsCountPerPage ? (
-					<Pagination
+					<Pagination  
 						linkClass="page-link"
 						linkClass="page-link"
 						activePage={activePage}
