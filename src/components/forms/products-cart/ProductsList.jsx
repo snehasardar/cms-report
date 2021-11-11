@@ -91,7 +91,7 @@ const ProductsList = (props) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.image_link} alt="book image" width="48" height="48"  />
+												<img src={data.image_link}  alt="book_image" width="48" height="48"/>
 											</td>
 											<td>{data.book_name}</td>
 											<td >{data.author_name}</td>
