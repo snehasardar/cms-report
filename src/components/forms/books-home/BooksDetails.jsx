@@ -9,10 +9,11 @@ import dateFormat from 'dateformat';
 import { deleteBook, clearBook, addAutoAllData } from '../../../actions/books.action';
 
 import '../customer-home/customerModal.styles.css';
+import '../styles.css';
+
 import { toast } from 'react-toastify';
 
 import books from './books.json';
-// import allBooksDtails from './books.json';
 
 const BooksDetails = (props) => {
 	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
@@ -175,8 +176,6 @@ const BooksDetails = (props) => {
 				)}
 				{totalBookData >= itemsCountPerPage ? (
 					<Pagination
-						linkClass="page-link"
-						linkClass="page-link"
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalBookData}

@@ -6,6 +6,7 @@ import Pagination from 'react-js-pagination';
 import { toast } from 'react-toastify';
 
 import { addToCart } from '../../../actions/product.action';
+import '../styles.css'
 
 const ProductsList = (props) => {
 	const { bookList } = useSelector((state) => state.booksReducer);
@@ -29,7 +30,7 @@ const ProductsList = (props) => {
 		dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
 	};
-	
+
 	const showBookList = () => {
 		setIsLoading(true);
 		let i = 0;
@@ -48,6 +49,7 @@ const ProductsList = (props) => {
 			console.log('TotalData in settime',totalData);
 		}, 1000);
 	};
+
 	useEffect(() => {
 		showBookList()
 		console.log('booklist',bookList)
@@ -83,17 +85,16 @@ const ProductsList = (props) => {
 							</tr>
 						</thead>
 						<tbody>
-
 							{filterdProductList &&
 								filterdProductList.length > 0 &&
 								filterdProductList.slice(firstData, lastData).map((data, index) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.image_link} alt="book image" width="48" height="48"  />{' '}
+												<img src={data.image_link} alt="book image" width="48" height="48"  />
 											</td>
 											<td>{data.book_name}</td>
-											<td>{data.author_name}</td>
+											<td >{data.author_name}</td>
 											<td>{data.genre}</td>
 											<td>{data.total_books}</td>
 											<td>₹{data.price}</td>
@@ -118,12 +119,10 @@ const ProductsList = (props) => {
 						</tbody>
 					</Table>
 				) : (
-					<div>Loading...</div>
-				)}
+						<div>Loading...</div>
+					)}
 				{totalData > itemsCountPerPage ? (
 					<Pagination  
-						linkClass="page-link"
-						linkClass="page-link"
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalData}

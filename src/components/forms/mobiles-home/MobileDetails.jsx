@@ -9,6 +9,7 @@ import dateFormat from 'dateformat';
 import { deleteMobile, autoFillMobiles, clearMobile  } from '../../../actions/mobile.action';
 
 import '../customer-home/customerModal.styles.css';
+import '../styles.css'
 import { toast } from 'react-toastify';
 
 import mobile from './Mobile.json';
@@ -180,8 +181,7 @@ const MobileDetails = (props) => {
 				)}
 				{totalMobileItem >= itemsCountPerPage ? (
 					<Pagination
-						linkClass="page-link"
-						linkClass="page-link"
+						
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalMobileItem}

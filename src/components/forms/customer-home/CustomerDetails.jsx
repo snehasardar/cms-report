@@ -8,10 +8,10 @@ import dateFormat from 'dateformat';
 
 import { deleteList, clearList, addAllData } from '../../../actions/customer.action';
 import './customerModal.styles.css';
+import '../styles.css';
 import { toast } from 'react-toastify';
 
 import customers from './customers.json';
-import allCustomerDetails from './customers.json';
 
 const CustomerDetails = (props) => {
 	const { editModal, setEditModal, addModal, setAddModal } = props;
@@ -185,7 +185,7 @@ const CustomerDetails = (props) => {
 					<div>Loading...</div>
 				)}
 				{totalData > itemsCountPerPage ? (
-					<Pagination   linkClass="page-link" linkClass="page-link"
+					<Pagination   
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalData}
