@@ -20,6 +20,17 @@
 	color: #dc3545
 }
 
+/* .button{
+
+} */
+.Link{
+	color:#024FC0;
+}
+
+a {
+	color:#024FC0;	
+}
+
 .table {
 	width: 100%;
 	table-layout: fixed;

@@ -68,9 +68,9 @@ const ProductsList = (props) => {
 		<div className="container">
 			<div className="main-content">
 				<h5>Shop now </h5>
-				<Button variant="link">
+				<button variant="link">
 					<Link to={`/shop/productsListCart`} >Check Your Cart</Link>
-				</Button>
+				</button>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>

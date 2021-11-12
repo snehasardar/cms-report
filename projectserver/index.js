@@ -55,5 +55,5 @@ function setNoCache(res) {
   });
 //listen to request
 app.listen(port, () => {
-    console.log(`server is running at port no http://localhost:${port}`);
+    console.log(`server is running at port no http://localhost:${Port}`);
 })
