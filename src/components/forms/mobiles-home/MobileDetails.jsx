@@ -149,7 +149,7 @@ const MobileDetails = (props) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.image_link} alt="book image" width="50" height="50" />{' '}
+												<img src={data.image_link} alt="mobile image"  width="48px" height="48px" />{' '}
 											</td>
 											<td>{data.id}</td>
 											<td>{data.mobile_name}</td>
