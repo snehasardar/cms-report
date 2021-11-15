@@ -122,8 +122,8 @@ const ProductsList = (props) => {
 			<nav className="navbar navbar-light bg-light">
 				<div className="fluid">
 					<form className="d-flex">
-					<input className="form-control me-2" type="search" placeholder="Search by products" 
-						value={searchByProducts} onchange={handleSearch}   />
+					<input className="form-control me-2" type="search" placeholder="Search by products" name="product_search"
+						value={searchByProducts} onchange={(e)=> handleSearch(e)}   />
 						<i className="fas fa-search icon"></i>
 					</form>
 				</div>

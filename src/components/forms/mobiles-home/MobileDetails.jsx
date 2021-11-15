@@ -127,13 +127,13 @@ const MobileDetails = (props) => {
 						<thead>
 							<tr>
 								<th>Image</th>
-								<th>ID</th>
 								<th>Mobile</th>
 								<th>Brand</th>
 								<th>RAM</th>
                                 <th>Storage</th>
                                 <th>Battery</th>
-								<th>Reference Number</th>
+								<th>Reference  
+									 Number</th>
 								<th>Stock </th>
 								<th>Price</th>
 								<th>Added date</th>
@@ -151,7 +151,6 @@ const MobileDetails = (props) => {
 											<td>
 												<img src={data.mobile_image} alt="mobile image"  width="50" height="80" />{' '}
 											</td>
-											<td>{data.id}</td>
 											<td>{data.mobile_name}</td>
 											<td>{data.brand_name}</td>
 											<td>{data.ram}</td>
