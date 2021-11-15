@@ -18,7 +18,7 @@ import { numberFieldValidation,  selectStatus } from '../../../shared/common';
 import { editMobile } from '../../../actions/mobile.action';
 
 const initialValues = {
-	image_link: '',
+	mobile_image: '',
 	mobile_name: '',
 	brand_name: '',
 	ram: '',
@@ -41,7 +41,7 @@ const MobileEdit = (props) => {
 	console.log('currentMobile', currentMobile);
 
 	const validateBooksInformation = Yup.object().shape({
-		image_link: Yup.string().required('Please enter an Image Link'),
+		mobile_image: Yup.string().required('Please enter an Image Link'),
 		mobile_name: Yup.string()
 			.trim()
 			.min(1, 'Mobile Name cannot be less than 1 character long')
@@ -82,7 +82,7 @@ const MobileEdit = (props) => {
 		status: Yup.object().required('Please select status'),
 	});
 	const newInitialValues = Object.assign(initialValues, {
-        image_link:  currentMobile && Object.keys(currentMobile).length > 0 ? currentMobile.image_link : '',
+        mobile_image:  currentMobile && Object.keys(currentMobile).length > 0 ? currentMobile.mobile_image : '',
 		mobile_name: currentMobile && Object.keys(currentMobile).length > 0 ? currentMobile.mobile_name : '',
 		brand_name: currentMobile && Object.keys(currentMobile).length > 0 ? currentMobile.brand_name : '',
 		ram: currentMobile && Object.keys(currentMobile).length > 0 ? currentMobile.ram : '',
@@ -96,7 +96,7 @@ const MobileEdit = (props) => {
 	const handleSubmitEvent = (values, actions) => {
 		let post_data = {
 			id: currentMobile && Object.keys(currentMobile).length > 0 ? currentMobile.id : '',
-			image_link: values.image_link,
+			mobile_image: values.mobile_image,
 			mobile_name: values.mobile_name,
 			brand_name: values.brand_name,
 			ram: values.ram,
@@ -150,15 +150,15 @@ const MobileEdit = (props) => {
 												/>
 												{errors.mobile_name && touched.mobile_name ? <p className="error no-pos"> {errors.mobile_name}</p> : null}
 											</Form.Group>
-											<Form.Group controlId="image_link">
+											<Form.Group controlId="mobile_image">
 												<Form.Control
 													type="link"
 													placeholder="Image-Link *"
 													onChange={handleChange}
-													value={values.image_link}
-													isInvalid={errors.image_link && touched.image_link}
+													value={values.mobile_image}
+													isInvalid={errors.mobile_image && touched.mobile_image}
 												/>
-												{errors.image_link && touched.image_link ? <p className="error no-pos"> {errors.image_link}</p> : null}
+												{errors.mobile_image && touched.mobile_image ? <p className="error no-pos"> {errors.mobile_image}</p> : null}
 											</Form.Group>
 											<Form.Group controlId="brand_name">
 												<Form.Control type="text" placeholder="brand_name *" onChange={handleChange} value={values.brand_name} />

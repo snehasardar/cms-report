@@ -27,7 +27,7 @@ const ProductsListCart = () => {
 							return (
 								<tr key={index}>
                                     <td>
-										<img src={product.image_link} alt="book image" width="50" height="50" />{' '}
+										<img src={product.image_link} alt="book image" width="200px" height="150px" />{' '}
 									</td>
                                     <td>{product.book_name}</td>
 									<td>{product.price}</td>

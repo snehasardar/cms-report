@@ -1,7 +1,7 @@
 {
     "allBooksDtails": [
       { 
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "twilight",
         "author_name": "Meyer",
         "genre": "vampire",
@@ -13,7 +13,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "parineeta",
         "author_name": "Sarat",
         "genre": "Novel",
@@ -25,7 +25,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Gitanjali",
         "author_name": "rabindranath Tagore",
         "genre": "Novel",
@@ -37,7 +37,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Monk",
         "author_name": "Robin Sharma",
         "genre": "Self-help",
@@ -49,7 +49,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Feluda",
         "author_name": "satyajit",
         "genre": "detective",
@@ -61,7 +61,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Think ",
         "author_name": "Jay Shetty",
         "genre": "Self-help",
@@ -73,9 +73,9 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Byomkesh",
-        "author_name": "Sharadindu ",
+        "author_name": "Sharadindu",
         "genre": "detective",
         "total_books": "24",
         "price": "100",
@@ -85,7 +85,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Devdas",
         "author_name": "Sarat",
         "genre": "Novel",
@@ -97,7 +97,7 @@
         "product_btn" : "Add to Cart"
       },
       {
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Kabuliwala",
         "author_name": "Rabindranath Tagore",
         "genre": "Short Story",
@@ -108,7 +108,7 @@
         "reference_num": "Kabu10009",
         "product_btn" : "Add to Cart"
       },{
-        "image_link" : "https://img.icons8.com/clouds/100/000000/storytelling.png",
+        "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Kiriti",
         "author_name": "Niharranjan Gupta",
         "genre": "Detective Short Story",

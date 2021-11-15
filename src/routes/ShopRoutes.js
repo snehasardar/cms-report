@@ -2,15 +2,13 @@ import React, { useState, useLayoutEffect } from 'react';
 import { BrowserRouter, Switch, withRouter, Redirect } from 'react-router-dom';
 
 
-
 /** Public Routes */
 import PublicRoute from './PublicRoute';
 
 
-// import Navbar from '../components/forms/Navbar';
-
 import ProductsList from '../components/forms/products-cart/ProductsList';
 import ProductsListCart from '../components/forms/products-cart/ProductsListCart';
+import Header from '../components/forms/products-cart/Header';
 
 const ShopRoutes = () => {
 
@@ -20,9 +18,9 @@ const ShopRoutes = () => {
 
 	return (
 		<BrowserRouter>
-			{/* <Navbar  /> */}
+			<Header  />
 			<Switch>
-				
+
 				<PublicRoute exact path="/shop" component={ProductsList}  />
 				<PublicRoute exact path="/shop/productsListCart" component={ProductsListCart} />
 				

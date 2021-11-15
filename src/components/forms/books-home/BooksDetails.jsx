@@ -136,7 +136,7 @@ const BooksDetails = (props) => {
 								<th>Added date</th>
 								<th>Updated Date</th>
 								<th>Status</th>
-								<th colSpan="2">Action</th>
+								<th > Action </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -160,8 +160,7 @@ const BooksDetails = (props) => {
 											<td>{data.status}</td>
 											<td>
 												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-											</td>
-											<td>
+											
 												<button onClick={() => setBookEditModal(true)}>
 													<Link to={`/booksEdit/${data.id}`}>Edit</Link>
 												</button>

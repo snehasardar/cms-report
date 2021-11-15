@@ -139,7 +139,7 @@ const MobileDetails = (props) => {
 								<th>Added date</th>
 								<th>Updated Date</th>
 								<th>Status</th>
-								<th colSpan="2">Action</th>
+								<th >Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -149,7 +149,7 @@ const MobileDetails = (props) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.image_link} alt="mobile image"  width="48px" height="48px" />{' '}
+												<img src={data.mobile_image} alt="mobile image"  width="50" height="80" />{' '}
 											</td>
 											<td>{data.id}</td>
 											<td>{data.mobile_name}</td>
@@ -165,8 +165,7 @@ const MobileDetails = (props) => {
 											<td>{data.status}</td>
 											<td>
 												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-											</td>
-											<td>
+											
 												<button onClick={() => setMobileEditModal(true)}>
 													<Link to={`/mobileEdit/${data.id}`}>Edit</Link>
 												</button>
