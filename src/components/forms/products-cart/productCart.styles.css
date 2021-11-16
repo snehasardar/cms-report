@@ -8,6 +8,8 @@
     height: 44px;
     /* background: url("https://fontawesome.com/v5.15/icons/search?style=solid") no-repeat scroll 7px 7px;
     padding-left:30px; */
+    font-family: sans-serif;
+    font-size: 18px;
 }
 
  .icon {
@@ -29,6 +31,7 @@
     transition: 0.3s;
     background-color: #fff;
     border-radius: 5px;
+    justify-content: center;
 } 
 
 .book_card{

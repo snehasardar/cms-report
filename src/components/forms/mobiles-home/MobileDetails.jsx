@@ -50,6 +50,7 @@ const MobileDetails = (props) => {
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
 			setActivePage(1);
+			console.log('activePage in search', newMobileList.length)
 		} else if (value && name === 'brand_search') {
 			newMobileList.filter((data) => {
 				if (data.brand_name.toLowerCase().includes(searchByBrand.toLowerCase())) {
@@ -67,6 +68,7 @@ const MobileDetails = (props) => {
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
 			setActivePage(1);
+			
 		}  else {
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
@@ -106,6 +108,11 @@ const MobileDetails = (props) => {
 
 	useEffect(() => {
 		showBookList(firstData, lastData);
+		console.log('activepage', activePage);
+	}, [activePage]);
+
+	useEffect(() => {
+		
 		console.log('activepage', activePage);
 	}, [activePage]);
 
@@ -179,7 +186,6 @@ const MobileDetails = (props) => {
 				)}
 				{totalMobileItem >= itemsCountPerPage ? (
 					<Pagination
-						
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalMobileItem}
