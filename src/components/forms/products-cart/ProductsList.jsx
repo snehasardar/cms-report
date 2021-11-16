@@ -148,7 +148,6 @@ const ProductsList = (props) => {
 						( 
 
 							<div className="main-content">
-							
 								{	allSearchProducts  &&
 									allSearchProducts.map((data, index) => {
 										return (
@@ -201,7 +200,7 @@ const ProductsList = (props) => {
 						 ) : (
 							
 								allSearchProducts  || allSearchMobileProducts &&
-						allSearchProducts.length > 1 || allSearchMobileProducts.length > 1 ? (
+							allSearchProducts.length > 1 || allSearchMobileProducts.length > 1 ? (
 							<div className="main-content">
 							<Slider {...settings}> 
 								{	allSearchProducts  &&
@@ -255,8 +254,10 @@ const ProductsList = (props) => {
 
 						) : (
 							
-							<div>
-							<h4>Category: Books</h4>
+						<div >
+							<div className="clearfix mt-5 mb-2 ">
+								<h4>Category: Books</h4>
+							</div>
 							<div className="main-content">
 								<Slider {...settings}>
 									{filterdProductList &&
@@ -284,7 +285,9 @@ const ProductsList = (props) => {
 									})}
 								</Slider>
 							</div>
-							<h4>Category: Mobiles</h4>
+							<div className="clearfix mt-5 mb-2 ">
+								<h4>Category: Mobiles</h4>
+							</div>
 							<div className="main-content">
 								<Slider {...settings}>
 									{filterdMobileList &&
@@ -315,7 +318,7 @@ const ProductsList = (props) => {
 							</div>
 						</div>	
 						)
-							
+			
 						)
 						
 					}

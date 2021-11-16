@@ -104,7 +104,7 @@ const BooksDetails = (props) => {
 	}, [bookList]);
 
 	useEffect(() => {
-		showBookList(firstData, lastData);
+		showBookList();
 		console.log('activepage', activePage);
 	}, [activePage]);
 
@@ -114,19 +114,19 @@ const BooksDetails = (props) => {
 			<Sidebar />
 			<div>
 				<h5>Books list </h5>
-				<button onClick={() => setBookModal(true)}>
+				<button className='top-button' onClick={() => setBookModal(true)}>
 					<Link to={'/booksAdd'}>Add Books</Link>
 				</button>{' '}
 				<input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
 				<input placeholder="Search by Author Name" name="author_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
-				<button onClick={() => dispatch(clearBook())}>Clear BooksList</button> <button onClick={handleAddAutoData}>Autofill</button>
+				<button className='top-button' onClick={() => dispatch(clearBook())}>Clear BooksList</button>
+				 <button className='top-button' onClick={handleAddAutoData}>Autofill</button>
 				<h6>Total Books : {filterdBookList.length}</h6>
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
 							<tr>
 								<th>Image</th>
-								<th>ID</th>
 								<th>Book Name</th>
 								<th>Author Name</th>
 								<th>Genre</th>
@@ -148,7 +148,6 @@ const BooksDetails = (props) => {
 											<td>
 												<img src={data.image_link} alt="book image" width="50" height="50" />{' '}
 											</td>
-											<td>{data.id}</td>
 											<td>{data.book_name}</td>
 											<td>{data.author_name}</td>
 											<td>{data.genre}</td>

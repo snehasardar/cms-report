@@ -125,16 +125,16 @@ const CustomerDetails = (props) => {
 			<Sidebar />
 			<div>
 				<h5>Customer list </h5>
-				<button onClick={() => setAddModal(true)}>
+				<button className='top-button' onClick={() => setAddModal(true)}>
 					<Link to={'/customerAdd'}>Add Customer</Link>
 				</button>{' '}
 				<input placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />{' '}
 				<input placeholder="Search by Email" name="email_search" value={searchByCustomerEmail} onChange={handleSearch} />{' '}
-				<button onClick={() => handleClear()}>Clear List</button>{' '}
-				<button onClick={ handleAddAutoData }>Autofill</button>
+				<button className='top-button' onClick={() => handleClear()}>Clear List</button>{' '}
+				<button className='top-button' onClick={ handleAddAutoData }>Autofill</button>
 				<h6>Total Customer : {filteredCustomer.length}</h6>
 				{!isLoading ? (
-					<Table striped bordered hover>
+					<Table striped bordered hover >
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -148,7 +148,7 @@ const CustomerDetails = (props) => {
 								<th>Regno</th>
 								<th>Status</th>
 								<th>Date</th>
-								<th colSpan="2">Action</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -164,14 +164,13 @@ const CustomerDetails = (props) => {
 											<td>{data.last_name}</td>
 											<td>{data.fullname}</td>
 											<td>{data.mobile_no}</td>
-											<td>{data.email}</td>
+											<td >{data.email}</td>
 											<td>{data.registration_num}</td>
 											<td>{data.status}</td>
 											<td> {dateFormat(data.date, 'dd-mm-yyyy hh:MM TT')} </td>
 											<td>
 												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-											</td>
-											<td>
+											
 												<button onClick={() => setEditModal(true)}>
 													<Link to={`/customerEdit/${data.id}`}>Edit</Link>
 												</button>

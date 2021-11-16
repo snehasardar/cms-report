@@ -51,10 +51,10 @@ const MobileDetails = (props) => {
 			setActivePage(1);
 			console.log('activePage in search', newMobileList.length)
 		} else if (value && name === 'brand_search') {
-			newMobileList.filter((data) => {
+			mobileList.filter((data) => {
 				if (data.brand_name.toLowerCase().includes(searchByBrand.toLowerCase())) {
 					newMobileList.push(data);
-					console.log('data', data);
+					console.log('data brand name', data);
 				} else if (
 					data.mobile_name.toLowerCase().includes(searchByMobile.toLowerCase()) &&
 					data.brand_name.toLowerCase().includes(searchByBrand.toLowerCase())
@@ -67,10 +67,10 @@ const MobileDetails = (props) => {
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
 			setActivePage(1);
-			
+			console.log('activePage in search', newMobileList.length)
 		}  else {
-			setFilterdMobileList(newMobileList);
-			setTotalMobileItem(newMobileList.length);
+			setFilterdMobileList(mobileList);
+			setTotalMobileItem(mobileList.length);
 			console.log('totalMobileItem', totalMobileItem)
             setSearchByMobile('');
 			setSearchByBrand('');
@@ -105,15 +105,9 @@ const MobileDetails = (props) => {
 	}, [mobileList]);
 
 	useEffect(() => {
-		showBookList(firstData, lastData);
+		showBookList();
 		console.log('showBookList activepage', activePage);
 	}, [activePage]);
-
-	useEffect(() => {
-		
-		console.log(' only activepage', activePage);
-	}, [activePage]);
-
 
 
 	console.log('isLoading', isLoading);
@@ -122,15 +116,16 @@ const MobileDetails = (props) => {
 			<Sidebar />
 			<div>
 				<h5>Mobiles list </h5>
-				<button onClick={() => setMobileAddModal(true)}>
+				<button className='top-button' onClick={() => setMobileAddModal(true)}>
 					<Link to={'/mobileAdd'}>Add Mobiles</Link>
 				</button>{' '}
 				<input placeholder="Search by Mobile Name" name="mobile_search" value={searchByMobile} onChange={handleSearchByName} />{' '}
 				<input placeholder="Search by Brand Name" name="brand_search" value={searchByBrand} onChange={handleSearchByName} />{' '}
-				<button onClick={() => dispatch(clearMobile())}>Clear MobileList</button> <button onClick={handleAddAutoData}>Autofill</button>
+				<button className='top-button' onClick={() => dispatch(clearMobile())}>Clear MobileList</button> 
+				<button className='top-button' onClick={handleAddAutoData}>Autofill</button>
 				<h6>Total Mobiles : {filterdMobileList.length}</h6>
 				{!isLoading ? (
-					<Table striped bordered hover>
+					<Table striped bordered hover tbl-style>
 						<thead>
 							<tr>
 								<th>Image</th>
@@ -155,7 +150,7 @@ const MobileDetails = (props) => {
 								filterdMobileList.slice(firstData, lastData).map((data, index) => {
 									return (
 										<tr key={index}>
-											<td>
+											<td >
 												<img src={data.mobile_image} alt="mobile image"  width="50" height="80" />{' '}
 											</td>
 											<td>{data.mobile_name}</td>

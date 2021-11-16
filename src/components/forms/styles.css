@@ -31,22 +31,29 @@ a {
 	color:#024FC0;	
 }
 
-.table {
+.top-button{
+	margin: 10px;
+}
+/* if i use it then it will create mess in books and mobile page
+.table  {
 	width: 100%;
 	table-layout: fixed;
 }
 
-.table tr th {
-	text-align: left;
-	width: 100%;
-	
+ .table tr th {
+	text-align: center;
+	width: 100%;	
 }
+*/
+.table tr td button {
+	margin: 10px;
+} 
 
 .pagination {
 	position: relative;
 	min-width: 30px; 
 	min-height: 20px;
-  }
+}
  
   ul {
 	list-style: none;
@@ -91,3 +98,4 @@ a {
 	justify-content: space-between;
 	margin-top: 10px;
   }
+
