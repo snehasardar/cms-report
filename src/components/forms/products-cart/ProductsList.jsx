@@ -143,8 +143,8 @@ const ProductsList = (props) => {
 			{!isLoading ? (
 				<div>
 					{	
-						allSearchProducts.length === 1 && allSearchMobileProducts.length > 2 ||
-						 allSearchMobileProducts.length === 1 && allSearchProducts.length > 2 ? 
+						allSearchProducts.length === 1  &&
+						 allSearchMobileProducts.length === 1  ? 
 						( 
 
 							<div className="main-content">
