@@ -143,7 +143,7 @@ const ProductsList = (props) => {
 			{!isLoading ? (
 				<div>
 					{	
-						allSearchProducts.length === 1  &&
+						allSearchProducts.length === 1  ||
 						 allSearchMobileProducts.length === 1  ? 
 						( 
 
