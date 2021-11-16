@@ -17,8 +17,7 @@ import allMobileDetails from './Mobile.json';
 
 const MobileDetails = (props) => {
 	const { mobileAddModal, setMobileAddModal, mobileEditModal, setMobileEditModal } = props;
-    console.log('setMobileAddModal',setMobileAddModal);
-    console.log('setMobileEditModal',setMobileEditModal);
+    
     const { mobileList } = useSelector((state) => state.mobileReducer);
 	const dispatch = useDispatch();
 	const [searchByMobile, setSearchByMobile] = useState('');
@@ -99,7 +98,6 @@ const MobileDetails = (props) => {
 		}, 1000);
 	};
 
-
 	useEffect(() => {
 		setFilterdMobileList(mobileList);
 		setTotalMobileItem(mobileList.length);
@@ -108,13 +106,15 @@ const MobileDetails = (props) => {
 
 	useEffect(() => {
 		showBookList(firstData, lastData);
-		console.log('activepage', activePage);
+		console.log('showBookList activepage', activePage);
 	}, [activePage]);
 
 	useEffect(() => {
 		
-		console.log('activepage', activePage);
+		console.log(' only activepage', activePage);
 	}, [activePage]);
+
+
 
 	console.log('isLoading', isLoading);
 	return (

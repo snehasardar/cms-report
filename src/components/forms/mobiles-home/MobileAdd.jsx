@@ -122,7 +122,7 @@ const MobileAdd = (props) => {
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
-											{console.log('errors', errors)}
+											{/* {console.log('errors', errors)} */}
 											<Form.Group controlId="mobile_name">
 												<Form.Control
 													type="text"

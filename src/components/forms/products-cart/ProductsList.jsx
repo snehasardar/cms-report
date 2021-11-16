@@ -143,8 +143,65 @@ const ProductsList = (props) => {
 			{!isLoading ? (
 				<div>
 					{	
-						allSearchProducts  || allSearchMobileProducts &&
-						allSearchProducts.length > 1  ? (
+						allSearchProducts.length === 1 && allSearchMobileProducts.length > 2 ||
+						 allSearchMobileProducts.length === 1 && allSearchProducts.length > 2 ? 
+						( 
+
+							<div className="main-content">
+							
+								{	allSearchProducts  &&
+									allSearchProducts.map((data, index) => {
+										return (
+											<div className="book_card"  key={index}>
+												<img src={data.image_link }  alt="book_image" width="200px" height="150px"/>
+												<h5>{data.book_name }</h5>
+												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
+												<h5>₹{data.price} </h5>
+												{ newProduct = items.map((product) => product.id === data.id)  &&
+													newProduct && 
+													newProduct.length > 0 ? (
+														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+														{newProduct.product_btn}
+													</button>
+												)  : ( 
+													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+														{data.product_btn}
+													</button>
+												) }
+											</div>
+										);
+									})
+								} 
+								{	allSearchMobileProducts &&
+									allSearchMobileProducts.map((data, index) => {
+										return (
+											<div className="book_card"  key={index}>
+												<img src={data.mobile_image}  alt="mobile_image" width="150px" height="150px"/>
+												<h5>{data.mobile_name}</h5>
+												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
+												<h5>₹{data.price} </h5>
+												{ newProduct = items.map((product) => product.id === data.id)  &&
+													newProduct && 
+													newProduct.length > 0 ? (
+														<button type="submit" className="btn btn-primary " onClick={() => handleSubmit(data)}>
+														{newProduct.product_btn}
+														</button>
+													)  : ( 
+														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															{data.product_btn}
+														</button>
+													) }
+											</div>
+										);
+									})
+								}
+							
+							</div>
+
+						 ) : (
+							
+								allSearchProducts  || allSearchMobileProducts &&
+						allSearchProducts.length > 1 || allSearchMobileProducts.length > 1 ? (
 							<div className="main-content">
 							<Slider {...settings}> 
 								{	allSearchProducts  &&
@@ -195,7 +252,9 @@ const ProductsList = (props) => {
 								}
 							</Slider>
 							</div>
-						) : ( 
+
+						) : (
+							
 							<div>
 							<h4>Category: Books</h4>
 							<div className="main-content">
@@ -256,6 +315,9 @@ const ProductsList = (props) => {
 							</div>
 						</div>	
 						)
+							
+						)
+						
 					}
 				</div>
 				) : (

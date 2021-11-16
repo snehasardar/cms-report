@@ -8,7 +8,6 @@ import PublicRoute from './PublicRoute';
 
 import ProductsList from '../components/forms/products-cart/ProductsList';
 import ProductsListCart from '../components/forms/products-cart/ProductsListCart';
-// import Header from '../components/forms/products-cart/Header';
 
 const ShopRoutes = () => {
 
@@ -18,7 +17,6 @@ const ShopRoutes = () => {
 
 	return (
 		<BrowserRouter>
-			{/* <Header  /> */}
 			<Switch>
 
 				<PublicRoute exact path="/shop" component={ProductsList}  />
