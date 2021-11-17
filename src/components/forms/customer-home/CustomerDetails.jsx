@@ -20,6 +20,7 @@ const CustomerDetails = (props) => {
 	const [searchByName, setSearchByName] = useState('');
 	const [searchByCustomerEmail, setSearchByCustomerEmail] = useState('');
 	const [filteredCustomer, setFilteredCustomer] = useState('');
+	const [searchedCustomerList, setSearchedCustomerList] = useState('');
 
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
@@ -28,13 +29,8 @@ const CustomerDetails = (props) => {
 	const [totalData, setTotalData] = useState(0);
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
-	// let currentData = filteredCustomer.slice(firstData, lastData);
-
-	console.log('customerData',customerData)
-	console.log('filteredCustomer',filteredCustomer);
-
 	
-	
+
 	const handleSearch = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
@@ -50,6 +46,8 @@ const CustomerDetails = (props) => {
 			setSearchByName(value);
 			setFilteredCustomer(newData);
 			setTotalData(newData.length);
+			setSearchedCustomerList(newData);
+			console.log('searchedCustomerList in handle search',searchedCustomerList);
 			setActivePage(1)
 			console.log('name TotalData', totalData);
 		} else if (value && name === 'email_search') {
@@ -68,6 +66,8 @@ const CustomerDetails = (props) => {
 			setSearchByCustomerEmail(value);
 			setFilteredCustomer(newData);
 			setTotalData(newData.length);
+			setSearchedCustomerList(newData);
+			console.log('searchedCustomerList in handle search',searchedCustomerList);
 			setActivePage(1)
 			console.log('email TotalData', totalData);	
 		} else {
@@ -101,8 +101,19 @@ const CustomerDetails = (props) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			setFilteredCustomer(customerData);
-			setTotalData(customerData.length);
+			if(searchByName){
+				setFilteredCustomer(searchedCustomerList);
+				console.log('searchedCustomerList in showCustomerList',searchedCustomerList)
+				setTotalData(searchedCustomerList.length);
+			}else if(searchByCustomerEmail){
+				setFilteredCustomer(searchedCustomerList);
+				console.log('searchedCustomerList in showCustomerList',searchedCustomerList)
+				setTotalData(searchedCustomerList.length);
+			} else {
+				setFilteredCustomer(customerData);
+				setTotalData(customerData.length);
+			}
+			
 		}, 1000);
 	};
 

@@ -23,6 +23,7 @@ const MobileDetails = (props) => {
 	const [searchByMobile, setSearchByMobile] = useState('');
 	const [searchByBrand, setSearchByBrand] = useState('');
 	const [filterdMobileList, setFilterdMobileList] = useState('');
+	const [searchedList, setSearchedList] = useState();
 
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
@@ -32,12 +33,13 @@ const MobileDetails = (props) => {
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
-	let newMobileList = [];
+	
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
 		console.log('name ', name);
 		console.log('value', value);
+		let newMobileList = [];
 		if (value && name === 'mobile_search') {
 			mobileList.filter((data) => {
 				if (data.mobile_name.toLowerCase().includes(value.toLowerCase())) {
@@ -48,6 +50,8 @@ const MobileDetails = (props) => {
 			setSearchByMobile(value);
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
+			setSearchedList(newMobileList);
+			console.log('searchedList in handleSearch',searchedList);
 			setActivePage(1);
 			console.log('activePage in search', newMobileList.length)
 		} else if (value && name === 'brand_search') {
@@ -66,6 +70,8 @@ const MobileDetails = (props) => {
 			setSearchByBrand(value);
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
+			setSearchedList(newMobileList);
+			console.log('searchedList in handleSearch',searchedList);
 			setActivePage(1);
 			console.log('activePage in search', newMobileList.length)
 		}  else {
@@ -89,12 +95,23 @@ const MobileDetails = (props) => {
 		toast.success('Mobile has been successfully deleted');
 	};
 
-	const showBookList = () => {
+	const showMobileList = () => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			setFilterdMobileList(mobileList);
-			setTotalMobileItem(mobileList.length);
+			if(searchByMobile ){
+				setFilterdMobileList(searchedList);
+				console.log('searchedList in showMobileList',searchedList);
+				setTotalMobileItem(searchedList.length);
+			}else if(searchByBrand){
+				setFilterdMobileList(searchedList);
+				console.log('searchedList in showMobileList',searchedList);
+				setTotalMobileItem(searchedList.length);
+			}else {
+				setFilterdMobileList(mobileList);
+				setTotalMobileItem(mobileList.length);
+			}
+			
 		}, 1000);
 	};
 
@@ -105,8 +122,8 @@ const MobileDetails = (props) => {
 	}, [mobileList]);
 
 	useEffect(() => {
-		showBookList();
-		console.log('showBookList activepage', activePage);
+		showMobileList();
+		console.log('showMobileList activepage', activePage);
 	}, [activePage]);
 
 
@@ -125,7 +142,7 @@ const MobileDetails = (props) => {
 				<button className='top-button' onClick={handleAddAutoData}>Autofill</button>
 				<h6>Total Mobiles : {filterdMobileList.length}</h6>
 				{!isLoading ? (
-					<Table striped bordered hover tbl-style>
+					<Table striped bordered hover >
 						<thead>
 							<tr>
 								<th>Image</th>
@@ -166,7 +183,6 @@ const MobileDetails = (props) => {
 											<td>{data.status}</td>
 											<td>
 												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-											
 												<button onClick={() => setMobileEditModal(true)}>
 													<Link to={`/mobileEdit/${data.id}`}>Edit</Link>
 												</button>

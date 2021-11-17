@@ -22,6 +22,7 @@ const BooksDetails = (props) => {
 	const [searchByName, setSearchByName] = useState('');
 	const [searchByAuthor, setSearchByAuthor] = useState('');
 	const [filterdBookList, setFilterdBookList] = useState('');
+	const [serachedBookList, setSerachedBookList] = useState();
 
 	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
@@ -31,12 +32,13 @@ const BooksDetails = (props) => {
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
-	let newDataList = [];
+	
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
 		console.log('name ', name);
 		console.log('value', value);
+		let newDataList = [];
 		if (value && name === 'name_search') {
 			bookList.filter((data) => {
 				if (data.book_name.toLowerCase().includes(value.toLowerCase())) {
@@ -47,9 +49,10 @@ const BooksDetails = (props) => {
 			setSearchByName(value);
 			setFilterdBookList(newDataList);
 			setTotalBookData(newDataList.length);
+			setSerachedBookList(newDataList);
+			console.log('serachedBookList in handle search',serachedBookList);
 			setActivePage(1);
 		} else if (value && name === 'author_search') {
-			// let newDataList = [];
 			bookList.filter((data) => {
 				if (data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())) {
 					newDataList.push(data);
@@ -65,6 +68,8 @@ const BooksDetails = (props) => {
 			setSearchByAuthor(value);
 			setFilterdBookList(newDataList);
 			setTotalBookData(newDataList.length);
+			setSerachedBookList(newDataList);
+			console.log('serachedBookList in handle search',serachedBookList);
 			setActivePage(1);
 		} else {
 			setFilterdBookList(bookList);
@@ -91,8 +96,19 @@ const BooksDetails = (props) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			setFilterdBookList(bookList);
-			setTotalBookData(bookList.length);
+			if(searchByName ){
+				setFilterdBookList(serachedBookList);
+				console.log('serachedBookList in showBookList',serachedBookList);
+				setTotalBookData(serachedBookList.length);
+			}else if(searchByAuthor){
+				setFilterdBookList(serachedBookList);
+				console.log('serachedBookList in sowBookList',serachedBookList);
+				setTotalBookData(serachedBookList.length);
+			}else {
+				setFilterdBookList(bookList);
+				setTotalBookData(bookList.length);
+			}
+
 		}, 1000);
 	};
 

@@ -31,14 +31,13 @@ const ProductsList = (props) => {
 	const [allSearchProducts, setAllSearchProducts] = useState('')
 	const [allSearchMobileProducts, setAllSearchMobileProducts] = useState('')
 
+	const [updatedProductList, setUpdatedProductList] = useState('');
+	const [mobileProductList, setMobileProductList] = useState('');
+
 	const [isLoading, setIsLoading] = useState(false);
 
 	let newProduct = []; 
-	let updatedProductList = [];
-	let mobileProductList = [];
-	let searchedBookList = [];
-	let searchedMobileList = [];
-	let allProducts = [];
+	
 	const handleSubmit = (data) => {
 		dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
@@ -48,20 +47,22 @@ const ProductsList = (props) => {
 		e.preventDefault();
 		const { value } = e.target;
 		console.log('value', value);
+		let searchedBookList = [];
+		let searchedMobileList = [];
 		if (value ) {
-			bookList.filter((data) => {
+			updatedProductList.filter((data) => {
 				if (data.book_name.toLowerCase().includes(value.toLowerCase()) || 
 					data.author_name.toLowerCase().includes(value.toLowerCase())) {
 					searchedBookList.push(data);
-					console.log('data', data);
+					// console.log('data', data);
 				} 
 			});
 			
-			mobileList.filter((data) => {
+			mobileProductList.filter((data) => {
 				if (data.mobile_name.toLowerCase().includes(value.toLowerCase()) || 
 					data.brand_name.toLowerCase().includes(value.toLowerCase())) {
 					searchedMobileList.push(data);
-					console.log('data', data);
+					// console.log('data', data);
 					
 				} 
 			});
@@ -73,58 +74,64 @@ const ProductsList = (props) => {
 		} else {
 			setFilterdProductList(updatedProductList);
 			setFilterdMobileList(mobileProductList);
+			console.log('updatedProductList else in search ',updatedProductList); 
+			console.log('mobileProductList else in search',mobileProductList)
 			setSearchByProducts('');
 		}
 	}
 
-	const showBookList = () => {
+	const showProductList = () => {
 		setIsLoading(true);
+		
 		let i = 0;
+		console.log('bookList in while', bookList);
+		let checkedBookProducts = [];
+		let checkedMobileProducts = [];
 		while (i < bookList.length) {
 			if (bookList[i].status == 1) {
 				let newBookList = bookList[i];
-				updatedProductList.push(newBookList);
+				checkedBookProducts.push(newBookList);
 			}
 			i = i + 1;
 		}
-		allProducts.push(updatedProductList);
+		setUpdatedProductList(checkedBookProducts);
+		console.log('checkedBookProducts after while', checkedBookProducts)
 		i = 0;
 		while (i < mobileList.length) {
 			if (mobileList[i].status == 1) {
 				let newMobileList = mobileList[i];
-				mobileProductList.push(newMobileList);
+				checkedMobileProducts.push(newMobileList);
 			}
 			i = i + 1;
 		}
-		console.log('updatedProductList after while', updatedProductList)
-		allProducts.push(mobileProductList);
-		console.log('allProducts after while', allProducts)
+		console.log('checkedMobileProducts after while', checkedMobileProducts)
+		setMobileProductList(checkedMobileProducts);
+
 		setTimeout(() => {
 			setIsLoading(false);
-			setFilterdProductList(updatedProductList);
-			setFilterdMobileList(mobileProductList);
+			setFilterdProductList(checkedBookProducts);
+			setFilterdMobileList(checkedMobileProducts);
 
-			console.log('filterdMobileList in settime',filterdMobileList);
-			console.log('updatedProductList.length in settime',updatedProductList.length); 
-			console.log('updatedProductList in settime',updatedProductList); 
-			
 		}, 1000);
 	};
 
 	useEffect(() => {
-		showBookList()
-		console.log('booklist',bookList)
-		
+		showProductList()
 	},[bookList])
 
 	useEffect(() => {
-		setFilterdProductList(updatedProductList);
+		
+			setFilterdProductList(updatedProductList);
+			setFilterdMobileList(mobileProductList);
+	
 	}, [bookList]);
 	
 	
 	console.log('isLoading', isLoading);
-	console.log('allSearchProducts before return', allSearchProducts)
-	console.log('allSearchMobileProducts before return', allSearchMobileProducts);
+	console.log('filterdMobileList before return',filterdMobileList);
+	console.log('updatedProductList before return',updatedProductList); 
+	console.log('mobileProductList before return',mobileProductList)
+	
 	return (
 		<div className="container">
 			<nav className="navbar navbar-light bg-light">
@@ -144,7 +151,7 @@ const ProductsList = (props) => {
 				<div>
 					{	
 						allSearchProducts.length === 1  ||
-						 allSearchMobileProducts.length === 1  ? 
+						allSearchMobileProducts.length === 1  ? 
 						( 
 
 							<div className="main-content">
@@ -199,8 +206,8 @@ const ProductsList = (props) => {
 
 						 ) : (
 							
-								allSearchProducts  || allSearchMobileProducts &&
-							allSearchProducts.length > 1 || allSearchMobileProducts.length > 1 ? (
+								searchByProducts   &&
+								searchByProducts.length > 1  ? (
 							<div className="main-content">
 							<Slider {...settings}> 
 								{	allSearchProducts  &&
@@ -275,6 +282,7 @@ const ProductsList = (props) => {
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{newProduct.product_btn}
 														</button>
+														
 													)  : ( 
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
@@ -319,13 +327,14 @@ const ProductsList = (props) => {
 						</div>	
 						)
 			
-						)
+						)  
 						
-					}
+					}  
 				</div>
 				) : (
 						<div>Loading...</div>
 					)}
+					
 		</div>
 	);
 };
