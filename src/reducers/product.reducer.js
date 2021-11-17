@@ -2,6 +2,7 @@ import { ADD_TO_CART, REMOVE_ITEM, SUB_QUANTITY, ADD_QUANTITY, CLEAR_CART } from
 
 const initialStates = {
 	items: [],
+    
 };
 
 
@@ -12,16 +13,16 @@ const productReducer = (state = initialStates, action) => {
             let allAddedItems = [...state.items];
             let addValue = action.payload; 
             if (allAddedItems.length > 0) {
-                let needToadd = allAddedItems.find((data) => data.id == addValue.id);
-                if(needToadd ){
-                    needToadd.quantity = needToadd.quantity + 1;
-                    console.log('needToadd.quantity',needToadd.quantity);
-                }else{
+                // let needToadd = allAddedItems.find((data) => data.id == addValue.id);
+                // if(needToadd ){
+                //     needToadd.quantity = needToadd.quantity + 1;
+                //     console.log('needToadd.quantity',needToadd.quantity);
+                // }else{
                     let qnt = 1;
                     addValue.product_btn = "Remove from Cart";
                     let newValue = { ...addValue, quantity: qnt };
                     allAddedItems.push(newValue);
-                }
+                // }
             } else {
                 let qnt = 1;
                 addValue.product_btn = "Remove from Cart";
@@ -73,9 +74,10 @@ const productReducer = (state = initialStates, action) => {
 		case REMOVE_ITEM:
 			let allAddItems = [...state.items];
             console.log('allAddItems',allAddItems);
-            let clearPrd = allAddItems.find((data) => data.id == action.payload);
-            clearPrd.quantity = 0;
-            clearPrd.product_btn = "Add to Cart";
+            let clearPrd = allAddItems.filter((data) => data.id == action.payload);
+            console.log(' remove clearPrd ', clearPrd);
+            // clearPrd.quantity = 0;
+            // clearPrd.product_btn = "Add to Cart";
             let needToAdd = allAddItems.filter((data) => data.id != action.payload);
             allAddItems = needToAdd;
             console.log(' remove clearPrd ', clearPrd);

@@ -39,8 +39,15 @@ const ProductsList = (props) => {
 	let newProduct = []; 
 	
 	const handleSubmit = (data) => {
-		dispatch(addToCart(data));
+		
+		let newPrd = items.find((prd) => prd.id === data.id)
+		console.log('newProduct', newPrd);
+		if(newPrd && Object.keys(newPrd).length > 0){
+			toast.warning('product is already in your Cart');
+		}else {
+			dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
+		}
 	};
 	
 	const handleSearch = (e) => {
@@ -54,7 +61,6 @@ const ProductsList = (props) => {
 				if (data.book_name.toLowerCase().includes(value.toLowerCase()) || 
 					data.author_name.toLowerCase().includes(value.toLowerCase())) {
 					searchedBookList.push(data);
-					// console.log('data', data);
 				} 
 			});
 			
@@ -62,20 +68,18 @@ const ProductsList = (props) => {
 				if (data.mobile_name.toLowerCase().includes(value.toLowerCase()) || 
 					data.brand_name.toLowerCase().includes(value.toLowerCase())) {
 					searchedMobileList.push(data);
-					// console.log('data', data);
-					
 				} 
 			});
 			setSearchByProducts(value);
 			setAllSearchProducts(searchedBookList);
-			console.log('allSearchProducts', allSearchProducts);
+			// console.log('allSearchProducts', allSearchProducts);
 			setAllSearchMobileProducts(searchedMobileList);
-			console.log('allSearchMobileProducts', allSearchMobileProducts);
+			// console.log('allSearchMobileProducts', allSearchMobileProducts);
 		} else {
 			setFilterdProductList(updatedProductList);
 			setFilterdMobileList(mobileProductList);
-			console.log('updatedProductList else in search ',updatedProductList); 
-			console.log('mobileProductList else in search',mobileProductList)
+			// console.log('updatedProductList else in search ',updatedProductList); 
+			// console.log('mobileProductList else in search',mobileProductList)
 			setSearchByProducts('');
 		}
 	}
@@ -84,7 +88,7 @@ const ProductsList = (props) => {
 		setIsLoading(true);
 		
 		let i = 0;
-		console.log('bookList in while', bookList);
+		// console.log('bookList in while', bookList);
 		let checkedBookProducts = [];
 		let checkedMobileProducts = [];
 		while (i < bookList.length) {
@@ -95,7 +99,7 @@ const ProductsList = (props) => {
 			i = i + 1;
 		}
 		setUpdatedProductList(checkedBookProducts);
-		console.log('checkedBookProducts after while', checkedBookProducts)
+		// console.log('checkedBookProducts after while', checkedBookProducts)
 		i = 0;
 		while (i < mobileList.length) {
 			if (mobileList[i].status == 1) {
@@ -104,7 +108,7 @@ const ProductsList = (props) => {
 			}
 			i = i + 1;
 		}
-		console.log('checkedMobileProducts after while', checkedMobileProducts)
+		// console.log('checkedMobileProducts after while', checkedMobileProducts)
 		setMobileProductList(checkedMobileProducts);
 
 		setTimeout(() => {
@@ -163,17 +167,9 @@ const ProductsList = (props) => {
 												<h5>{data.book_name }</h5>
 												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 												<h5>₹{data.price} </h5>
-												{ newProduct = items.map((product) => product.id === data.id)  &&
-													newProduct && 
-													newProduct.length > 0 ? (
-														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-														{newProduct.product_btn}
-													</button>
-												)  : ( 
 													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 														{data.product_btn}
 													</button>
-												) }
 											</div>
 										);
 									})
@@ -185,29 +181,21 @@ const ProductsList = (props) => {
 												<img src={data.mobile_image}  alt="mobile_image" width="150px" height="150px"/>
 												<h5>{data.mobile_name}</h5>
 												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
-												<h5>₹{data.price} </h5>
-												{ newProduct = items.map((product) => product.id === data.id)  &&
-													newProduct && 
-													newProduct.length > 0 ? (
-														<button type="submit" className="btn btn-primary " onClick={() => handleSubmit(data)}>
-														{newProduct.product_btn}
-														</button>
-													)  : ( 
+												<h5>₹{data.price} </h5>												
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
-														</button>
-													) }
+														</button>																											
 											</div>
 										);
 									})
 								}
-							
+							{console.log('first')}
 							</div>
 
 						 ) : (
 							
 								searchByProducts   &&
-								searchByProducts.length > 1  ? (
+								searchByProducts.length > 2  ? (
 							<div className="main-content">
 							<Slider {...settings}> 
 								{	allSearchProducts  &&
@@ -217,18 +205,10 @@ const ProductsList = (props) => {
 												<img src={data.image_link }  alt="book_image" width="200px" height="150px"/>
 												<h5>{data.book_name }</h5>
 												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
-												<h5>₹{data.price} </h5>
-												{ newProduct = items.map((product) => product.id === data.id)  &&
-													newProduct && 
-													newProduct.length > 0 ? (
-														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-														{newProduct.product_btn}
-													</button>
-												)  : ( 
+												<h5>₹{data.price} </h5>												
 													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 														{data.product_btn}
 													</button>
-												) }
 											</div>
 										);
 									})
@@ -240,22 +220,15 @@ const ProductsList = (props) => {
 												<img src={data.mobile_image}  alt="mobile_image" width="150px" height="150px"/>
 												<h5>{data.mobile_name}</h5>
 												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
-												<h5>₹{data.price} </h5>
-												{ newProduct = items.map((product) => product.id === data.id)  &&
-													newProduct && 
-													newProduct.length > 0 ? (
-														<button type="submit" className="btn btn-primary " onClick={() => handleSubmit(data)}>
-														{newProduct.product_btn}
-														</button>
-													)  : ( 
+												<h5>₹{data.price} </h5>												
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
 														</button>
-													) }
 											</div>
 										);
 									})
 								}
+								{console.log('second')}
 							</Slider>
 							</div>
 
@@ -276,18 +249,9 @@ const ProductsList = (props) => {
 													<h5>{data.book_name}</h5>
 													<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 													<h5>₹{data.price} </h5>
-													{ newProduct = items.map((product) => product.id === data.id)  &&
-														newProduct && 
-														newProduct.length > 0 ? (
-															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-															{newProduct.product_btn}
-														</button>
-														
-													)  : ( 
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
 														</button>
-													) }
 												</div>
 											);
 									})}
@@ -306,23 +270,17 @@ const ProductsList = (props) => {
 													<img src={data.mobile_image}  alt="mobile_image" width="150px" height="150px"/>
 													<h5>{data.mobile_name}</h5>
 													<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
-													<h5>₹{data.price} </h5>
-													{ newProduct = items.map((product) => product.id === data.id)  &&
-														newProduct && 
-														newProduct.length > 0 ? (
-															<button type="submit" className="btn btn-primary " onClick={() => handleSubmit(data)}>
-															{newProduct.product_btn}
-														</button>
-													)  : ( 
+													<h5>₹{data.price} </h5>													
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
-														</button>
-													) }
+														</button>													
 												</div>
 											);
 									})
 									}
+									{console.log('third')}
 								</Slider>
+													
 							</div>
 						</div>	
 						)
@@ -339,20 +297,3 @@ const ProductsList = (props) => {
 	);
 };
 export default ProductsList;
-
-
-
-/*
-{totalData > itemsCountPerPage ? (
-					<Pagination  
-						activePage={activePage}
-						itemsCountPerPage={itemsCountPerPage}
-						totalItemsCount={totalData}
-						pageRangeDisplayed={pageRangeDisplayed}
-						onChange={(currentPage) => setActivePage(currentPage)}
-					/>
-				) : (
-					' '
-				)} */
-
-
