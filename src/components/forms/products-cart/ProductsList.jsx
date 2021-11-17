@@ -249,9 +249,19 @@ const ProductsList = (props) => {
 													<h5>{data.book_name}</h5>
 													<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 													<h5>₹{data.price} </h5>
+													{/* { 
+														newProduct && 
+														newProduct.length > 0 ? (
+															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															{newProduct.product_btn}
+														</button>
+														
+													)  : (  */}
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
 														</button>
+														
+													{/* ) } */}
 												</div>
 											);
 									})}
@@ -280,7 +290,7 @@ const ProductsList = (props) => {
 									}
 									{console.log('third')}
 								</Slider>
-													
+								{console.log('newProduct',newProduct)}							
 							</div>
 						</div>	
 						)
