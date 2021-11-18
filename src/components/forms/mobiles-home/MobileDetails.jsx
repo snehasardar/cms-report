@@ -37,47 +37,46 @@ const MobileDetails = (props) => {
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log('name ', name);
 		console.log('value', value);
 		let newMobileList = [];
 		if (value && name === 'mobile_search') {
 			mobileList.filter((data) => {
 				if (data.mobile_name.toLowerCase().includes(value.toLowerCase())) {
 					newMobileList.push(data);
-					console.log('data', data);
+					
 				}
 			});
 			setSearchByMobile(value);
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
 			setSearchedList(newMobileList);
-			console.log('searchedList in handleSearch',searchedList);
+			// console.log('searchedList in handleSearch',searchedList);
 			setActivePage(1);
 			console.log('activePage in search', newMobileList.length)
 		} else if (value && name === 'brand_search') {
 			mobileList.filter((data) => {
 				if (data.brand_name.toLowerCase().includes(searchByBrand.toLowerCase())) {
 					newMobileList.push(data);
-					console.log('data brand name', data);
+					
 				} else if (
 					data.mobile_name.toLowerCase().includes(searchByMobile.toLowerCase()) &&
 					data.brand_name.toLowerCase().includes(searchByBrand.toLowerCase())
 				) {
 					newMobileList.push(data);
-					console.log('data', data);
+					
 				}
 			});
 			setSearchByBrand(value);
 			setFilterdMobileList(newMobileList);
 			setTotalMobileItem(newMobileList.length);
 			setSearchedList(newMobileList);
-			console.log('searchedList in handleSearch',searchedList);
+			// console.log('searchedList in handleSearch',searchedList);
 			setActivePage(1);
-			console.log('activePage in search', newMobileList.length)
+			// console.log('activePage in search', newMobileList.length)
 		}  else {
 			setFilterdMobileList(mobileList);
 			setTotalMobileItem(mobileList.length);
-			console.log('totalMobileItem', totalMobileItem)
+			// console.log('totalMobileItem', totalMobileItem)
             setSearchByMobile('');
 			setSearchByBrand('');
 		}
@@ -101,11 +100,11 @@ const MobileDetails = (props) => {
 			setIsLoading(false);
 			if(searchByMobile ){
 				setFilterdMobileList(searchedList);
-				console.log('searchedList in showMobileList',searchedList);
+				// console.log('searchedList in showMobileList',searchedList);
 				setTotalMobileItem(searchedList.length);
 			}else if(searchByBrand){
 				setFilterdMobileList(searchedList);
-				console.log('searchedList in showMobileList',searchedList);
+				// console.log('searchedList in showMobileList',searchedList);
 				setTotalMobileItem(searchedList.length);
 			}else {
 				setFilterdMobileList(mobileList);
@@ -118,7 +117,7 @@ const MobileDetails = (props) => {
 	useEffect(() => {
 		setFilterdMobileList(mobileList);
 		setTotalMobileItem(mobileList.length);
-		console.log('mobileList.length', mobileList.length)
+		
 	}, [mobileList]);
 
 	useEffect(() => {

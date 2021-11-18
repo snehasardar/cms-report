@@ -73,14 +73,11 @@ const productReducer = (state = initialStates, action) => {
 
 		case REMOVE_ITEM:
 			let allAddItems = [...state.items];
-            console.log('allAddItems',allAddItems);
-            let clearPrd = allAddItems.filter((data) => data.id == action.payload);
+            console.log('allAddItems in remove reducer',allAddItems);
+            let clearPrd = action.payload
             console.log(' remove clearPrd ', clearPrd);
-            // clearPrd.quantity = 0;
-            // clearPrd.product_btn = "Add to Cart";
-            let needToAdd = allAddItems.filter((data) => data.id != action.payload);
+            let needToAdd = allAddItems.filter((data) => data.reference_num !== action.payload.reference_num);
             allAddItems = needToAdd;
-            console.log(' remove clearPrd ', clearPrd);
             console.log(' remove allAddItems ', allAddItems);
             console.log('remove needToadd', needToAdd);
             return {

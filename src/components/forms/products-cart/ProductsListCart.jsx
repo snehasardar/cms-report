@@ -8,6 +8,9 @@ const ProductsListCart = () => {
     const { items }= useSelector((state) => state.productReducer);
 	const dispatch = useDispatch();
 	console.log('items', items);
+	let productInCart = [];
+	productInCart = items;
+	console.log('productInCart', productInCart);
 	return (
 		<div className='container'>
 			<div>
@@ -16,34 +19,56 @@ const ProductsListCart = () => {
                     <thead>
 						<tr>
                         <th>Image</th>
-							<th>Book Name</th>
+							<th>Product Name</th>
 							<th>Price</th>
                             <th>Quantity </th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						{items?.map((product, index) => {
+						{ productInCart.length > 0 &&
+						productInCart.map((product, index) => {
 							return (
-								<tr key={index}>
-                                    <td>
-										<img src={product.image_link} alt="book image" width="200px" height="150px" />{' '}
-									</td>
-                                    <td>{product.book_name}</td>
-									<td>{product.price}</td>
-									<td>{product.quantity}</td>
-									<td>
-										<button onClick={() => dispatch(addQuantity(product.id))}> + </button>
-										<button onClick={() => dispatch(subtractQuantity(product.id))}> - </button>
-										<button onClick={() => dispatch(removeItem(product.id))}> remove</button>
-									</td>
-								</tr>
+								<>
+									{ 
+									product.type === 'book' ? (
+										<tr key={index}>
+											<td>
+												<img src={product.image_link} alt="book image" width="150px" height="150px" />{' '}
+											</td>
+											<td>{product.book_name}</td>
+											<td>{product.price}</td>
+											<td>{product.quantity}</td>
+											<td>
+												<button onClick={() => dispatch(addQuantity(product.id))}> + </button>
+												<button onClick={() => dispatch(subtractQuantity(product.id))}> - </button>
+												<button onClick={() => dispatch(removeItem(product))}> remove</button>
+											</td>
+										</tr>
+									) : (
+										<tr key={index}>
+											<td>
+												<img src={product.mobile_image} alt="book image" width="150px" height="150px" />{' '}
+											</td>
+											<td>{product.mobile_name}</td>
+											<td>{product.price}</td>
+											<td>{product.quantity}</td>
+											<td>
+												<button onClick={() => dispatch(addQuantity(product.id))}> + </button>
+												<button onClick={() => dispatch(subtractQuantity(product.id))}> - </button>
+												<button onClick={() => dispatch(removeItem(product))}> remove</button>
+											</td>
+										</tr>
+									)
+									}
+								</>	
 							);
 						})}
 					</tbody>
 				</Table>
 				<div>
-					<h4>Total :{items?.map((el) => el.quantity * el.price).reduce((acc, value) => (acc = acc + value), 0)}</h4>
+					<h4>Total :{productInCart.length > 0 &&
+						productInCart.map((el) => el.quantity * el.price).reduce((acc, value) => (acc = acc + value), 0)}</h4>
 				</div>
 			</div>
 		</div>

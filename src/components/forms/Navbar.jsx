@@ -5,7 +5,6 @@ import { logOff } from '../../actions/signup.action';
 
 const Navbar = () => {
 	const { loggedIn } = useSelector((state) => state.registration);
-	console.log('navbar loggedIn ', loggedIn);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	

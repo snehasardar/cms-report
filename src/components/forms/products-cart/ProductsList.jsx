@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { addToCart } from '../../../actions/product.action';
+import { removeItem } from '../../../actions/product.action';
 import '../styles.css'
 import './productCart.styles.css'
 
@@ -30,20 +31,24 @@ const ProductsList = (props) => {
 	const [searchByProducts, setSearchByProducts] = useState('')
 	const [allSearchProducts, setAllSearchProducts] = useState('')
 	const [allSearchMobileProducts, setAllSearchMobileProducts] = useState('')
-
+	const [cartProduct, setCartProduct] = useState();
 	const [updatedProductList, setUpdatedProductList] = useState('');
 	const [mobileProductList, setMobileProductList] = useState('');
 
 	const [isLoading, setIsLoading] = useState(false);
-
-	let newProduct = []; 
-	
+	 
+		
 	const handleSubmit = (data) => {
 		
-		let newPrd = items.find((prd) => prd.id === data.id)
-		console.log('newProduct', newPrd);
+		let newPrd =  items.find((prd) => prd.reference_num === data.reference_num)
+		console.log('newPrd', newPrd);
 		if(newPrd && Object.keys(newPrd).length > 0){
 			toast.warning('product is already in your Cart');
+			// dispatch(removeItem(data));
+			// console.log('handleSubmit data',data);
+			// toast.success('Product has been removed from your Cart');
+			// setCartProduct(items);
+			// console.log('cartProduct in handleSubmit',cartProduct)
 		}else {
 			dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
@@ -53,7 +58,7 @@ const ProductsList = (props) => {
 	const handleSearch = (e) => {
 		e.preventDefault();
 		const { value } = e.target;
-		console.log('value', value);
+		// console.log('value', value);
 		let searchedBookList = [];
 		let searchedMobileList = [];
 		if (value ) {
@@ -72,14 +77,11 @@ const ProductsList = (props) => {
 			});
 			setSearchByProducts(value);
 			setAllSearchProducts(searchedBookList);
-			// console.log('allSearchProducts', allSearchProducts);
 			setAllSearchMobileProducts(searchedMobileList);
-			// console.log('allSearchMobileProducts', allSearchMobileProducts);
+			
 		} else {
 			setFilterdProductList(updatedProductList);
 			setFilterdMobileList(mobileProductList);
-			// console.log('updatedProductList else in search ',updatedProductList); 
-			// console.log('mobileProductList else in search',mobileProductList)
 			setSearchByProducts('');
 		}
 	}
@@ -88,7 +90,6 @@ const ProductsList = (props) => {
 		setIsLoading(true);
 		
 		let i = 0;
-		// console.log('bookList in while', bookList);
 		let checkedBookProducts = [];
 		let checkedMobileProducts = [];
 		while (i < bookList.length) {
@@ -99,7 +100,7 @@ const ProductsList = (props) => {
 			i = i + 1;
 		}
 		setUpdatedProductList(checkedBookProducts);
-		// console.log('checkedBookProducts after while', checkedBookProducts)
+		
 		i = 0;
 		while (i < mobileList.length) {
 			if (mobileList[i].status == 1) {
@@ -108,9 +109,10 @@ const ProductsList = (props) => {
 			}
 			i = i + 1;
 		}
-		// console.log('checkedMobileProducts after while', checkedMobileProducts)
 		setMobileProductList(checkedMobileProducts);
 
+		setCartProduct(items);
+		//set the cart items 	
 		setTimeout(() => {
 			setIsLoading(false);
 			setFilterdProductList(checkedBookProducts);
@@ -125,16 +127,16 @@ const ProductsList = (props) => {
 
 	useEffect(() => {
 		
-			setFilterdProductList(updatedProductList);
-			setFilterdMobileList(mobileProductList);
-	
+		setFilterdProductList(updatedProductList);
+		setFilterdMobileList(mobileProductList);
+			
 	}, [bookList]);
 	
 	
-	console.log('isLoading', isLoading);
-	console.log('filterdMobileList before return',filterdMobileList);
-	console.log('updatedProductList before return',updatedProductList); 
-	console.log('mobileProductList before return',mobileProductList)
+	// console.log('isLoading', isLoading);
+	// console.log('filterdMobileList before return',filterdMobileList);
+	// console.log('updatedProductList before return',updatedProductList); 
+	// console.log('mobileProductList before return',mobileProductList)
 	
 	return (
 		<div className="container">
@@ -157,7 +159,6 @@ const ProductsList = (props) => {
 						allSearchProducts.length === 1  ||
 						allSearchMobileProducts.length === 1  ? 
 						( 
-
 							<div className="main-content">
 								{	allSearchProducts  &&
 									allSearchProducts.map((data, index) => {
@@ -167,9 +168,21 @@ const ProductsList = (props) => {
 												<h5>{data.book_name }</h5>
 												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 												<h5>₹{data.price} </h5>
-													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-														{data.product_btn}
-													</button>
+												{ 	cartProduct &&
+													cartProduct.length > 0 &&
+														cartProduct.find((item) => item.reference_num === data.reference_num) 
+
+														 ? (
+															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															Remove from cart
+														</button>
+														
+													)  : ( 
+														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															{data.product_btn}
+														</button>
+														
+													) }
 											</div>
 										);
 									})
@@ -182,9 +195,21 @@ const ProductsList = (props) => {
 												<h5>{data.mobile_name}</h5>
 												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
 												<h5>₹{data.price} </h5>												
+												{ 	cartProduct &&
+													cartProduct.length > 0 &&
+														cartProduct.find((item) => item.reference_num === data.reference_num) 
+
+														 ? (
+															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															Remove from cart
+														</button>
+														
+													)  : ( 
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
-														</button>																											
+														</button>
+														
+													) }																											
 											</div>
 										);
 									})
@@ -206,12 +231,24 @@ const ProductsList = (props) => {
 												<h5>{data.book_name }</h5>
 												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 												<h5>₹{data.price} </h5>												
-													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-														{data.product_btn}
-													</button>
+												{ 	cartProduct &&
+													cartProduct.length > 0 &&
+														cartProduct.find((item) => item.reference_num === data.reference_num) 
+
+														 ? (
+															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															Remove from cart
+														</button>
+														
+													)  : ( 
+														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															{data.product_btn}
+														</button>
+														
+													) }
 											</div>
 										);
-									})
+									}) 
 								} 
 								{	allSearchMobileProducts &&
 									allSearchMobileProducts.map((data, index) => {
@@ -221,9 +258,21 @@ const ProductsList = (props) => {
 												<h5>{data.mobile_name}</h5>
 												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
 												<h5>₹{data.price} </h5>												
+												{ 	cartProduct &&
+													cartProduct.length > 0 &&
+														cartProduct.find((item) => item.reference_num === data.reference_num) 
+
+														 ? (
+															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															Remove from cart
+														</button>
+														
+													)  : ( 
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
 														</button>
+														
+													) }
 											</div>
 										);
 									})
@@ -249,19 +298,21 @@ const ProductsList = (props) => {
 													<h5>{data.book_name}</h5>
 													<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 													<h5>₹{data.price} </h5>
-													{/* { 
-														newProduct && 
-														newProduct.length > 0 ? (
+													{ 	cartProduct &&
+													cartProduct.length > 0 &&
+														cartProduct.find((item) => item.reference_num === data.reference_num) 
+
+														 ? (
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-															{newProduct.product_btn}
+															Remove from cart
 														</button>
 														
-													)  : (  */}
+													)  : ( 
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
 														</button>
 														
-													{/* ) } */}
+													) } 
 												</div>
 											);
 									})}
@@ -281,23 +332,36 @@ const ProductsList = (props) => {
 													<h5>{data.mobile_name}</h5>
 													<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
 													<h5>₹{data.price} </h5>													
+													{ 	cartProduct &&
+													cartProduct.length > 0 &&
+														cartProduct.find((item) => item.reference_num === data.reference_num) 
+
+														 ? (
+															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+															Remove from cart
+														</button>
+														
+													)  : ( 
 														<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
 															{data.product_btn}
-														</button>													
+														</button>
+														
+													) } 												
 												</div>
 											);
 									})
 									}
 									{console.log('third')}
 								</Slider>
-								{console.log('newProduct',newProduct)}							
+								{console.log('cartProduct',cartProduct)}	
+															
 							</div>
 						</div>	
-						)
+						 )
 			
 						)  
 						
-					}  
+					}   
 				</div>
 				) : (
 						<div>Loading...</div>

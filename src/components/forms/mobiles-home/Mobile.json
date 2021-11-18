@@ -12,7 +12,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "real10001",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -26,7 +27,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "sams10002",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -40,7 +42,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "real10003",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -54,7 +57,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "poco10004",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -68,7 +72,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "real10005",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -82,7 +87,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "poco10006",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -96,7 +102,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "moto10007",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -110,7 +117,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Devd10008",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },
       {
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
@@ -124,7 +132,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Moto10009",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       },{
         "mobile_image" : "https://rukminim1.flixcart.com/image/416/416/ku04o7k0/mobile/p/8/u/9i-sport-mzb0a5iin-redmi-original-imag785qegs5ghyy.jpeg",
         "mobile_name": "redmi NOTE 10 LITE",
@@ -137,7 +146,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "redm100010",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "image"
       }
     ]
   }

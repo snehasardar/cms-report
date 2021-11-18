@@ -10,7 +10,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "twil10001",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -22,7 +23,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "pari10002",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -34,7 +36,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Gita10003",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -46,7 +49,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "monk10004",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -58,7 +62,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Felu10005",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -70,7 +75,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Thin10006",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -82,7 +88,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Byom10007",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -94,7 +101,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Devd10008",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },
       {
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
@@ -106,7 +114,8 @@
         "status": "0",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Kabu10009",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       },{
         "image_link" : "https://image.freepik.com/free-vector/world-book-day-poster-template_83728-6748.jpg",
         "book_name": "Kireti",
@@ -117,7 +126,8 @@
         "status": "1",
         "added_date": "10/29/2021, 3:14:15 PM",
         "reference_num": "Kiri100010",
-        "product_btn" : "Add to Cart"
+        "product_btn" : "Add to Cart",
+        "type" : "book"
       }
     ]
   }

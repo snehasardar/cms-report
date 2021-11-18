@@ -15,14 +15,12 @@ const initialValues = {
 	email: '',
 	password: '',
 };
-console.log('initialValues', initialValues);
 
 const LogIn = (props) => {
 	const { logged, setLogged } = props;
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userData } = useSelector((state) => state.registration);
-	console.log(' userData', userData);
 
 	const validateRequestCallBack = Yup.object().shape({
 		email: Yup.string().trim().email('Enter valid Email Id').required('Please enter Email Id'),
@@ -34,11 +32,9 @@ const LogIn = (props) => {
 			email: values.email,
 			password: values.password,
 		};
-		console.log('postdata', postdata);
 		const user = userData.find((item) => item.email === values.email);
 		if (user && Object.keys(user).length > 0) {
 			if (user.password === values.password) {
-				console.log('loggedUser.email', postdata.email);
 				toast.success('successfully login');
 				dispatch(logIn());
 				history.push('/home');
@@ -53,8 +49,6 @@ const LogIn = (props) => {
 	const handleEmailChange = (e, setFieldValue) => {
 		e.preventDefault();
 		let { value, name } = e.target;
-		console.log('event.target', e.target);
-		console.log('value', value);
 		setFieldValue(name, value);
 	};
 
@@ -68,7 +62,6 @@ const LogIn = (props) => {
 						{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 							return (
 								<FormikForm>
-									{console.log('errors', errors)}
 									<Form.Group controlId="email">
 										<Form.Control
 											type="text"
