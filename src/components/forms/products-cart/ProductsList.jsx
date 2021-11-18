@@ -43,12 +43,12 @@ const ProductsList = (props) => {
 		let newPrd =  items.find((prd) => prd.reference_num === data.reference_num)
 		console.log('newPrd', newPrd);
 		if(newPrd && Object.keys(newPrd).length > 0){
-			toast.warning('product is already in your Cart');
-			// dispatch(removeItem(data));
-			// console.log('handleSubmit data',data);
-			// toast.success('Product has been removed from your Cart');
-			// setCartProduct(items);
-			// console.log('cartProduct in handleSubmit',cartProduct)
+			//toast.warning('product is already in your Cart');
+			dispatch(removeItem(data));
+			console.log('handleSubmit data',data);
+			toast.success('Product has been removed from your Cart');
+			setCartProduct(items);
+			console.log('cartProduct in handleSubmit',cartProduct)
 		}else {
 			dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
@@ -146,9 +146,10 @@ const ProductsList = (props) => {
 						<a className="navbar-brand" href="#">Shop now</a>
 						<input className="form-control me-2" type="search" placeholder="Search by products" name="product_search"
 							value={searchByProducts} onChange={(e)=> handleSearch(e)}   />
-							<i className="fas fa-search icon"></i>
+							
 						<button className="btn btn-link" type="button">
-							<Link to={`/shop/productsListCart`} >Cart</Link>
+							<Link to={`/shop/productsListCart`} >Check Your Cart</Link>
+							
 						</button>
 					</form>
 				</div>
