@@ -40,36 +40,30 @@ const CustomerDetails = (props) => {
 			customerData.filter((data) => {
 				if (data.first_name.toLowerCase().includes(value.toLowerCase())) {
 					newData.push(data);
-					console.log('data', data);
 				}
 			});
 			setSearchByName(value);
 			setFilteredCustomer(newData);
 			setTotalData(newData.length);
 			setSearchedCustomerList(newData);
-			console.log('searchedCustomerList in handle search',searchedCustomerList);
 			setActivePage(1)
-			console.log('name TotalData', totalData);
 		} else if (value && name === 'email_search') {
 			customerData.filter((data) => {
 				if (data.email.toLowerCase().includes(searchByCustomerEmail.toLowerCase())) {
 					newData.push(data);
-					console.log('data', data);
+				
 				} else if (
 					data.first_name.toLowerCase().includes(searchByName.toLowerCase()) &&
 					data.email.toLowerCase().includes(searchByCustomerEmail.toLowerCase())
 				) {
 					newData.push(data);
-					console.log('data', data);
 				}
 			});
 			setSearchByCustomerEmail(value);
 			setFilteredCustomer(newData);
 			setTotalData(newData.length);
 			setSearchedCustomerList(newData);
-			console.log('searchedCustomerList in handle search',searchedCustomerList);
 			setActivePage(1)
-			console.log('email TotalData', totalData);	
 		} else {
 			setFilteredCustomer(customerData);
 			setTotalData(customerData.length);
@@ -103,11 +97,9 @@ const CustomerDetails = (props) => {
 			setIsLoading(false);
 			if(searchByName){
 				setFilteredCustomer(searchedCustomerList);
-				console.log('searchedCustomerList in showCustomerList',searchedCustomerList)
 				setTotalData(searchedCustomerList.length);
 			}else if(searchByCustomerEmail){
 				setFilteredCustomer(searchedCustomerList);
-				console.log('searchedCustomerList in showCustomerList',searchedCustomerList)
 				setTotalData(searchedCustomerList.length);
 			} else {
 				setFilteredCustomer(customerData);
@@ -128,7 +120,6 @@ const CustomerDetails = (props) => {
 		console.log('activepage', activePage);
 	}, [activePage]);
 
-	console.log('TotalData', totalData);
 	console.log('isLoading', isLoading);
 
 	return (

@@ -26,7 +26,6 @@ const initialValues = {
 	price: '',
 	status: '',
 };
-console.log('initialValues', initialValues);
 
 const BooksAdd = (props) => {
 	const { bookModal, setBookModal } = props;
@@ -107,7 +106,7 @@ const BooksAdd = (props) => {
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
-											{console.log('errors', errors)}
+											
 											<Form.Group controlId="book_name">
 												<Form.Control
 													type="text"

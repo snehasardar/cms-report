@@ -23,7 +23,6 @@ const initialValues = {
 	gender: '',
 	terms_of_service: false,
 };
-console.log('initialValues', initialValues);
 
 const Registration = (props) => {
 	const dispatch = useDispatch();
@@ -90,7 +89,6 @@ const Registration = (props) => {
 		setFieldValue(name, value);
 		if(userData.length > 0){
 			userData.some((item) => {
-				console.log('item', item);
 				if(item.mobile_no == value){
 					toast.warning('there is customer with this number')
 				}
@@ -111,7 +109,6 @@ const Registration = (props) => {
 							//callbacks
 							return (
 								<FormikForm>
-									{console.log('errors', errors)}
 									<Form.Group controlId="name">
 										<Form.Control
 											type="text"

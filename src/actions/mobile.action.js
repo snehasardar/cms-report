@@ -16,7 +16,6 @@ export const autoFillMobiles = (data) => {
 			type: AUTOFILL_MOBILES,
 			payload: data,
 		});
-		console.log(' data', data)
 	};
 };
 

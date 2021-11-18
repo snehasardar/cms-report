@@ -28,7 +28,6 @@ const initialValues = {
 	price: '',
 	status: '',
 };
-console.log('initialValues', initialValues);
 
 const MobileAdd = (props) => {
 	const { mobileAddModal, setMobileAddModal } = props;

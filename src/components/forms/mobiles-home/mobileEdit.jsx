@@ -28,7 +28,6 @@ const initialValues = {
 	price: '',
 	status: '',
 };
-console.log('initialValues', initialValues);
 
 const MobileEdit = (props) => {
 	const { mobileEditModal, setMobileEditModal } = props;
@@ -38,7 +37,6 @@ const MobileEdit = (props) => {
 	const history = useHistory();
 
 	const currentMobile = mobileList.find((item) => item.id == id);
-	console.log('currentMobile', currentMobile);
 
 	const validateBooksInformation = Yup.object().shape({
 		mobile_image: Yup.string().required('Please enter an Image Link'),
@@ -139,7 +137,6 @@ const MobileEdit = (props) => {
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
-											{console.log('errors', errors)}
 											<Form.Group controlId="mobile_name">
 												<Form.Control
 													type="text"

@@ -111,13 +111,13 @@ const ProductsList = (props) => {
 		}
 		setMobileProductList(checkedMobileProducts);
 
-		setCartProduct(items);
+		//setCartProduct(items);
 		//set the cart items 	
 		setTimeout(() => {
 			setIsLoading(false);
 			setFilterdProductList(checkedBookProducts);
 			setFilterdMobileList(checkedMobileProducts);
-
+			setCartProduct(items);
 		}, 1000);
 	};
 

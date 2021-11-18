@@ -6,7 +6,6 @@ export const signUp = (data) => {
 			type: SIGN_UP,
 			payload: data,
 		});
-		console.log('signUp', data);
 	};
 };
 

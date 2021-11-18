@@ -126,7 +126,6 @@ const CustomerEdit = (props) => {
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
-											{console.log('errors', errors)}
 											<Form.Row>
 												<Form.Group as={Col} sm="6" controlId="initial">
 													<Select

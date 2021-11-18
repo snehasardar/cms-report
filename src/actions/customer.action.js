@@ -18,7 +18,6 @@ export const addAllData = (data) => {
 			type: ADDALL_DATA,
 			payload: data,
 		});
-		console.log(' data', data)
 	};
 };
 

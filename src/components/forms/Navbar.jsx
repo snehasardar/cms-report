@@ -68,33 +68,3 @@ const Navbar = () => {
 	);
 };
 export default Navbar;
-
-/*							<li className="nav-item">
-								<Link to="/customerDetails" className="nav-link active">
-									Customer Details
-								</Link>
-							</li>
-							<li className="nav-item">
-								<Link to="/booksDetails" className="nav-link active">
-									Books Details
-								</Link>
-							</li>
-							 <li className="nav-item">
-								<Link to="/customerAdd" className="nav-link active">
-									Customer Add
-								</Link>
-							</li> 
-							
-							 <li className="nav-item">
-								<Link to="/customerEdit" className="nav-link active">
-									Customer Edit
-								</Link>
-							</li>
-							{logged === true ? (
-						<span className="navbar-text">
-							<Link to="/productsList" className="nav-link active">
-								Buy Products
-							</Link>
-						</span>
-							
-						) : ( ' ')} */

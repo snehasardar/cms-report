@@ -26,13 +26,11 @@ const initialValues = {
 	email: '',
 	status: '',
 };
-console.log('initialValues', initialValues);
 
 const CustomerAdd = (props) => {
 	const { addModal, setAddModal } = props;
 	const dispatch = useDispatch();
 	const { customerData } = useSelector((state) => state.customerReducer);
-	console.log('customerData', customerData);
 	const history = useHistory();
 
 	const validateCustomerInformation = Yup.object().shape({
@@ -58,7 +56,6 @@ const CustomerAdd = (props) => {
 		email: Yup.string().trim()
 			.email('Enter valid Email Id')
 			.required('Please enter Email Id'),
-			// .test('name',"Email supports only alphabets and some other characters. ('.)", (value) => value && value.match(REGEX_EMAIL)),
 		status: Yup.object().required('Please select status'),
 	});
 

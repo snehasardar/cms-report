@@ -32,6 +32,8 @@ const LogIn = (props) => {
 			email: values.email,
 			password: values.password,
 		};
+		console.log('postdata',postdata);
+		
 		const user = userData.find((item) => item.email === values.email);
 		if (user && Object.keys(user).length > 0) {
 			if (user.password === values.password) {

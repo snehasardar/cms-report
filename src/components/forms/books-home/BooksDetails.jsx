@@ -36,14 +36,12 @@ const BooksDetails = (props) => {
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log('name ', name);
 		console.log('value', value);
 		let newDataList = [];
 		if (value && name === 'name_search') {
 			bookList.filter((data) => {
 				if (data.book_name.toLowerCase().includes(value.toLowerCase())) {
 					newDataList.push(data);
-					console.log('data', data);
 				}
 			});
 			setSearchByName(value);
@@ -56,13 +54,11 @@ const BooksDetails = (props) => {
 			bookList.filter((data) => {
 				if (data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())) {
 					newDataList.push(data);
-					console.log('data', data);
 				} else if (
 					data.book_name.toLowerCase().includes(searchByName.toLowerCase()) &&
 					data.author_name.toLowerCase().includes(searchByAuthor.toLowerCase())
 				) {
 					newDataList.push(data);
-					console.log('data', data);
 				}
 			});
 			setSearchByAuthor(value);
@@ -74,7 +70,6 @@ const BooksDetails = (props) => {
 		} else {
 			setFilterdBookList(bookList);
 			setTotalBookData(bookList.length);
-			console.log('TotalBookData', totalBookData)
 			setSearchByName('');
 			setSearchByAuthor('');
 		}
@@ -98,11 +93,9 @@ const BooksDetails = (props) => {
 			setIsLoading(false);
 			if(searchByName ){
 				setFilterdBookList(serachedBookList);
-				console.log('serachedBookList in showBookList',serachedBookList);
 				setTotalBookData(serachedBookList.length);
 			}else if(searchByAuthor){
 				setFilterdBookList(serachedBookList);
-				console.log('serachedBookList in sowBookList',serachedBookList);
 				setTotalBookData(serachedBookList.length);
 			}else {
 				setFilterdBookList(bookList);
@@ -116,7 +109,6 @@ const BooksDetails = (props) => {
 	useEffect(() => {
 		setFilterdBookList(bookList);
 		setTotalBookData(bookList.length);
-		console.log('bookList.length', bookList.length)
 	}, [bookList]);
 
 	useEffect(() => {
@@ -204,34 +196,3 @@ const BooksDetails = (props) => {
 	);
 };
 export default BooksDetails;
-
-/*
-const handleSearchByName = (e) => {
-		e.preventDefault();
-		setSearchByName(e.target.value);
-		console.log('handleSearchByName ', searchByName);
-		console.log('filterdBookList', filterdBookList);
-		if (e.target.value) {
-			let newData = [];
-			bookList.filter((data) => {
-				if (data.book_name.toLowerCase().includes(searchByName.toLowerCase())) {
-					newData.push(data);
-					console.log('data', data);
-				} else if (data.author_name.toLowerCase().includes(searchByName.toLowerCase())) {
-					newData.push(data);
-					console.log('data', data);
-				} else if (
-					data.author_name.toLowerCase().includes(searchByName.toLowerCase()) &&
-					data.book_name.toLowerCase().includes(searchByName.toLowerCase())
-				) {
-					newData.push(data);
-					console.log('data', data);
-				}
-			});
-			setFilterdBookList(newData);
-		} else {
-			setFilterdBookList(bookList);
-		}
-	};
-
- */

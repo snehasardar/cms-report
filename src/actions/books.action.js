@@ -16,7 +16,6 @@ export const addAutoAllData = (data) => {
 			type: ADDAUTOFILL_DATA,
 			payload: data,
 		});
-		console.log(' data', data)
 	};
 };
 

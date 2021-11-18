@@ -25,7 +25,6 @@ const initialValues = {
 	price: '',
 	status: '',
 };
-console.log('initialValues', initialValues);
 
 const BooksEdit = (props) => {
 	const { bookEditModal, setBookEditModal } = props;
@@ -35,7 +34,6 @@ const BooksEdit = (props) => {
 	const history = useHistory();
 
 	const currentBook = bookList.find((item) => item.id == id);
-	console.log('currentBook', currentBook);
 
 	const validateBooksInformation = Yup.object().shape({
 		book_name: Yup.string()
@@ -121,7 +119,6 @@ const BooksEdit = (props) => {
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
 										<FormikForm>
-											{console.log('errors', errors)}
 											<Form.Group controlId="book_name">
 												<Form.Control
 													type="text"
