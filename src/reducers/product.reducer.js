@@ -13,19 +13,11 @@ const productReducer = (state = initialStates, action) => {
             let allAddedItems = [...state.items];
             let addValue = action.payload; 
             if (allAddedItems.length > 0) {
-                // let needToadd = allAddedItems.find((data) => data.id == addValue.id);
-                // if(needToadd ){
-                //     needToadd.quantity = needToadd.quantity + 1;
-                //     console.log('needToadd.quantity',needToadd.quantity);
-                // }else{
                     let qnt = 1;
-                    // addValue.product_btn = "Remove from Cart";
                     let newValue = { ...addValue, quantity: qnt };
                     allAddedItems.push(newValue);
-                // }
             } else {
                 let qnt = 1;
-                // addValue.product_btn = "Remove from Cart";
                 let newValue = { ...addValue, quantity: qnt };
                 allAddedItems.push(newValue);
             }
@@ -57,7 +49,6 @@ const productReducer = (state = initialStates, action) => {
                 needtoAdd.quantity = needtoAdd.quantity - 1;
             }
             if (needtoAdd.quantity == 0) {
-                // needtoAdd.product_btn = "Add to Cart";
                 let clearPrd = allAddeditems.filter((data) => data.id != action.payload);
                 allAddeditems = clearPrd;
                 console.log('clearprd', clearPrd);
@@ -75,7 +66,6 @@ const productReducer = (state = initialStates, action) => {
 			let allAddItems = [...state.items];
             console.log('allAddItems in remove reducer',allAddItems);
             let clearPrd = action.payload
-            console.log('action in reducer', action.payload);
             console.log(' remove clearPrd ', clearPrd);
             let needToAdd = allAddItems.filter((data) => data.reference_num !== action.payload.reference_num);
             allAddItems = needToAdd;

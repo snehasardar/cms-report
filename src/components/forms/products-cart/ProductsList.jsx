@@ -31,7 +31,6 @@ const ProductsList = (props) => {
 	const [searchByProducts, setSearchByProducts] = useState('')
 	const [allSearchProducts, setAllSearchProducts] = useState('')
 	const [allSearchMobileProducts, setAllSearchMobileProducts] = useState('')
-	const [cartProduct, setCartProduct] = useState();
 	const [updatedProductList, setUpdatedProductList] = useState('');
 	const [mobileProductList, setMobileProductList] = useState('');
 
@@ -45,22 +44,18 @@ const ProductsList = (props) => {
 		if(newPrd && Object.keys(newPrd).length > 0){
 			//toast.warning('product is already in your Cart');
 			dispatch(removeItem(data));
-			//console.log('handleSubmit data',data);
 			toast.success('Product has been removed from your Cart');
-			setCartProduct(items);
-			console.log('cartProduct in handleSubmit',cartProduct)
 		}else {
 			dispatch(addToCart(data));
 		toast.success('Product has been added to your Cart');
-		setCartProduct(items);
-		console.log('cartProduct after add',cartProduct)
+		
 		}
 	};
 	
 	const handleSearch = (e) => {
 		e.preventDefault();
 		const { value } = e.target;
-		// console.log('value', value);
+		console.log('value', value);
 		let searchedBookList = [];
 		let searchedMobileList = [];
 		if (value ) {
@@ -113,14 +108,12 @@ const ProductsList = (props) => {
 		}
 		setMobileProductList(checkedMobileProducts);
 
-		//setCartProduct(items);
 		
 		setTimeout(() => {
 			setIsLoading(false);
 			setFilterdProductList(checkedBookProducts);
 			setFilterdMobileList(checkedMobileProducts);
-			setCartProduct(items);
-			console.log('cartProduct before return', cartProduct)
+			
 		}, 1000);
 	};
 
@@ -135,11 +128,8 @@ const ProductsList = (props) => {
 			
 	}, [bookList]);
 	
-	console.log('cartProduct before return', cartProduct);
-	// console.log('isLoading', isLoading);
-	// console.log('filterdMobileList before return',filterdMobileList);
-	// console.log('updatedProductList before return',updatedProductList); 
-	// console.log('mobileProductList before return',mobileProductList)
+	
+	console.log('isLoading', isLoading);
 	
 	return (
 		<div className="container">
@@ -172,9 +162,9 @@ const ProductsList = (props) => {
 												<h5>{data.book_name }</h5>
 												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 												<h5>₹{data.price} </h5>
-												{ 	cartProduct &&
-													cartProduct.length > 0 &&
-														cartProduct.find((item) => item.reference_num === data.reference_num) 
+												{ 	items &&
+													items.length > 0 &&
+													items.find((item) => item.reference_num === data.reference_num) 
 
 														 ? (
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
@@ -199,9 +189,9 @@ const ProductsList = (props) => {
 												<h5>{data.mobile_name}</h5>
 												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
 												<h5>₹{data.price} </h5>												
-												{ 	cartProduct &&
-													cartProduct.length > 0 &&
-														cartProduct.find((item) => item.reference_num === data.reference_num) 
+												{ 	items &&
+													items.length > 0 &&
+													items.find((item) => item.reference_num === data.reference_num) 
 
 														 ? (
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
@@ -218,7 +208,6 @@ const ProductsList = (props) => {
 										);
 									})
 								}
-							{console.log('first')}
 							</div>
 
 						 ) : (
@@ -235,9 +224,9 @@ const ProductsList = (props) => {
 												<h5>{data.book_name }</h5>
 												<h6>{data.author_name}, {data.genre}, {data.total_books} pieces </h6>
 												<h5>₹{data.price} </h5>												
-												{ 	cartProduct &&
-													cartProduct.length > 0 &&
-														cartProduct.find((item) => item.reference_num === data.reference_num) 
+												{ 	items &&
+													items.length > 0 &&
+													items.find((item) => item.reference_num === data.reference_num) 
 
 														 ? (
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
@@ -262,9 +251,9 @@ const ProductsList = (props) => {
 												<h5>{data.mobile_name}</h5>
 												<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
 												<h5>₹{data.price} </h5>												
-												{ 	cartProduct &&
-													cartProduct.length > 0 &&
-														cartProduct.find((item) => item.reference_num === data.reference_num) 
+												{ 	items &&
+													items.length > 0 &&
+													items.find((item) => item.reference_num === data.reference_num) 
 
 														 ? (
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
@@ -281,7 +270,6 @@ const ProductsList = (props) => {
 										);
 									})
 								}
-								{console.log('second')}
 							</Slider>
 							</div>
 
@@ -336,9 +324,9 @@ const ProductsList = (props) => {
 													<h5>{data.mobile_name}</h5>
 													<h6>{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery </h6>
 													<h5>₹{data.price} </h5>													
-													{ 	cartProduct &&
-													cartProduct.length > 0 &&
-														cartProduct.find((item) => item.reference_num === data.reference_num) 
+													{ 	items &&
+													items.length > 0 &&
+													items.find((item) => item.reference_num === data.reference_num) 
 
 														 ? (
 															<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
@@ -355,10 +343,7 @@ const ProductsList = (props) => {
 											);
 									})
 									}
-									{console.log('third')}
-								</Slider>
-								{console.log('cartProduct',cartProduct)}	
-															
+								</Slider>							
 							</div>
 						</div>	
 						 )
