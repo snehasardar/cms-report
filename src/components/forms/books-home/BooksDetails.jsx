@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import books from './books.json';
 
 const BooksDetails = (props) => {
-	const { bookModal, setBookModal, bookEditModal, setBookEditModal } = props;
+	const { setBookModal, setBookEditModal } = props;
 	const { bookList } = useSelector((state) => state.booksReducer);
 	const dispatch = useDispatch();
 	const [searchByName, setSearchByName] = useState('');
@@ -24,15 +24,14 @@ const BooksDetails = (props) => {
 	const [filterdBookList, setFilterdBookList] = useState('');
 	const [serachedBookList, setSerachedBookList] = useState();
 
-	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
+	const [itemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
-	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
+	const [pageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
 	const [totalBookData, setTotalBookData] = useState(0);
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
 
-	
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
@@ -48,7 +47,7 @@ const BooksDetails = (props) => {
 			setFilterdBookList(newDataList);
 			setTotalBookData(newDataList.length);
 			setSerachedBookList(newDataList);
-			console.log('serachedBookList in handle search',serachedBookList);
+			console.log('serachedBookList in handle search', serachedBookList);
 			setActivePage(1);
 		} else if (value && name === 'author_search') {
 			bookList.filter((data) => {
@@ -65,7 +64,7 @@ const BooksDetails = (props) => {
 			setFilterdBookList(newDataList);
 			setTotalBookData(newDataList.length);
 			setSerachedBookList(newDataList);
-			console.log('serachedBookList in handle search',serachedBookList);
+			console.log('serachedBookList in handle search', serachedBookList);
 			setActivePage(1);
 		} else {
 			setFilterdBookList(bookList);
@@ -91,20 +90,18 @@ const BooksDetails = (props) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			if(searchByName ){
+			if (searchByName) {
 				setFilterdBookList(serachedBookList);
 				setTotalBookData(serachedBookList.length);
-			}else if(searchByAuthor){
+			} else if (searchByAuthor) {
 				setFilterdBookList(serachedBookList);
 				setTotalBookData(serachedBookList.length);
-			}else {
+			} else {
 				setFilterdBookList(bookList);
 				setTotalBookData(bookList.length);
 			}
-
 		}, 1000);
 	};
-
 
 	useEffect(() => {
 		setFilterdBookList(bookList);
@@ -122,14 +119,24 @@ const BooksDetails = (props) => {
 			<Sidebar />
 			<div>
 				<h5>Books list </h5>
-				<button className='top-button' onClick={() => setBookModal(true)}>
-					<Link to={'/booksAdd'}>Add Books</Link>
-				</button>{' '}
-				<input placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
-				<input placeholder="Search by Author Name" name="author_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
-				<button className='top-button' onClick={() => dispatch(clearBook())}>Clear BooksList</button>
-				 <button className='top-button' onClick={handleAddAutoData}>Autofill</button>
-				<h6>Total Books : {filterdBookList.length}</h6>
+
+				<div className=" gap-2 flex ">
+					<button type="button" className="btn btn-outline-secondary top-button" onClick={() => setBookModal(true)}>
+						<Link to={'/booksAdd'}>Add Books</Link>
+					</button>{' '}
+					<input type="input" placeholder="Search by Book Name" name="name_search" value={searchByName} onChange={handleSearchByName} />{' '}
+					<input placeholder="Search by Author Name" name="author_search" value={searchByAuthor} onChange={handleSearchByName} />{' '}
+					<button type="button" className="btn btn-secondary top-button" onClick={() => dispatch(clearBook())}>
+						Clear BooksList
+					</button>{' '}
+					<button type="button" className="btn btn-secondary top-button" onClick={handleAddAutoData}>
+						Autofill
+					</button>
+				</div>
+				<p className="text-end fs-5" style={{ padding: '10px' }}>
+					Total Books : {filterdBookList.length}
+				</p>
+
 				{!isLoading ? (
 					<Table striped bordered hover>
 						<thead>
@@ -144,7 +151,7 @@ const BooksDetails = (props) => {
 								<th>Added date</th>
 								<th>Updated Date</th>
 								<th>Status</th>
-								<th > Action </th>
+								<th> Action </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -166,9 +173,9 @@ const BooksDetails = (props) => {
 											<td>{dateFormat(data.updated_date, 'dd-mm-yyyy hh:MM TT')}</td>
 											<td>{data.status}</td>
 											<td>
-												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-											
-												<button onClick={() => setBookEditModal(true)}>
+												<button type="button" className="btn btn-success" onClick={(e) => handleDelete(data.id)}>Delete</button>
+
+												<button type="button" className="btn btn-outline-secondary " onClick={() => setBookEditModal(true)}>
 													<Link to={`/booksEdit/${data.id}`}>Edit</Link>
 												</button>
 											</td>
@@ -178,7 +185,12 @@ const BooksDetails = (props) => {
 						</tbody>
 					</Table>
 				) : (
-					<div>Loading...</div>
+					<div className="text-center">
+						<button className="btn btn-light text-dark" type="button" disabled>
+							<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							Loading...
+						</button>
+					</div>
 				)}
 				{totalBookData >= itemsCountPerPage ? (
 					<Pagination

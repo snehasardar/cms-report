@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import customers from './customers.json';
 
 const CustomerDetails = (props) => {
-	const { editModal, setEditModal, addModal, setAddModal } = props;
+	const { setEditModal, setAddModal } = props;
 	const { customerData } = useSelector((state) => state.customerReducer);
 	const dispatch = useDispatch();
 	const [searchByName, setSearchByName] = useState('');
@@ -22,19 +22,18 @@ const CustomerDetails = (props) => {
 	const [filteredCustomer, setFilteredCustomer] = useState('');
 	const [searchedCustomerList, setSearchedCustomerList] = useState('');
 
-	const [itemsCountPerPage, setItemsCountPerPage] = useState(5);
+	const [itemsCountPerPage] = useState(5);
 	const [activePage, setActivePage] = useState(1);
-	const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
+	const [pageRangeDisplayed] = useState(5);
 	const [isLoading, setIsLoading] = useState(false);
 	const [totalData, setTotalData] = useState(0);
 	const lastData = activePage * itemsCountPerPage;
 	const firstData = lastData - itemsCountPerPage;
-	
 
 	const handleSearch = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log('value',value);
+		console.log('value', value);
 		let newData = [];
 		if (value && name === 'name_search') {
 			customerData.filter((data) => {
@@ -46,12 +45,11 @@ const CustomerDetails = (props) => {
 			setFilteredCustomer(newData);
 			setTotalData(newData.length);
 			setSearchedCustomerList(newData);
-			setActivePage(1)
+			setActivePage(1);
 		} else if (value && name === 'email_search') {
 			customerData.filter((data) => {
 				if (data.email.toLowerCase().includes(searchByCustomerEmail.toLowerCase())) {
 					newData.push(data);
-				
 				} else if (
 					data.first_name.toLowerCase().includes(searchByName.toLowerCase()) &&
 					data.email.toLowerCase().includes(searchByCustomerEmail.toLowerCase())
@@ -63,7 +61,7 @@ const CustomerDetails = (props) => {
 			setFilteredCustomer(newData);
 			setTotalData(newData.length);
 			setSearchedCustomerList(newData);
-			setActivePage(1)
+			setActivePage(1);
 		} else {
 			setFilteredCustomer(customerData);
 			setTotalData(customerData.length);
@@ -73,42 +71,37 @@ const CustomerDetails = (props) => {
 	};
 
 	const handleAddAutoData = () => {
-		customers.allCustomerDetails.map(item => {
-			return(
-				console.log(item)
-			)
+		customers.allCustomerDetails.map((item) => {
+			return console.log(item);
 		});
-		dispatch(addAllData( customers.allCustomerDetails));
-	}
+		dispatch(addAllData(customers.allCustomerDetails));
+	};
 
 	const handleDelete = (id) => {
 		dispatch(deleteList(id));
 		toast.success('Customer Data has been successfully deleted');
-	}
-	const handleClear= () => {
-		dispatch(clearList())
+	};
+	const handleClear = () => {
+		dispatch(clearList());
 		setTotalData(0);
-		
-	}
+	};
 
 	const showCustomerList = (start, end) => {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			if(searchByName){
+			if (searchByName) {
 				setFilteredCustomer(searchedCustomerList);
 				setTotalData(searchedCustomerList.length);
-			}else if(searchByCustomerEmail){
+			} else if (searchByCustomerEmail) {
 				setFilteredCustomer(searchedCustomerList);
 				setTotalData(searchedCustomerList.length);
 			} else {
 				setFilteredCustomer(customerData);
 				setTotalData(customerData.length);
 			}
-			
 		}, 1000);
 	};
-
 
 	useEffect(() => {
 		setFilteredCustomer(customerData);
@@ -127,16 +120,25 @@ const CustomerDetails = (props) => {
 			<Sidebar />
 			<div>
 				<h5>Customer list </h5>
-				<button className='top-button' onClick={() => setAddModal(true)}>
-					<Link to={'/customerAdd'}>Add Customer</Link>
-				</button>{' '}
-				<input placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />{' '}
-				<input placeholder="Search by Email" name="email_search" value={searchByCustomerEmail} onChange={handleSearch} />{' '}
-				<button className='top-button' onClick={() => handleClear()}>Clear List</button>{' '}
-				<button className='top-button' onClick={ handleAddAutoData }>Autofill</button>
-				<h6>Total Customer : {filteredCustomer.length}</h6>
+
+				<div className=" gap-2 flex ">
+					<button type="button" className="btn btn-outline-secondary top-button" onClick={() => setAddModal(true)}>
+						<Link to={'/customerAdd'}>Add Customer</Link>
+					</button>{' '}
+					<input type="input" placeholder="Search by First Name" name="name_search" value={searchByName} onChange={handleSearch} />{' '}
+					<input type="input" placeholder="Search by Email" name="email_search" value={searchByCustomerEmail} onChange={handleSearch} />{' '}
+					<button type="button" className="btn btn-secondary top-button" onClick={() => handleClear()}>
+						Clear List
+					</button>{' '}
+					<button type="button" className="btn btn-secondary top-button" onClick={handleAddAutoData}>
+						Autofill
+					</button>
+				</div>
+				<p className="text-end fs-5" style={{ padding: '10px' }}>
+					Total Customer : {filteredCustomer.length}
+				</p>
 				{!isLoading ? (
-					<Table striped bordered hover >
+					<Table striped bordered hover>
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -166,14 +168,16 @@ const CustomerDetails = (props) => {
 											<td>{data.last_name}</td>
 											<td>{data.fullname}</td>
 											<td>{data.mobile_no}</td>
-											<td >{data.email}</td>
+											<td>{data.email}</td>
 											<td>{data.registration_num}</td>
 											<td>{data.status}</td>
 											<td> {dateFormat(data.date, 'dd-mm-yyyy hh:MM TT')} </td>
 											<td>
-												<button onClick={(e) => handleDelete(data.id)}>Delete</button>
-											
-												<button onClick={() => setEditModal(true)}>
+												<button type="button" className="btn btn-success" onClick={(e) => handleDelete(data.id)}>
+													Delete
+												</button>
+
+												<button type="button" className="btn btn-outline-secondary " onClick={() => setEditModal(true)}>
 													<Link to={`/customerEdit/${data.id}`}>Edit</Link>
 												</button>
 											</td>
@@ -183,10 +187,15 @@ const CustomerDetails = (props) => {
 						</tbody>
 					</Table>
 				) : (
-					<div>Loading...</div>
+					<div className="text-center">
+						<button className="btn btn-light text-dark" type="button" disabled>
+							<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							Loading...
+						</button>
+					</div>
 				)}
 				{totalData > itemsCountPerPage ? (
-					<Pagination   
+					<Pagination
 						activePage={activePage}
 						itemsCountPerPage={itemsCountPerPage}
 						totalItemsCount={totalData}

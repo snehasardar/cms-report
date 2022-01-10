@@ -94,14 +94,17 @@ const BooksAdd = (props) => {
 
 	return (
 		<Modal className="requestCallModal" show={bookModal} onHide={() => setBookModal(false)} backdrop="static" centered>
-			<Modal.Header closeButton onClick={handleClose}></Modal.Header>
+			<Modal.Header closeButton onClick={handleClose}>
+			<Modal.Title>Add Book</Modal.Title>
+			</Modal.Header>
+
 			<Modal.Body>
 				<div className="requestCallWrapper">
 					<Row>
-						<Col xs={12} md={5} className="callBackBg"></Col>
+						{/* <Col xs={12} md={5} className="callBackBg"></Col> */}
 						
 						<Col xs={12} md={7} className="">
-							<h3>Add Books here</h3>
+							{/* <h3>Add Books here</h3> */}
 							<Formik initialValues={initialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (

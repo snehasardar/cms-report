@@ -181,6 +181,7 @@ const ProductsList = (props) => {
 										);
 									})
 								} 
+							
 								{	allSearchMobileProducts &&
 									allSearchMobileProducts.map((data, index) => {
 										return (
@@ -209,7 +210,7 @@ const ProductsList = (props) => {
 									})
 								}
 							</div>
-
+							
 						 ) : (
 							
 								searchByProducts   &&
@@ -239,10 +240,14 @@ const ProductsList = (props) => {
 														</button>
 														
 													) }
+													
 											</div>
+											
 										);
-									}) 
+									} ) 
+									
 								} 
+								
 								{	allSearchMobileProducts &&
 									allSearchMobileProducts.map((data, index) => {
 										return (
@@ -266,6 +271,7 @@ const ProductsList = (props) => {
 														</button>
 														
 													) }
+													
 											</div>
 										);
 									})
@@ -353,7 +359,12 @@ const ProductsList = (props) => {
 					}   
 				</div>
 				) : (
-						<div>Loading...</div>
+					<div className="text-center">
+						<button className="btn btn-light text-dark" type="button" disabled>
+							<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							Loading...
+						</button>
+					</div>
 					)}
 					
 		</div>

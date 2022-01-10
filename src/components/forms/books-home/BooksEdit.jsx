@@ -108,13 +108,15 @@ const BooksEdit = (props) => {
 
 	return (
 		<Modal className="requestCallModal" show={bookEditModal} onHide={() => setBookEditModal(false)} backdrop="static" centered>
-			<Modal.Header closeButton onClick={handleClose}></Modal.Header>
+			<Modal.Header closeButton onClick={handleClose}>
+				<Modal.Title>Edit Book</Modal.Title>
+			</Modal.Header>
 			<Modal.Body>
 				<div className="requestCallWrapper">
 					<Row>
-						<Col xs={12} md={5} className="callBackBg"></Col>
+						{/* <Col xs={12} md={5} className="callBackBg"></Col> */}
 						<Col xs={12} md={7} className="">
-							<h3>Edit Books here</h3>
+							{/* <h3>Edit Books here</h3> */}
 							<Formik initialValues={newInitialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (
