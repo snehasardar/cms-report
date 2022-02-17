@@ -20,7 +20,6 @@ const booksReducer = (state = initialStates, action) => {
 					reference_num: regNum,
 					product_btn : prd_btn
 				};
-				console.log('newBooklist',newBookList)
 				allBookList.push(newBookList);
 			} else {
 				let id = 1;
@@ -28,7 +27,6 @@ const booksReducer = (state = initialStates, action) => {
 				let regNum = subtringName + 1000 + id;
 				let prd_btn = "Add to Cart";
 				let newBookList = { ...action.payload, id, reference_num: regNum, product_btn : prd_btn };
-				console.log('newBooklist',newBookList)
 				allBookList.push(newBookList);
 			}
 			return {
@@ -39,10 +37,9 @@ const booksReducer = (state = initialStates, action) => {
 		case ADDAUTOFILL_DATA:
 			let oldBookData = [...state.bookList];
 			let localValue = action.payload; 
-				console.log('localValue',localValue);
 			// const totalData = oldData.length;
 			let id = 0;
-			let prd_btn = '';
+			// let prd_btn = '';
 			for(let i=0; i < localValue.length; i++){
 				if (oldBookData.length > 0) {
 					id = oldBookData[oldBookData.length - 1].id + 1; 
@@ -50,16 +47,13 @@ const booksReducer = (state = initialStates, action) => {
 						...localValue[i], id
 					};
 					oldBookData.push(newValue);
-					console.log('newValue',newValue)
 				} else {
 					id = id + 1;
 					let newValue = {
 						...localValue[i], id};
 					oldBookData.push(newValue);
-						console.log('newValue',newValue)
 				}
 			} 
-				console.log('oldBookData',oldBookData);
 			return {
 				bookList: oldBookData,
 			};
@@ -67,7 +61,6 @@ const booksReducer = (state = initialStates, action) => {
 		case DELETE_BOOKS:
 			let freshBookList = [...state.bookList];
 			let newBookList = freshBookList.filter((item) => item.id !== action.payload);
-			console.log(' newBookList', newBookList);
 			return {
 				...state,
 				bookList: newBookList,
@@ -84,7 +77,6 @@ const booksReducer = (state = initialStates, action) => {
 				}
 				return item;
 			});
-			console.log(' existingBook', existingBook);
 			return {
 				...state,
 				bookList: updatedBook,

@@ -36,7 +36,6 @@ export const selectStatus = (status) => {
 
 export const numberFieldValidation = (value) => {
 	if (value.slice(-1)) {
-		console.log(' common value', value);
 		if(value.charAt(0) !== "0"){
 			if (!REGEX_DIGITS.test(value.slice(-1)) || value.length > 10 || parseInt(value.slice(-1) === 0)) {
 				let newValue = value.slice(0, value.length - 1);

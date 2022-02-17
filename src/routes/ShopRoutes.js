@@ -1,5 +1,5 @@
-import React, { useState, useLayoutEffect } from 'react';
-import { BrowserRouter, Switch, withRouter, Redirect } from 'react-router-dom';
+import React, { useLayoutEffect } from 'react';
+import { BrowserRouter, Switch, withRouter } from 'react-router-dom';
 
 
 /** Public Routes */

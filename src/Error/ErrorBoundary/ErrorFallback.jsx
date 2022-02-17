@@ -2,6 +2,7 @@ import { useHistory } from 'react-router';
 import somethingWrongBg from '../../assets/images/something-wrong.svg';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
+ 
 	const history = useHistory();
 	return (
 		<div>

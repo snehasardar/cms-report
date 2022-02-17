@@ -35,7 +35,6 @@ const BooksDetails = (props) => {
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log('value', value);
 		let newDataList = [];
 		if (value && name === 'name_search') {
 			bookList.filter((data) => {
@@ -47,7 +46,7 @@ const BooksDetails = (props) => {
 			setFilterdBookList(newDataList);
 			setTotalBookData(newDataList.length);
 			setSerachedBookList(newDataList);
-			console.log('serachedBookList in handle search', serachedBookList);
+			// console.log('serachedBookList in handle search', serachedBookList);
 			setActivePage(1);
 		} else if (value && name === 'author_search') {
 			bookList.filter((data) => {
@@ -64,7 +63,6 @@ const BooksDetails = (props) => {
 			setFilterdBookList(newDataList);
 			setTotalBookData(newDataList.length);
 			setSerachedBookList(newDataList);
-			console.log('serachedBookList in handle search', serachedBookList);
 			setActivePage(1);
 		} else {
 			setFilterdBookList(bookList);
@@ -76,7 +74,8 @@ const BooksDetails = (props) => {
 
 	const handleAddAutoData = () => {
 		books.allBooksDtails.map((item) => {
-			return console.log(item);
+			return item;
+			// return console.log(item);
 		});
 		dispatch(addAutoAllData(books.allBooksDtails));
 	};
@@ -110,10 +109,9 @@ const BooksDetails = (props) => {
 
 	useEffect(() => {
 		showBookList();
-		console.log('activepage', activePage);
+		// console.log('activepage', activePage);
 	}, [activePage]);
 
-	console.log('isLoading', isLoading);
 	return (
 		<div className="container">
 			<Sidebar />
@@ -161,7 +159,7 @@ const BooksDetails = (props) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.image_link} alt="book image" width="50" height="50" />{' '}
+												<img src={data.image_link} alt="book" width="50" height="50" />{' '}
 											</td>
 											<td>{data.book_name}</td>
 											<td>{data.author_name}</td>

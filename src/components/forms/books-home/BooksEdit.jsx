@@ -92,7 +92,7 @@ const BooksEdit = (props) => {
 
 		dispatch(editBook(post_data));
 		toast('Book information has been successfully edited');
-		console.log('post_data', post_data);
+		// console.log('post_data', post_data);
 		history.push('/booksDetails');
 	};
 
@@ -113,8 +113,7 @@ const BooksEdit = (props) => {
 			</Modal.Header>
 			<Modal.Body>
 				<div className="requestCallWrapper">
-					<Row>
-						{/* <Col xs={12} md={5} className="callBackBg"></Col> */}
+					<Row>	
 						<Col xs={12} md={7} className="">
 							{/* <h3>Edit Books here</h3> */}
 							<Formik initialValues={newInitialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>

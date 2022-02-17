@@ -92,7 +92,6 @@ const MobileAdd = (props) => {
 
 		dispatch(addMobile(post_data));
 		toast.success('The Mobile has been added successfully');
-		console.log('post_data', post_data);
 		history.push('/mobileDetails');
 	};
 

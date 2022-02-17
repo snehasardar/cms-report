@@ -78,7 +78,7 @@ const BooksAdd = (props) => {
 
 		dispatch(addBook(post_data));
 		toast.success('The Book has been added successfully');
-		console.log('post_data', post_data);
+		// console.log('post_data', post_data);
 		history.push('/booksDetails');
 	};
 
@@ -101,10 +101,9 @@ const BooksAdd = (props) => {
 			<Modal.Body>
 				<div className="requestCallWrapper">
 					<Row>
-						{/* <Col xs={12} md={5} className="callBackBg"></Col> */}
-						
+
 						<Col xs={12} md={7} className="">
-							{/* <h3>Add Books here</h3> */}
+							
 							<Formik initialValues={initialValues} validationSchema={validateBooksInformation} onSubmit={handleSubmitEvent}>
 								{({ values, errors, handleChange, isSubmitting, setFieldValue, touched }) => {
 									return (

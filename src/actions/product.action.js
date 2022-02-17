@@ -15,7 +15,7 @@ export const removeItem = (data) => {
             type: REMOVE_ITEM,
             payload : data,
         });
-        console.log('hello..its remove action', data);
+        // console.log('hello..its remove action', data);
         
 	};
 };

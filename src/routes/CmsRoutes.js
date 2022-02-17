@@ -2,15 +2,15 @@ import React, { useState, useLayoutEffect } from 'react';
 import { BrowserRouter, Switch, withRouter, Redirect } from 'react-router-dom';
 
 /** Private Routes */
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 
 /** Public Routes */
 import PublicRoute from './PublicRoute';
 
 // import { withSuspense } from '../hoc/withSuspense';
 // import TransparentLoader from '../components/loaders/TransparentLoader';
-import Dashboard from '../pages/dashboard/Dashboard';
-import Login from '../pages/login/Login';
+// import Dashboard from '../pages/dashboard/Dashboard';
+// import Login from '../pages/login/Login';
 import PageNotFound from '../pages/error-pages/PageNotFound';
 // const Dashboard = withSuspense(React.lazy(() => import(/* webpackChunkName: "Dashboard" */ '../pages/Dashboard')) ,<TransparentLoader/>);
 import Navbar from '../components/forms/Navbar';

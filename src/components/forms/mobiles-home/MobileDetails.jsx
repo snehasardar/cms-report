@@ -36,7 +36,6 @@ const MobileDetails = (props) => {
 	const handleSearchByName = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log('value', value);
 		let newMobileList = [];
 		if (value && name === 'mobile_search') {
 			mobileList.filter((data) => {
@@ -75,7 +74,7 @@ const MobileDetails = (props) => {
 
 	const handleAddAutoData = () => {
 		mobile.allMobileDetails.map((item) => {
-			return console.log(item);
+			return item;
 		});
 		dispatch(autoFillMobiles(mobile.allMobileDetails));
 	};
@@ -111,10 +110,9 @@ const MobileDetails = (props) => {
 
 	useEffect(() => {
 		showMobileList();
-		console.log('showMobileList activepage', activePage);
+		// console.log('showMobileList activepage', activePage);
 	}, [activePage]);
 
-	console.log('isLoading', isLoading);
 	return (
 		<div className="container">
 			<Sidebar />
@@ -163,7 +161,7 @@ const MobileDetails = (props) => {
 									return (
 										<tr key={index}>
 											<td>
-												<img src={data.mobile_image} alt="mobile image" width="50" height="80" />{' '}
+												<img src={data.mobile_image} alt="mobile" width="50" height="80" />{' '}
 											</td>
 											<td>{data.mobile_name}</td>
 											<td>{data.brand_name}</td>

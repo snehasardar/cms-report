@@ -3,7 +3,7 @@ import { SIGN_UP, LOG_IN, LOG_OFF } from '../action-types/action.types';
 const initialStates = {
 	userData: [],
 	userToken: '',
-	loggedIn : false,
+	loggedIn: false,
 };
 
 const registration = (state = initialStates, action) => {
@@ -12,7 +12,6 @@ const registration = (state = initialStates, action) => {
 			let allUserData = [...state.userData];
 			let newUser = action.payload;
 			allUserData.push(newUser);
-			console.log('newUser', newUser);
 
 			return {
 				...state,
@@ -21,20 +20,18 @@ const registration = (state = initialStates, action) => {
 
 		case LOG_IN:
 			let token = 'userLoggedIn';
-			console.log('token', token);
-			
+
 			return {
 				...state,
 				userToken: token,
-				loggedIn : true,
+				loggedIn: true,
 			};
 
 		case LOG_OFF:
-
 			return {
 				...state,
 				userToken: '',
-				loggedIn : false,
+				loggedIn: false,
 			};
 
 		default:

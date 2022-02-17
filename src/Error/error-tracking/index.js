@@ -1,6 +1,7 @@
 import API from "../../shared/api";
 
 export const sendErrorMail = (payload)=>{
+   
     return new Promise((resolve,reject)=>{
         API.post(`//send-errors`, payload)
         .then(res=>{
@@ -12,6 +13,7 @@ export const sendErrorMail = (payload)=>{
         }).catch(error=>{
             if(error && error.data){
                 reject(error.data);
+
             }else{
                 reject({message: "Something went wrong!"})
             }

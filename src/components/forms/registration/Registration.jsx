@@ -11,7 +11,7 @@ import './registration.styles.css';
 import '../styles.css';
 
 import { GENDERS_FORM, REGEX_FULL_NAME } from '../../../shared/constants';
-import { numberFieldValidation, selectGender } from '../../../shared/common';
+import { numberFieldValidation } from '../../../shared/common';
 
 import { signUp } from '../../../actions/signup.action';
 
@@ -57,7 +57,7 @@ const Registration = (props) => {
 			gender: values.gender.value,
 		};
 		dispatch(signUp(post_data));
-		history.push('/logIn');
+		history.push('/home');
 		toast.success('you are successfully Registered');
 	};
 
@@ -69,7 +69,6 @@ const Registration = (props) => {
 	const handleEmailChange = (e, setFieldValue) => {
 		e.preventDefault();
 		let { value, name } = e.target;
-		console.log('value', value);
 		// value = emailFieldValidation(value);
 		setFieldValue(name, value);
 		if(userData.length > 0){

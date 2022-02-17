@@ -7,10 +7,8 @@ import { addQuantity, subtractQuantity, removeItem} from '../../../actions/produ
 const ProductsListCart = () => {
     const { items }= useSelector((state) => state.productReducer);
 	const dispatch = useDispatch();
-	console.log('items', items);
 	let productInCart = [];
 	productInCart = items;
-	console.log('productInCart', productInCart);
 	return (
 		<div className='container'>
 			<div>
@@ -34,7 +32,7 @@ const ProductsListCart = () => {
 									product.type === 'book' ? (
 										<tr key={index}>
 											<td>
-												<img src={product.image_link} alt="book image" width="150px" height="150px" />{' '}
+												<img src={product.image_link} alt="book" width="150px" height="150px" />{' '}
 											</td>
 											<td>{product.book_name}</td>
 											<td>{product.price}</td>
@@ -48,7 +46,7 @@ const ProductsListCart = () => {
 									) : (
 										<tr key={index}>
 											<td>
-												<img src={product.mobile_image} alt="book image" width="150px" height="150px" />{' '}
+												<img src={product.mobile_image} alt="mobile" width="150px" height="150px" />{' '}
 											</td>
 											<td>{product.mobile_name}</td>
 											<td>{product.price}</td>

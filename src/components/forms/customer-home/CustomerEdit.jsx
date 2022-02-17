@@ -12,7 +12,7 @@ import '../registration/registration.styles.css';
 import './customerModal.styles.css';
 import '../styles.css';
 
-import { GENDERS_FORM, REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
+import { REGEX_FULL_NAME, INITIAL_FORM, STATUS_FORM } from '../../../shared/constants';
 import { numberFieldValidation, selectInitial, selectStatus } from '../../../shared/common';
 
 import { editList } from '../../../actions/customer.action';
@@ -26,18 +26,15 @@ const initialValues = {
 	email: '',
 	status: '',
 };
-console.log('initialValues', initialValues);
 
 const CustomerEdit = (props) => {
 	const { editModal, setEditModal } = props;
 	const { id } = props;
 	const { customerData } = useSelector((state) => state.customerReducer);
-	console.log('customerData', customerData);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const currentData = customerData.find((item) => item.id == id);
-	console.log('currentData', currentData);
 
 	const validateRequestCallBack = Yup.object().shape({
 		initial: Yup.object().required('Please select any one initial'),
@@ -88,7 +85,6 @@ const CustomerEdit = (props) => {
 		};
 
 		const  remainUser = customerData.filter((item) => item.email !== currentData.email);
-		console.log(' remainUser', remainUser);
 		const existedtUser =  remainUser.find((item) => item.email === values.email);
 		const editedUser = remainUser.find((item) => item.mobile_no === values.mobile_no);
 		if (existedtUser && Object.keys(existedtUser).length > 0) {

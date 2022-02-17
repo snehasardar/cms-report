@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {  Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ErrorBoundary } from 'react-error-boundary';
 import 'bootstrap/dist/css/bootstrap.min.css';

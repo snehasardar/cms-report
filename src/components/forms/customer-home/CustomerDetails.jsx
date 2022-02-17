@@ -33,7 +33,6 @@ const CustomerDetails = (props) => {
 	const handleSearch = (e) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log('value', value);
 		let newData = [];
 		if (value && name === 'name_search') {
 			customerData.filter((data) => {
@@ -72,7 +71,7 @@ const CustomerDetails = (props) => {
 
 	const handleAddAutoData = () => {
 		customers.allCustomerDetails.map((item) => {
-			return console.log(item);
+			return item;
 		});
 		dispatch(addAllData(customers.allCustomerDetails));
 	};
@@ -110,10 +109,10 @@ const CustomerDetails = (props) => {
 
 	useEffect(() => {
 		showCustomerList();
-		console.log('activepage', activePage);
+		// console.log('activepage', activePage);
 	}, [activePage]);
 
-	console.log('isLoading', isLoading);
+	// console.log('isLoading', isLoading);
 
 	return (
 		<div className="container">
@@ -176,7 +175,6 @@ const CustomerDetails = (props) => {
 												<button type="button" className="btn btn-success" onClick={(e) => handleDelete(data.id)}>
 													Delete
 												</button>
-
 												<button type="button" className="btn btn-outline-secondary " onClick={() => setEditModal(true)}>
 													<Link to={`/customerEdit/${data.id}`}>Edit</Link>
 												</button>

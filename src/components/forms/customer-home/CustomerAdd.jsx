@@ -74,7 +74,6 @@ const CustomerAdd = (props) => {
 
 		dispatch(addList(post_data));
 		toast.success('Customer Data added successfully');
-		console.log('post_data', post_data);
 		history.push('/customerDetails');
 	};
 

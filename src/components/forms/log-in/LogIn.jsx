@@ -17,7 +17,7 @@ const initialValues = {
 };
 
 const LogIn = (props) => {
-	const { logged, setLogged } = props;
+	// const { logged, setLogged } = props;
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userData } = useSelector((state) => state.registration);

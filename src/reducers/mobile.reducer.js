@@ -1,4 +1,4 @@
-import { ADD_MOBILE, EDIT_MOBILE, DELETE_MOBILE, CLEAR_MOBILES, AUTOFILL_MOBILES  } from '../action-types/action.types';
+import { ADD_MOBILE, EDIT_MOBILE, DELETE_MOBILE, CLEAR_MOBILES, AUTOFILL_MOBILES } from '../action-types/action.types';
 
 const initialStates = {
 	mobileList: [],
@@ -12,23 +12,21 @@ const mobileReducer = (state = initialStates, action) => {
 			if (totalMobiles > 0) {
 				let id = allMobileList[totalMobiles - 1].id + 1;
 				let subtrName = action.payload.mobile_name.substring(0, 4);
-				let regNum = subtrName  + 1000 + id;
-				let prd_btn = "Add to Cart";
+				let regNum = subtrName + 1000 + id;
+				let prd_btn = 'Add to Cart';
 				let newMobileList = {
 					...action.payload,
 					id,
 					reference_num: regNum,
-					product_btn : prd_btn
+					product_btn: prd_btn,
 				};
-				console.log('newMobileList',newMobileList)
 				allMobileList.push(newMobileList);
 			} else {
 				let id = 1;
 				let subtrName = action.payload.mobile_name.substring(0, 4);
 				let regNum = subtrName + 1000 + id;
-				let prd_btn = "Add to Cart";
-				let newMobileList = { ...action.payload, id, reference_num: regNum, product_btn : prd_btn };
-				console.log('newMobileList',newMobileList)
+				let prd_btn = 'Add to Cart';
+				let newMobileList = { ...action.payload, id, reference_num: regNum, product_btn: prd_btn };
 				allMobileList.push(newMobileList);
 			}
 			return {
@@ -38,26 +36,25 @@ const mobileReducer = (state = initialStates, action) => {
 
 		case AUTOFILL_MOBILES:
 			let oldMobileList = [...state.mobileList];
-			let localData = action.payload; 
-				console.log('localData',localData);
+			let localData = action.payload;
 			let id = 0;
-			for(let i=0; i < localData.length; i++){
+			for (let i = 0; i < localData.length; i++) {
 				if (oldMobileList.length > 0) {
-					id = oldMobileList[oldMobileList.length - 1].id + 1; 
+					id = oldMobileList[oldMobileList.length - 1].id + 1;
 					let newData = {
-						...localData[i], id
+						...localData[i],
+						id,
 					};
 					oldMobileList.push(newData);
-					console.log('newData',newData)
 				} else {
 					id = id + 1;
 					let newData = {
-						...localData[i], id};
+						...localData[i],
+						id,
+					};
 					oldMobileList.push(newData);
-						console.log('newData',newData)
 				}
-			} 
-				console.log('oldMobileList',oldMobileList);
+			}
 			return {
 				...state,
 				mobileList: oldMobileList,
@@ -66,7 +63,6 @@ const mobileReducer = (state = initialStates, action) => {
 		case DELETE_MOBILE:
 			let oldList = [...state.mobileList];
 			let newList = oldList.filter((item) => item.id !== action.payload);
-			console.log(' newList', newList);
 			return {
 				...state,
 				mobileList: newList,
@@ -83,7 +79,6 @@ const mobileReducer = (state = initialStates, action) => {
 				}
 				return item;
 			});
-			console.log('existingMobiles', existingMobiles);
 			return {
 				...state,
 				mobileList: updatedMobiles,

@@ -39,7 +39,6 @@ const customerReducer = (state = initialStates, action) => {
 		case ADDALL_DATA:
 			let oldData = [...state.customerData];
 			let localValue = action.payload; 
-				console.log('localValue',localValue);
 			let id = 0;
 			for(let i=0; i < localValue.length; i++){
 				if (oldData.length > 0) {
@@ -79,7 +78,6 @@ const customerReducer = (state = initialStates, action) => {
 				}
 				return item;
 			});
-			console.log(' existingData', existingData);
 			return {
 				...state,
 				customerData: newData,

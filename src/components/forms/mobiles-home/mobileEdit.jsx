@@ -110,7 +110,6 @@ const MobileEdit = (props) => {
 
 		dispatch(editMobile(post_data));
 		toast('Mobile information has been successfully edited');
-		console.log('post_data', post_data);
 		history.push('/mobileDetails');
 	};
 
