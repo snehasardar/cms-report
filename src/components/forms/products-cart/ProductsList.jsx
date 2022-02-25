@@ -21,6 +21,14 @@ const ProductsList = (props) => {
 		slidesToScroll: 2,
 	};
 
+	var itemPerPage = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+	};
+
 	const { bookList } = useSelector((state) => state.booksReducer);
 	const { items } = useSelector((state) => state.productReducer);
 	const { mobileList } = useSelector((state) => state.mobileReducer);
@@ -140,52 +148,54 @@ const ProductsList = (props) => {
 			{!isLoading ? (
 				<div>
 					{allSearchProducts.length === 1 || allSearchMobileProducts.length === 1 ? (
-						<div className="main-content">
-							{allSearchProducts &&
-								allSearchProducts.map((data, index) => {
-									return (
-										<div className="book_card" key={index}>
-											<img src={data.image_link} alt="book_image" width="200px" height="150px" />
-											<h5>{data.book_name}</h5>
-											<h6>
-												{data.author_name}, {data.genre}, {data.total_books} pieces{' '}
-											</h6>
-											<h5>₹{data.price} </h5>
-											{items && items.length > 0 && items.find((item) => item.reference_num === data.reference_num) ? (
-												<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-													Remove from cart
-												</button>
-											) : (
-												<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-													{data.product_btn}
-												</button>
-											)}
-										</div>
-									);
-								})}
+						<div className="card-content">
+							<Slider {...itemPerPage}>
+								{allSearchProducts &&
+									allSearchProducts.map((data, index) => {
+										return (
+											<div className="card" key={index}>
+												<img src={data.image_link} alt="book" width="200px" height="150px" />
+												<h5>{data.book_name}</h5>
+												<h6>
+													{data.author_name}, {data.genre}, {data.total_books} pieces{' '}
+												</h6>
+												<h5>₹{data.price} </h5>
+												{items && items.length > 0 && items.find((item) => item.reference_num === data.reference_num) ? (
+													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+														Remove from cart
+													</button>
+												) : (
+													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+														{data.product_btn}
+													</button>
+												)}
+											</div>
+										);
+									})}
 
-							{allSearchMobileProducts &&
-								allSearchMobileProducts.map((data, index) => {
-									return (
-										<div className="book_card" key={index}>
-											<img src={data.mobile_image} alt="mobile_image" width="150px" height="150px" />
-											<h5>{data.mobile_name}</h5>
-											<h6>
-												{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery{' '}
-											</h6>
-											<h5>₹{data.price} </h5>
-											{items && items.length > 0 && items.find((item) => item.reference_num === data.reference_num) ? (
-												<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-													Remove from cart
-												</button>
-											) : (
-												<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
-													{data.product_btn}
-												</button>
-											)}
-										</div>
-									);
-								})}
+								{allSearchMobileProducts &&
+									allSearchMobileProducts.map((data, index) => {
+										return (
+											<div className="card" key={index}>
+												<img src={data.mobile_image} alt="mobile" width="150px" height="150px" />
+												<h5>{data.mobile_name}</h5>
+												<h6>
+													{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery{' '}
+												</h6>
+												<h5>₹{data.price} </h5>
+												{items && items.length > 0 && items.find((item) => item.reference_num === data.reference_num) ? (
+													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+														Remove from cart
+													</button>
+												) : (
+													<button type="submit" className="btn btn-primary" onClick={() => handleSubmit(data)}>
+														{data.product_btn}
+													</button>
+												)}
+											</div>
+										);
+									})}
+							</Slider>
 						</div>
 					) : searchByProducts && searchByProducts.length > 2 ? (
 						<div className="main-content">
@@ -194,7 +204,7 @@ const ProductsList = (props) => {
 									allSearchProducts.map((data, index) => {
 										return (
 											<div className="book_card" key={index}>
-												<img src={data.image_link} alt="book_image" width="200px" height="150px" />
+												<img src={data.image_link} alt="book" width="200px" height="150px" />
 												<h5>{data.book_name}</h5>
 												<h6>
 													{data.author_name}, {data.genre}, {data.total_books} pieces{' '}
@@ -217,7 +227,7 @@ const ProductsList = (props) => {
 									allSearchMobileProducts.map((data, index) => {
 										return (
 											<div className="book_card" key={index}>
-												<img src={data.mobile_image} alt="mobile_image" width="150px" height="150px" />
+												<img src={data.mobile_image} alt="mobile" width="150px" height="150px" />
 												<h5>{data.mobile_name}</h5>
 												<h6>
 													{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery{' '}
@@ -249,7 +259,7 @@ const ProductsList = (props) => {
 										filterdProductList.map((data, index) => {
 											return (
 												<div className="book_card" key={index}>
-													<img src={data.image_link} alt="book_image" width="200px" height="150px" />
+													<img src={data.image_link} alt="book" width="200px" height="150px" />
 													<h5>{data.book_name}</h5>
 													<h6>
 														{data.author_name}, {data.genre}, {data.total_books} pieces{' '}
@@ -279,7 +289,7 @@ const ProductsList = (props) => {
 										filterdMobileList.map((data, index) => {
 											return (
 												<div className="book_card" key={index}>
-													<img src={data.mobile_image} alt="mobile_image" width="150px" height="150px" />
+													<img src={data.mobile_image} alt="mobile" width="150px" height="150px" />
 													<h5>{data.mobile_name}</h5>
 													<h6>
 														{data.brand_name}, {data.ram} ram, {data.storage} storage, {data.battery} battery{' '}

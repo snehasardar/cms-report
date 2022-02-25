@@ -12,10 +12,12 @@ const registration = (state = initialStates, action) => {
 			let allUserData = [...state.userData];
 			let newUser = action.payload;
 			allUserData.push(newUser);
-
+			let reg_token = 'userLoggedIn';
 			return {
 				...state,
 				userData: allUserData,
+				userToken: reg_token,
+				loggedIn: true,
 			};
 
 		case LOG_IN:

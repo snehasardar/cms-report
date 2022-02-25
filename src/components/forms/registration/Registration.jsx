@@ -61,9 +61,9 @@ const Registration = (props) => {
 		toast.success('you are successfully Registered');
 	};
 
-	const newInitialValues = {
-		umobile_no: userData && Object.keys(userData).length > 0 ? userData.umobile_no : '',
-	};
+	// const newInitialValues = {
+	// 	umobile_no: userData && Object.keys(userData).length > 0 ? userData.umobile_no : '',
+	// };
 	
 
 	const handleEmailChange = (e, setFieldValue) => {
