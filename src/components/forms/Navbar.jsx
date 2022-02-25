@@ -7,7 +7,6 @@ const Navbar = () => {
 	const { loggedIn } = useSelector((state) => state.registration);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	console.log('loggedIn',loggedIn)
 	
 	const handleLogout = () => {
 		dispatch(logOff());
